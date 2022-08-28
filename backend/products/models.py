@@ -1,4 +1,34 @@
+from distutils.archive_util import make_zipfile
 from django.db import models
 
-class product(models.Model):
+class Product(models.Model):
+    title = models.CharField(max_length=250)
     description = models.CharField(max_length=1000)
+    care = models.CharField(max_length=1000)
+    inventory = models.IntegerField(default=0)
+    min_order = models.IntegerField(default = 1)
+    discount = models.IntegerField(blank=True, null=True) 
+    active = models.BooleanField(default=True)
+    single_price = models.IntegerField()
+    max_price = models.IntegerField(blank=True, null=True)
+    
+    
+    
+class ProductPackage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    qty = models.IntegerField()
+    price = models.IntegerField()
+    discount = models.IntegerField(blank=True, null=True)
+    
+    
+class StProduct(models.Model):
+    product = models.OneToOneField(Product, blank=True, null=True, on_delete=models.CASCADE)
+    package = models.OneToOneField(ProductPackage, blank=True, null=True, on_delete=models.CASCADE)
+    st_price = models.CharField(max_length=300)
+    st_product = models.CharField(max_length=300)
+    
+
+    
+    
+    
+    

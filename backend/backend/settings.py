@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "corsheaders",
     'rest_framework',
+    'users.apps.UsersConfig',
     'orders.apps.OrdersConfig',
     'products.apps.ProductsConfig',
     'transactions.apps.TransactionsConfig',
@@ -44,7 +45,8 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = ['*']
+#CORS_ALLOWED_ORIGINS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -80,8 +82,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+AUTH_USER_MODEL = "users.CustomProfile"
 
 DATABASES = {
     'default': {
