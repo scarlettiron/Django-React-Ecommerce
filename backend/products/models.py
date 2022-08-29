@@ -1,5 +1,7 @@
 from distutils.archive_util import make_zipfile
+from unicodedata import category
 from django.db import models
+from categoriesTags.models import Category, SubCategory, ThirdSubcategory, Tag
 
 class Product(models.Model):
     title = models.CharField(max_length=250)
@@ -11,6 +13,10 @@ class Product(models.Model):
     active = models.BooleanField(default=True)
     single_price = models.IntegerField()
     max_price = models.IntegerField(blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    subCategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=True, null=True)
+    thirdSubcategory = models.ForeignKey(ThirdSubcategory, on_delete=models.CASCADE, blank=True, null=True)
+    tags = models.ManyToManyField(Tag)
     
     
     
