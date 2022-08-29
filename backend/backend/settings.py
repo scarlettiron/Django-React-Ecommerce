@@ -50,7 +50,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'backend.urls'
 
-REST_FRAMEWORK = {
+''' REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -61,7 +61,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE':20,
     
-}
+} '''
 
 TEMPLATES = [
     {
@@ -88,7 +88,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': config('DB_NAME'),
-        'PASSWORD':config('DB_PASSWORD')
+        'PASSWORD':config('DB_PASSWORD'),
+        'PORT':5432,
+        'USER':'postgres',
+        'HOST':'localhost',
     }
 }
 

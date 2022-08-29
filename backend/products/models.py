@@ -16,14 +16,14 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=True, null=True)
     thirdsubcategory = models.ForeignKey(ThirdSubcategory, on_delete=models.CASCADE, blank=True, null=True)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
     
     
     
 class ProductPackage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    qty = models.IntegerField()
-    price = models.IntegerField()
+    qty = models.IntegerField(default=0)
+    price = models.IntegerField(default=0)
     discount = models.IntegerField(blank=True, null=True)
     
     

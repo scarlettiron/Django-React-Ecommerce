@@ -6,7 +6,7 @@ User = settings.AUTH_USER_MODEL
 
 class CustomProfile(AbstractUser):
     is_vender = models.BooleanField(default=False)
-    phone = models.IntegerField()
+    phone = models.IntegerField(blank=True, null=True)
  
  
  
