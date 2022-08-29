@@ -14,8 +14,8 @@ class Product(models.Model):
     single_price = models.IntegerField()
     max_price = models.IntegerField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    subCategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=True, null=True)
-    thirdSubcategory = models.ForeignKey(ThirdSubcategory, on_delete=models.CASCADE, blank=True, null=True)
+    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=True, null=True)
+    thirdsubcategory = models.ForeignKey(ThirdSubcategory, on_delete=models.CASCADE, blank=True, null=True)
     tags = models.ManyToManyField(Tag)
     
     
