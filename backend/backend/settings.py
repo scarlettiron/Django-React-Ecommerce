@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "corsheaders",
     'rest_framework',
+    "djstripe",
     'users.apps.UsersConfig',
     'orders.apps.OrdersConfig',
     'products.apps.ProductsConfig',
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'vendors.apps.VendorsConfig',
     'categoriesTags.apps.CategoriestagsConfig',
     'media.apps.MediaConfig',
+    'checkout.apps.CheckoutConfig',
 ]
 
 MIDDLEWARE = [
