@@ -4,9 +4,10 @@ from decouple import Config
 stripe.api_key=Config('STRIPE_SECRET_KEY')
 
 class StripeCheckoutSession:
-    def __init__(self, subtotal, checkout_session_id = None, user = None):
+    def __init__(self, subtotal, products, checkout_session = None, user = None):
         self.subtotal = subtotal
-        self.checkout_session_id = checkout_session_id
+        self.products = products
+        self.checkout_session = checkout_session
         self.user = user
         
     def NoLoginCheckoutSession(self):
@@ -30,6 +31,7 @@ class StripeCheckoutSession:
             metadata = {
                 'site':Config('SITE_NAME'),
                 'user_logged_in':False,
+                'products':self.products,
                 
             }
         )
@@ -37,7 +39,7 @@ class StripeCheckoutSession:
         except:
             return False
         
-        self.checkout_session_id = checkout_session_id.url
+        self.checkout_session = checkout_session_id
         return self
     
     def LoggedInCheckoutSession(self):
@@ -64,12 +66,13 @@ class StripeCheckoutSession:
                 'site':Config('SITE_NAME'),
                 'user_logged_in':True,
                 'username':self.user.username,
+                'products':self.products,
             }
         )
         except:
             return False
             
-        self.checkout_session_id = checkout_session_id.url
+        self.checkout_session = checkout_session_id
         return self
     
     
