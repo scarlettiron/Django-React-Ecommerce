@@ -24,7 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "corsheaders",
     'rest_framework',
-    "djstripe",
+    #"djstripe",
     'users.apps.UsersConfig',
     'orders.apps.OrdersConfig',
     'products.apps.ProductsConfig',
