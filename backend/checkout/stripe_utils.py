@@ -1,9 +1,8 @@
-from asyncio.windows_events import NULL
 import stripe
 from decouple import config
 from orders.models import Order, Address, OrderItem
 from products.models import ProductPackage
-from json import dumps, load, dump, loads
+from json import dumps, loads
 
 stripe.api_key=config('STRIPE_SECRET_KEY')
 
@@ -102,7 +101,7 @@ class StripePaymentIntent:
     
     
 class StripeWebhooks:
-    def __init__(self, intentId = "", data = NULL, amount = NULL, user = None):
+    def __init__(self, intentId = "", data = None, amount = None, user = None):
         self.intentId = intentId
         self.data = data
         self.amount = amount
