@@ -69,8 +69,7 @@ class stripe_intent_webhook(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         event = None
         payload = request.data
-        
-        #event = json.loads(payload)
+
         event = payload
         
         sig_header = request.headers.get('STRIPE_SIGNATURE')
@@ -81,11 +80,14 @@ class stripe_intent_webhook(generics.GenericAPIView):
             )
         
         except stripe.error.SignatureVerificationError as e:
+            event = None
             print('⚠️  Webhook signature verification failed.' + str(e))
 
+        if not event or event['type'] != 'payment_intent.succeeded':
+            return response.Response(status = 400)
+            
         intent = event['data']['object']
         data = intent['metadata']
-        print(data)
         
         if 'user' in data.keys():
             order_created = StripeWebhooks(intentId = intent['id'], data = data, 
