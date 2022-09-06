@@ -2,6 +2,7 @@ import stripe
 from decouple import config
 from orders.models import Order, Address, OrderItem
 from products.models import ProductPackage
+from transactions.models import Transaction
 from json import dumps, loads
 
 stripe.api_key=config('STRIPE_SECRET_KEY')
@@ -101,11 +102,12 @@ class StripePaymentIntent:
     
     
 class StripeWebhooks:
-    def __init__(self, intentId = "", data = None, amount = None, user = None):
+    def __init__(self, intentId = "", data = None, amount = None, user = None, order = None):
         self.intentId = intentId
         self.data = data
         self.amount = amount
         self.user = user
+        self.order = order
         
         
     def createOrder(self):
@@ -158,9 +160,33 @@ class StripeWebhooks:
             for p in packages:
                 item = orderInfo[str(p.pk)]
                 OrderItem.objects.create(package = p, qty = item['quantity'], price = p.price, order = order)
-            return True
+            
+            self.order = order
+            transaction = self.createTransaction()
+            if transaction:
+                return True
+            return False
         except:
             address.delete()
             order.delete()    
             return False   
                 
+    
+    
+    def createTransaction(self):
+        if not self.order:
+            return False
+    
+        try:
+            transaction = Transaction.objects.create(
+                paymentMethod = "stripe",
+                amount = self.amount,
+                paymentId = self.intentId,
+                order = self.order
+            )
+            return True
+        
+        except:
+            self.order.delete()
+            return False
+
