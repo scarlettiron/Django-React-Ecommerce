@@ -8,9 +8,10 @@ from json import dumps, loads
 stripe.api_key=config('STRIPE_SECRET_KEY')
 
 class StripePaymentIntent:
-    def __init__(self, subtotal, products, shipping = "", first_name = "",
+    def __init__(self, subtotal, products, tax = "", shipping = "", first_name = "",
                  last_name = "", phone = "", email = "", intent = False, user = None):
         self.subtotal = subtotal
+        self.tax = tax
         self.products = products
         self.intent = intent
         self.user = user
@@ -27,35 +28,34 @@ class StripePaymentIntent:
         
         ### add tax and shipping to total ###
         # todo#
-        tax = 50
-        total = self.subtotal + tax
+        total = self.subtotal + self.tax
         
 
-        #try:
-        intent = stripe.PaymentIntent.create(
-        amount = total,
-        currency = 'USD',
-        payment_method_types=["card"],
+        try:
+            intent = stripe.PaymentIntent.create(
+            amount = total,
+            currency = 'USD',
+            payment_method_types=["card"],
 
-        metadata = {
-            'site':config('SITE_NAME'),
-            'user_logged_in':False,
-            'products':dumps(self.products),
-            'shipping':dumps(self.shipping),
-            'first_name':str(self.first_name),
-            'last_name':str(self.last_name),
-            'phone':str(self.phone),
-            'email':str(self.email),
-            'subtotal':self.subtotal,
-            'tax':tax
-            },
-        
-        )
+            metadata = {
+                'site':config('SITE_NAME'),
+                'user_logged_in':False,
+                'products':dumps(self.products),
+                'shipping':dumps(self.shipping),
+                'first_name':str(self.first_name),
+                'last_name':str(self.last_name),
+                'phone':str(self.phone),
+                'email':str(self.email),
+                'subtotal':self.subtotal,
+                'tax':self.tax
+                },
+            
+            )
             
             
-        ''' except:
+        except:
             self.intent = False
-            return self  '''
+            return self 
         
         self.intent = intent
         return self
@@ -69,8 +69,7 @@ class StripePaymentIntent:
             raise Exception("user required")
         
         ### add tax and shipping to total ###
-        # todo#
-        total = self.subtotal
+        total = self.subtotal + self.tax
 
         try:
             intent = stripe.PaymentIntent.create(
@@ -87,7 +86,8 @@ class StripePaymentIntent:
                 'first_name':self.first_name,
                 'last_name':self.last_name,
                 'phone':self.phone,
-                'email':self.email
+                'email':self.email,
+                'tax':self.tax
                 },
             
             )

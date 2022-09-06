@@ -1,8 +1,1 @@
 find api for calculating state sales tax
-    OR
-create and use stripes built in tax rate models and add to line items n checkout session
-based off of users inputted shipping address
-
-send product pk's from front end and add them to stripe checkout session in metadata
-when finalizing the order, retreive session and pk's then make order according to those 
-product keys

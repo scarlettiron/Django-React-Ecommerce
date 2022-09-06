@@ -1,11 +1,9 @@
-from asyncio.windows_events import NULL
-from itertools import product
 from rest_framework import generics, response
 from .stripe_utils import StripePaymentIntent as stIntent, StripeWebhooks
-from products.models import Product, ProductPackage
+from products.models import ProductPackage
 import stripe
 from decouple import config
-import json
+
 
 
 intent_success_webhook_secret = config('intent_success_webhook_secret')
@@ -19,7 +17,7 @@ class stripe_intent(generics.GenericAPIView):
         #  products:{
         #       packagePk:{product:pk of product, quantity:quantity of products being purchased
         #      }
-        #  shipping:{street:streetadress},
+        #  shipping:{street:streetaddress},
         #  etc... 
         #}
         data = self.request.data
@@ -46,13 +44,13 @@ class stripe_intent(generics.GenericAPIView):
             subtotal += item.price * purchasingPackage['quantity']
 
         if self.request.user.is_authenticated:
-            instance = stIntent(subtotal, products, shipping = data['shipping'], first_name = data['first_name'],
+            instance = stIntent(subtotal, products, tax = data['tax'], shipping = data['shipping'], first_name = data['first_name'],
                                 last_name = data['last_name'], phone = data['phone'], 
                                 email = data['email'], user = request.user)
             intent = instance.LoggedInIntent().intent
 
         else:
-            instance = stIntent(subtotal, products, shipping = data['shipping'], first_name = data['first_name'],
+            instance = stIntent(subtotal, products, tax = data['tax'], shipping = data['shipping'], first_name = data['first_name'],
                                 last_name = data['last_name'], phone = data['phone'], 
                                 email = data['email'])
             intent = instance.NoLoginIntent().intent
