@@ -2,7 +2,7 @@
 from rest_framework import generics, response
 from django.db.models import Prefetch, Q
 from .serializers import ProductList_Serializer
-from .models import Product
+from .models import Product, Category, SubCategory, ThirdSubcategory
 
 class product_list(generics.ListAPIView):
     model = Product
@@ -48,3 +48,6 @@ class search_products(generics.ListAPIView):
             qs = Product.objects.none()
         
         return qs
+    
+
+    

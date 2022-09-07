@@ -86,6 +86,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 AUTH_USER_MODEL = "users.CustomProfile"
 
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+ANYMAIL_MAILGUN_API_KEY = config("MAIL_GUN_DOMAIN_API")
+DEFAULT_FROM_EMAIL=config('MAIL_GUN_EMAIL')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',

@@ -24,6 +24,7 @@ checkoutTypes = [
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    email = models.EmailField()
     address = models.ForeignKey(Address, on_delete=models.SET_NULL, null = True)
     trackingNumber = models.CharField(max_length = 500, blank=True, null=True)
     status = models.CharField(choices=orderStatuses, max_length = 50, default='processing')
@@ -32,6 +33,8 @@ class Order(models.Model):
     subTotal = models.IntegerField()
     tax = models.IntegerField()
     total = models.IntegerField()
+    date = models.DateTimeField(auto_now_add=True)
+    orderId = models.CharField(max_length=500, blank=True)
     
 class OrderItem(models.Model):
     package = models.ForeignKey(ProductPackage, on_delete=models.SET_NULL, null=True)

@@ -13,6 +13,7 @@ python-decouple = "*"
 djangorestframework-simplejwt = "*"
 stripe = "*"
 dj-stripe = "*"
+django-anymail = "*"
 
 [dev-packages]
 

@@ -1,1 +1,2 @@
-find api for calculating state sales tax
+send emails when order is created or updated
+
