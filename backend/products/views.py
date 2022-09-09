@@ -1,8 +1,9 @@
 
 from rest_framework import generics, response
 from django.db.models import Prefetch, Q
-from .serializers import ProductList_Serializer, FeaturedProduct_Serializer
+from .serializers import ProductList_Serializer, FeaturedProduct_Serializer, Category_Serializer
 from .models import Product, Category, SubCategory, ThirdSubcategory, FeaturedProduct
+from json import dumps
 
 class product_list(generics.ListAPIView):
     model = Product
@@ -55,4 +56,25 @@ class featuredProductList(generics.ListAPIView):
     serializer_class = FeaturedProduct_Serializer
     model = FeaturedProduct
     queryset = FeaturedProduct.objects.all().select_related('product')
+    
+    
+    
+#for getting all info for home page, this view saves extra request
+class HomePage(generics.GenericAPIView):
+    def get(self, request, *args, **kwargs):
+        try:
+            cats = Category.objects.all()
+            categories = Category_Serializer(cats, many = True).data
+        except:
+            categories = []
+            
+        try:
+            featured = FeaturedProduct.objects.all().select_related('product').order_by('rank')
+            featuredProducts = FeaturedProduct_Serializer(featured, many=True)
+        except:
+            featuredProducts = []
+            
+        res = dumps({categories:categories, featuredProducts:featuredProducts})
+        return response.Response(res, status = 200)
+            
     

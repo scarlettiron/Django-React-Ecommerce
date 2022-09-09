@@ -1,6 +1,7 @@
+from ast import Mod
 from dataclasses import fields
 from rest_framework.serializers import ModelSerializer
-from .models import Product, ProductPackage, FeaturedProduct
+from .models import Product, ProductPackage, FeaturedProduct, Category
 
 class ProductPackage_Serializer(ModelSerializer):
     class Meta:
@@ -29,4 +30,9 @@ class FeaturedProduct_Serializer(ModelSerializer):
     Product = PrefetchProduct_Serializer()
     class Meta:
         model = FeaturedProduct
+        fields = '__all__'
+        
+class Category_Serializer(ModelSerializer):
+    class Meta:
+        model = Category
         fields = '__all__'
