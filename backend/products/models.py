@@ -18,6 +18,10 @@ class Product(models.Model):
     thirdsubcategory = models.ForeignKey(ThirdSubcategory, on_delete=models.CASCADE, blank=True, null=True)
     tags = models.ManyToManyField(Tag, blank=True)
     
+class FeaturedProduct(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    rank = models.IntegerField()
+    
     
     
 class ProductPackage(models.Model):

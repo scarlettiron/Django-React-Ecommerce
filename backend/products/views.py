@@ -1,8 +1,8 @@
 
 from rest_framework import generics, response
 from django.db.models import Prefetch, Q
-from .serializers import ProductList_Serializer
-from .models import Product, Category, SubCategory, ThirdSubcategory
+from .serializers import ProductList_Serializer, FeaturedProduct_Serializer
+from .models import Product, Category, SubCategory, ThirdSubcategory, FeaturedProduct
 
 class product_list(generics.ListAPIView):
     model = Product
@@ -50,4 +50,9 @@ class search_products(generics.ListAPIView):
         return qs
     
 
+
+class featuredProductList(generics.ListAPIView):
+    serializer_class = FeaturedProduct_Serializer
+    model = FeaturedProduct
+    queryset = FeaturedProduct.objects.all().select_related('product')
     

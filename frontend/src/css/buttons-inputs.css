@@ -1,0 +1,17 @@
+@import '../App.css';
+
+.input1{
+    outline: none;
+    border:none;
+    border-radius: 30px;
+    background-color: var(--background);
+    width:90%;
+    height:30px;
+    padding: 7px;
+    font-weight: bold;
+}
+
+.svg1{
+    height: 35px;
+    width: 35px;
+}

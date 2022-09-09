@@ -9,4 +9,10 @@ const checkoutUrls = {
     }
 }
 
-export {server, checkoutUrls}
+const productUrls = {
+    featuredProducts:{
+        url:`${server}products/featured-products/`
+    }
+}
+
+export {server, checkoutUrls, productUrls}

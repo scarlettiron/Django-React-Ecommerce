@@ -1,10 +1,13 @@
 import './App.css';
-import CheckoutWrapper from './components/checkout/CheckoutWrapper';
+import Home from './pages/Home';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 function App() {
   return (
     <div className="App">
-      <CheckoutWrapper/>
+      <Router>
+        <Route exact component={Home} path='/'/>
+      </Router>
     </div>
   );
 }
