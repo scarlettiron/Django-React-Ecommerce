@@ -11,9 +11,35 @@
 body{
   background-color: var(--background);
   overflow: hidden;
+  padding:0px;
+  margin:0px;
 }
 
 a{
   text-decoration: none;
   color:var(--text-secondary);
+}
+
+p{
+  word-break: break-word;
+}
+
+h1{
+  word-break: break-word;
+}
+
+h2{
+  word-break: break-word;
+}
+
+h3{
+  word-break: break-word;
+}
+
+h4{
+  word-break: break-word;
+}
+
+h5{
+  word-break: break-word;
 }

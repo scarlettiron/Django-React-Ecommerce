@@ -1,4 +1,9 @@
 const BasicFetch = async (url, fetchConfig = {}, contentTypeOverRide = null) => {
+
+    if(!fetchConfig['headers']){
+        fetchConfig['headers'] = {}
+    }
+
     if(!fetchConfig['headers']['Content-Type'] && !contentTypeOverRide){
         fetchConfig['headers']['Content-Type'] =  'application/json'
     }
@@ -6,7 +11,8 @@ const BasicFetch = async (url, fetchConfig = {}, contentTypeOverRide = null) => 
         fetchConfig['method'] = 'GET'
     }
 
-    const response = await fetch(url, JSON.stringify(fetchConfig))
+
+    const response = await fetch(url, fetchConfig)
     const data = await response.json()
     return {response, data}
 }

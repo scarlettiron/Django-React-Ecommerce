@@ -4,7 +4,7 @@ const server = 'http://127.0.0.1:8000/api/'
 const taxApi = "https://sales-tax-calculator.p.rapidapi.com/rates"
 
 const HomePageInfo = {
-    url:`${server}/products/home-info/`
+    url:`${server}products/home-info/`
 }
 
 const checkoutUrls = {
