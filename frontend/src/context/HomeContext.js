@@ -31,7 +31,8 @@ export const HomeContextProvider = ({children, ...rest}) => {
         if(response.status === 200){
             const products = {}
             for (const x in data.featuredproducts){
-                products[x.slot] = x
+                let index = String(data.featuredproducts[x].slot)
+                products[index] = data.featuredproducts[x]
             }
             setFeaturedProducts(products)
         }

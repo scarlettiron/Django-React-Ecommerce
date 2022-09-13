@@ -1,4 +1,3 @@
 style card so that thumbnail is abover label
-justify content center
 on hover have it haze over (maybe green) and have the icon fade out and label grow
 when link is clicked have custom loader of bugs or something
