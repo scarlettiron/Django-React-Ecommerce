@@ -5,5 +5,5 @@ from products.models import Product
 
     
 class Media(models.Model):
-    file = models.FileField(upload_to='products/media/')
+    file = models.FileField(upload_to='static/products/media/')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="media")
