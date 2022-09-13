@@ -1,9 +1,10 @@
 
 from rest_framework import generics, response
-from django.db.models import Prefetch, Q
+from django.db.models import Prefetch, Q, OuterRef, Subquery
 from .serializers import ProductList_Serializer, FeaturedProduct_Serializer, Category_Serializer
 from .models import Product, Category, SubCategory, ThirdSubcategory, FeaturedProduct
 from json import dumps
+from media.models import Media
 
 class product_list(generics.ListAPIView):
     model = Product
@@ -19,7 +20,7 @@ class product_detail(generics.RetrieveAPIView):
     def get_queryset(self):
         pk = self.kwargs['pk']
         try:
-            qs = Product.objects.filter(pk=pk).prefetch_related(Prefetch('productpackage_set', to_attr = 'packages'))[0]
+            qs = Product.objects.filter(pk=pk).prefetch_related(Prefetch('productpackage_set', to_attr = 'packages'), Prefetch('media_set', to_attr = 'images'))[0]
         except:
             qs = Product.objects.none()
         return qs
@@ -61,20 +62,15 @@ class featuredProductList(generics.ListAPIView):
     
 #for getting all info for home page, this view saves extra request
 class HomePage(generics.GenericAPIView):
+    serializer_class = FeaturedProduct_Serializer
     def get(self, request, *args, **kwargs):
-        try:
-            cats = Category.objects.all()
-            categories = Category_Serializer(cats, many = True).data
-        except:
-            categories = []
-            
-        try:
-            featured = FeaturedProduct.objects.all().select_related('product').order_by('rank')
-            featuredProducts = FeaturedProduct_Serializer(featured, many=True)
-        except:
-            featuredProducts = []
-            
-        res = dumps({categories:categories, featuredProducts:featuredProducts})
-        return response.Response(res, status = 200)
+     
+        cats = Category.objects.all()
+        categories = Category_Serializer(cats, many = True).data
+
+        featuredProducts = FeaturedProduct.objects.all().select_related('product').prefetch_related(Prefetch('product__media_set', to_attr = 'images'))
+        featured = FeaturedProduct_Serializer(featuredProducts, many=True).data
+
+        return response.Response({'categories':categories, 'featuredproducts':featured}, status = 200)
             
     

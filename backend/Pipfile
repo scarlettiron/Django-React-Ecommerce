@@ -15,6 +15,7 @@ stripe = "*"
 dj-stripe = "*"
 django-anymail = "*"
 whitenoise = "*"
+django-storages = "*"
 
 [dev-packages]
 

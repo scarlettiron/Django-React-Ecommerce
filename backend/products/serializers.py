@@ -1,6 +1,7 @@
-from ast import Mod
-from dataclasses import fields
+
 from rest_framework.serializers import ModelSerializer
+
+from media.serializers import media_serializer
 from .models import Product, ProductPackage, FeaturedProduct, Category
 
 class ProductPackage_Serializer(ModelSerializer):
@@ -20,6 +21,7 @@ class ProductList_Serializer(ModelSerializer):
 
 
 class PrefetchProduct_Serializer(ModelSerializer):
+    images = media_serializer(many=True)
     class Meta:
         fields = '__all__'
         model = Product
@@ -27,7 +29,7 @@ class PrefetchProduct_Serializer(ModelSerializer):
         
        
 class FeaturedProduct_Serializer(ModelSerializer):
-    Product = PrefetchProduct_Serializer()
+    product = PrefetchProduct_Serializer()
     class Meta:
         model = FeaturedProduct
         fields = '__all__'
