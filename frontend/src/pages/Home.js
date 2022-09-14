@@ -4,6 +4,7 @@ import MainHeader from '../components/headers/MainHeader'
 import CategoryCard from '../components/cards/CategoryCard'
 import FeaturedCard from '../components/cards/FeaturedCard'
 import FeaturedCardMain from '../components/cards/FeaturedCardMain'
+import Footer from '../components/footers/Footer'
 import '../css/general.css'
 import '../css/containers-cards.css'
 
@@ -22,20 +23,20 @@ const Home = () => {
         <div className='feature-container'>
           {featuredProducts && 
           <>
-          <div className='display-inline'>
+          <div className='feature-slot'>
             <div className='feature-card-wrapper'>
-              <div className='h-100 w-100'>
+              <div className='feature-card-wrapper'>
                 <FeaturedCard product={featuredProducts[2].product}/>
                 <FeaturedCard product={featuredProducts[3].product}/>
               </div>
             </div>
           </div>
-          <div className='display-inline'>
+          <div className='feature-slot'>
             <div className='feature-card-wrapper-main'>
               <FeaturedCardMain product={featuredProducts[1].product}/>
             </div>  
           </div>
-          <div className='display-inline'>
+          <div className='feature-slot-bottom'>
             <div className='feature-card-wrapper'>
               <FeaturedCard product={featuredProducts[4].product}/>
               <FeaturedCard product={featuredProducts[5].product}/>
@@ -44,6 +45,7 @@ const Home = () => {
           </>
           } 
         </div>
+        <Footer/>
     </div>
   )
 }

@@ -28,8 +28,16 @@
     height:90%;
 }
 
+.h-75{
+    height: 75% !important;
+}
+
 .margin-auto{
     margin:0 auto;
+}
+
+.margin-0{
+    margin:0px;
 }
 
 .margin-10{
@@ -67,6 +75,12 @@
 .justify-content-end{
     display: flex;
     justify-content: flex-end;
+}
+
+.text-center{
+    display:flex;
+    text-align: center;
+    justify-content: center;
 }
 
 .display-inline{
@@ -108,4 +122,12 @@
 
 .temp2{
     border:solid 2px blue;
+}
+
+.overflow-hidden{
+    overflow: hidden;
+}
+
+.top-0{
+    top:0px;
 }
