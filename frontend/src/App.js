@@ -1,7 +1,8 @@
 import './App.css';
-import Home from './pages/Home';
 import { HomeContextProvider } from './context/HomeContext';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
+import Home from './pages/Home';
+import Product from './pages/Product';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <Router>
         <HomeContextProvider>
           <Route exact component={Home} path='/'/>
+          <Route component={Product} path='/product/:product_id'/>
         </HomeContextProvider>
       </Router>
     </div>

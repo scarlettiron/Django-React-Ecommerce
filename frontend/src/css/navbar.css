@@ -1,0 +1,109 @@
+@import '../App.css';
+
+.nav-container{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: var(--nav-theme);
+    border-top:solid 1px var(--theme-secondary);
+    border-bottom: solid 1px var(--theme-secondary);
+}
+
+.large-screen-nav{
+    display:none;
+}
+
+.mobile-nav{
+    display:flex;
+}
+
+.nav-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left:10px;
+    margin-right:10px;
+    padding:20px;
+}
+
+.nav-item:hover{
+    background-color: var(--theme-secondary);
+}
+
+.nav-item h4:hover{
+    color:var(--text-primary);
+    flex-grow: 1.2;
+    border-bottom: solid 1px var(--text-primary);
+}
+
+.nav-btn{
+    outline:none;
+    background-color: transparent;
+    text-decoration: none;
+    border:none;
+    font-weight: bold;
+    color:var(--text-secondary);
+    font-size: 20px;
+}
+
+.nav-btn:hover{
+    color:var(--text-primary);
+}
+
+.nav-btn:focus{
+    outline: solid 1px var(--theme-secondary);
+}
+
+
+.nav-item-dropdown{
+    margin-top:150px;
+    margin-left:200px;
+    position: absolute;
+    width:300px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.nav-drop-multi{
+    margin-top:200px;
+    margin-left:400px;
+    position: absolute;
+    width:800px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: brown;
+}
+
+.nav-dropdown-link{
+    background-color: var(--theme-secondary);
+    padding:10px;
+    width:100%;
+    border-top:solid 1px var(--text-secondary);
+    border-bottom: solid 1px var(--text-secondary);
+}
+
+.nav-dropdown-link:hover{
+    background-color: black;
+}
+.nav-dropdown-link h4:hover{
+    color:var(--text-primary);
+}
+
+@media(min-width:550px){
+    .nav-container{
+        justify-content: center;
+
+    }
+
+    .large-screen-nav{
+        display:inline-flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .mobile-nav{
+        display:none;
+    }
+}

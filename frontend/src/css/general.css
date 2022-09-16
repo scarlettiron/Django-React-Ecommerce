@@ -52,6 +52,14 @@
     padding:10px;
 }
 
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+.flex-nowrap{
+    flex-wrap: nowrap;
+}
+
 .justify-content-center{
     display:flex;
     justify-content: center;

@@ -1,6 +1,7 @@
 import React, {useContext, useRef} from 'react'
 import HomeContext from '../context/HomeContext'
 import MainHeader from '../components/headers/MainHeader'
+import NavBar from '../components/navbars/NavBar'
 import CategoryCard from '../components/cards/CategoryCard'
 import FeaturedCard from '../components/cards/FeaturedCard'
 import FeaturedCardMain from '../components/cards/FeaturedCardMain'
@@ -15,6 +16,7 @@ const Home = () => {
   return (
     <div className='w-100 padding-0'>
         <MainHeader/>
+        <NavBar/>
         <div className='container'>
           {categories.map((cat, index) => {
             return <CategoryCard category={cat} key={index}/>

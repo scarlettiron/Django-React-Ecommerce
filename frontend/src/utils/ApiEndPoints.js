@@ -16,6 +16,9 @@ const checkoutUrls = {
 const productUrls = {
     featuredProducts:{
         url:`${server}products/featured-products/`
+    },
+    productDetail:{
+        url:`${server}products/product-detail/`
     }
 }
 
