@@ -12,6 +12,7 @@ class ProductPackage_Serializer(ModelSerializer):
 
 class ProductList_Serializer(ModelSerializer):
     packages = ProductPackage_Serializer(many=True, read_only=True)
+    images = media_serializer(many=True)
     class Meta:
         model = Product
         fields = ['id', 'title', 'description', 'care', 'inventory', 'min_order', 'discount',
