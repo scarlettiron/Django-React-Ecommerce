@@ -1,0 +1,16 @@
+@import '../App.css';
+
+.product-container{
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+@media (min-width:700px){
+    .product-container{
+        flex-wrap: nowrap;
+    }
+}
