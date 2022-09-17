@@ -5,6 +5,7 @@ from categoriesTags.models import Category, SubCategory, ThirdSubcategory, Tag
 
 class Product(models.Model):
     title = models.CharField(max_length=250)
+    scientific_name = models.CharField(max_length=250)
     description = models.CharField(max_length=1000)
     care = models.CharField(max_length=1000)
     inventory = models.IntegerField(default=0)

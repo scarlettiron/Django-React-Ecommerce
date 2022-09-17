@@ -15,7 +15,7 @@ class ProductList_Serializer(ModelSerializer):
     images = media_serializer(many=True)
     class Meta:
         model = Product
-        fields = ['id', 'title', 'description', 'care', 'inventory', 'min_order', 'discount',
+        fields = ['id', 'title', 'scientific_name', 'description', 'care', 'inventory', 'min_order', 'discount',
                   'active', 'max_price', 'category', 'subcategory', 'thirdsubcategory', 'packages',
                   'images']
         read_only = ['packages', 'images']
