@@ -3,12 +3,12 @@ import '../../css/general.css'
 import '../../css/image-carousel.css'
 
 const ImageCarousel = ({alt = "image", images}) => {
-console.log(images)
 
     const [curIndex, setCurIndex] = useState(() => 0)
 
     const changeIndex = (e) => {
         console.log(e.target.name)
+        setCurIndex(parseInt(e.target.name))
     }
 
   return (
@@ -37,7 +37,7 @@ console.log(images)
                         </React.Fragment>
                 }
                 return  <>
-                        <div className='bottom-slide inactive-bottom'>
+                        <div className='bottom-slide inactive-bottom' onClick={(e) => changeIndex(e)}>
                             <img src={image.file} 
                             alt={alt} key={index} name={index}/>
                         </div>

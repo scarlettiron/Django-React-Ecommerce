@@ -5,12 +5,26 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    align-items: center;
+}
+
+.product-section{
+    width:100%;
+}
+
+.product-section-item{
+    width:100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 
 @media (min-width:700px){
     .product-container{
         flex-wrap: nowrap;
+    }
+
+    .product-section{
+        width:50%;
     }
 }
