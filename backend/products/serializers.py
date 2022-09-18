@@ -16,7 +16,7 @@ class ProductList_Serializer(ModelSerializer):
     class Meta:
         model = Product
         fields = ['id', 'title', 'scientific_name', 'description', 'care', 'inventory', 'min_order', 'discount',
-                  'active', 'max_price', 'category', 'subcategory', 'thirdsubcategory', 'packages',
+                  'active', 'single_price', 'max_price', 'category', 'subcategory', 'thirdsubcategory', 'packages',
                   'images']
         read_only = ['packages', 'images']
 

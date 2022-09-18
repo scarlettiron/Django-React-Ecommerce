@@ -11,12 +11,12 @@ const FooterSection = ({title, links}) => {
             <h3 className='padding-0 margin-5 text-secondary'>{title}</h3>
         </div>
         {
-            links.map((link) => {
-                return <>
+            links.map((link, index) => {
+                return <React.Fragment key={index}>
                 <div className='footer-link' onClick={() => history.push(`/product/${link.path}`)}>
                     <p className='padding-0 margin-0 text-secondary'>{link.name}</p>                   
                 </div>
-                </>
+                </React.Fragment>
             })
         }
     </div>

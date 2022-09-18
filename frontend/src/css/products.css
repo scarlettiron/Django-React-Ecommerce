@@ -12,10 +12,14 @@
 }
 
 .product-section-item{
-    width:100%;
+    width:90%;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    padding-top:40px;
+    padding-left:20px;
+    padding-right:20px;
+    margin:0 auto;
 }
 
 

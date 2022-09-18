@@ -29,19 +29,19 @@ const ImageCarousel = ({alt = "image", images}) => {
         <div className='bottom-slides-wrapper'>
             {images.map((image, index) => {
                 if(index === curIndex){
-                    return <React.Fragment>
+                    return <React.Fragment key={index}>
                         <div className='bottom-slide active-bottom'>
                             <img src={image.file} 
                             alt={alt} key={index} name={index}/>
                         </div>
                         </React.Fragment>
                 }
-                return  <>
+                return  <React.Fragment key={index}>
                         <div className='bottom-slide inactive-bottom' onClick={(e) => changeIndex(e)}>
                             <img src={image.file} 
                             alt={alt} key={index} name={index}/>
                         </div>
-                        </>
+                        </React.Fragment>
             })}
         </div>
     </div>
