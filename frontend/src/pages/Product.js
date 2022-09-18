@@ -13,6 +13,7 @@ import InputSquare from '../components/buttonsAndInputs/InputSquare'
 import AddToCartBtn from '../components/buttonsAndInputs/AddToCartBtn'
 import Loading1 from '../components/LoadingAndErrors/Loading1'
 import {formatPrice} from '../utils/PriceFormats'
+import Divider1 from '../components/general/Divider1'
 import '../css/general.css'
 import '../css/products.css'
 import '../css/buttons-inputs.css'
@@ -88,6 +89,9 @@ const Product = () => {
                         </>
                     
                     }
+                    <div className='w-75 margin-10 padding-10 margin-auto'>
+                        <Divider1/>
+                    </div>
                 </div>
                 <div className='justify-content-end'>
                     <div className='w-75 margin-top-30 align-items-center flex-nowrap'>

@@ -147,3 +147,9 @@
 .top-0{
     top:0px;
 }
+
+.divider-1{
+    height:1px;
+    width:100%;
+    background-color: var(--dividers);
+}
