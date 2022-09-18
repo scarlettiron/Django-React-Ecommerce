@@ -26,6 +26,7 @@ const Product = () => {
     const [product, setProduct] = useState(() => null)
     const [loading, setLoading] = useState(() => true)
     const [displayPrice, setDisplayPrice] = useState(() => null)
+    const [qty, setQty] = useState(() => 1)
     const [selectedPackage, setSelectedPackage] = useState(() => null)
 
     const handleDisplayedPrice = (e) => {
@@ -49,6 +50,17 @@ const Product = () => {
             setProduct(() => data)
             setDisplayPrice(`$${formatPrice(product.single_price)} - ${formatPrice(product.max_price)}`)
             setLoading(() => false)
+            return
+        }
+    }
+
+    const handleSetQty = (action) => {
+        if(action === 'plus' && qty < product.inventory){
+            setQty(qty + 1)
+            return
+        }
+        if(action === 'minus' && qty > 1){
+            setQty(qty - 1)
             return
         }
     }
@@ -97,11 +109,16 @@ const Product = () => {
                     <div className='w-75 margin-top-30 align-items-center flex-nowrap'>
                         
                         <div>
-                        <ButtonArrowUp/>
+                        <ButtonArrowUp action={handleSetQty}/>
                             <div className='w-100'>
-                                <InputSquare name='qty' max={product?.inventory}/>
+                                <InputSquare 
+                                name='qty' 
+                                max={product?.inventory} 
+                                value={qty}
+                                onChange={handleSetQty}
+                                />
                             </div>
-                        <ButtonArrowDown/>
+                        <ButtonArrowDown action={handleSetQty}/>
                         </div>
                         <div className='w-75'>
                             <AddToCartBtn/>
