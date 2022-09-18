@@ -13,7 +13,6 @@ import InputSquare from '../components/buttonsAndInputs/InputSquare'
 import AddToCartBtn from '../components/buttonsAndInputs/AddToCartBtn'
 import Loading1 from '../components/LoadingAndErrors/Loading1'
 import {formatPrice} from '../utils/PriceFormats'
-import Divider1 from '../components/general/Divider1'
 import '../css/general.css'
 import '../css/products.css'
 import '../css/buttons-inputs.css'
@@ -25,9 +24,11 @@ const Product = () => {
     const {product_id} = useParams()
     const [product, setProduct] = useState(() => null)
     const [loading, setLoading] = useState(() => true)
+    const [error, setError] = useState(() => false)
     const [displayPrice, setDisplayPrice] = useState(() => null)
     const [qty, setQty] = useState(() => 1)
     const [selectedPackage, setSelectedPackage] = useState(() => null)
+    const [total, setTotal] = useState(() => null)
 
     const handleDisplayedPrice = (e) => {
         console.log(formatPrice(product.single_price))
@@ -39,6 +40,7 @@ const Product = () => {
         for(let x in product.packages){
             if(product.packages[x].id === parseInt(e.target.value)){
                 setDisplayPrice(`$${formatPrice(product.packages[x].price)}`)
+                setSelectedPackage(() => product.packages[x].id)
                 break
             }
         }
@@ -50,6 +52,7 @@ const Product = () => {
             setProduct(() => data)
             setDisplayPrice(`$${formatPrice(product.single_price)} - ${formatPrice(product.max_price)}`)
             setLoading(() => false)
+            console.log(data)
             return
         }
     }
@@ -63,6 +66,37 @@ const Product = () => {
             setQty(qty - 1)
             return
         }
+        setQty(action)
+        console.log(qty)
+    }
+
+    const handleAddToCart = () => {
+        if(!selectedPackage){
+            setError('select package')
+            return
+        }
+        let productData = JSON.parse(localStorage.getItem('products'))
+        if(productData){
+            for(let x in productData){
+                if(productData[x].id === product.id){
+                    for(let i in productData[x].packages){
+                        if(productData[x].packages[i] === selectedPackage){
+                            productData[x].packages[i].qty += qty
+                            return
+                        }
+                        productData[x].packages.push({id:selectedPackage, qty:qty})
+                        return
+                    }
+                }
+            }
+            productData.push({product:product_id, packages:[{id:selectedPackage, qty:qty}]})
+        localStorage.removeItem('products')
+        }
+        else{
+            productData = [{product:product_id, packages:[{id:selectedPackage, qty:qty}]}]
+        }
+        console.log(productData)
+        localStorage.setItem(productData)
     }
 
     useEffect(() => {
@@ -82,6 +116,9 @@ const Product = () => {
                 {product &&
                     <ImageCarousel images={product.images}/>
                 }
+                <div className='w-100'>
+                    <h2>TODO add featured ppeocuts here</h2>
+                </div>
             </div>
             <div className='margin-top-30 product-section'>
                 <div className='w-100 justify-content-center'>
@@ -97,32 +134,38 @@ const Product = () => {
                     {product &&
                         <>
                             <h3 className='text-third'>{displayPrice}</h3>
-                            <SelectDropDown options={product.packages} onChange={handleDisplayedPrice}/>
                         </>
-                    
                     }
-                    <div className='w-75 margin-10 padding-10 margin-auto'>
-                        <Divider1/>
-                    </div>
                 </div>
-                <div className='justify-content-end'>
-                    <div className='w-75 margin-top-30 align-items-center flex-nowrap'>
-                        
-                        <div>
-                        <ButtonArrowUp action={handleSetQty}/>
-                            <div className='w-100'>
-                                <InputSquare 
-                                name='qty' 
-                                max={product?.inventory} 
-                                value={qty}
-                                onChange={handleSetQty}
-                                />
-                            </div>
-                        <ButtonArrowDown action={handleSetQty}/>
+                <div className='w-90 padding-10'>
+                    <h4>About</h4>
+                    <p>{product?.description}</p>
+                </div>
+                
+                {product && product.care &&
+                    <div className='w-90 padding-10'>
+                        <h4>Care</h4>
+                        <p>{product.care}</p>
+                    </div>
+                }
+
+                <div className='w-100'>
+                    <SelectDropDown options={product ? product.packages : []} onChange={handleDisplayedPrice}/>
+                </div>
+                <div className='w-75 margin-top-30 align-items-center flex-nowrap'>
+                    <div>
+                    <ButtonArrowUp action={() => handleSetQty('plus')}/>
+                        <div className='w-100'>
+                            <InputSquare 
+                            name='qty' 
+                            max={product?.inventory} 
+                            value={qty}
+                            onChange={(e) => handleSetQty(e.target.value)}/>
                         </div>
-                        <div className='w-75'>
-                            <AddToCartBtn/>
-                        </div>
+                    <ButtonArrowDown action={() => handleSetQty('minus')}/>
+                    </div>
+                    <div className='w-75'>
+                        <AddToCartBtn/>
                     </div>
                 </div>
             </div>
