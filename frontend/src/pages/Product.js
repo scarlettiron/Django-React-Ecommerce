@@ -1,5 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react'
-import HomeContext from '../context/HomeContext'
+import React, {useEffect, useState} from 'react'
 import MainHeader from '../components/headers/MainHeader'
 import NavBar from '../components/navbars/NavBar'
 import Footer from '../components/footers/Footer'
@@ -7,9 +6,7 @@ import ImageCarousel from '../components/products/ImageCarousel'
 import SelectDropDown from '../components/buttonsAndInputs/SelectDropDown'
 import BasicFetch from '../utils/BasicFetch'
 import { productUrls } from '../utils/ApiEndPoints'
-import ButtonArrowUp from '../components/buttonsAndInputs/ButtonArrowUp'
-import ButtonArrowDown from '../components/buttonsAndInputs/ButtonArrowDown'
-import InputSquare from '../components/buttonsAndInputs/InputSquare'
+import QtyBtn from '../components/buttonsAndInputs/QtyBtn'
 import AddToCartBtn from '../components/buttonsAndInputs/AddToCartBtn'
 import Loading1 from '../components/LoadingAndErrors/Loading1'
 import {formatPrice} from '../utils/PriceFormats'
@@ -17,6 +14,7 @@ import '../css/general.css'
 import '../css/products.css'
 import '../css/buttons-inputs.css'
 import { useParams } from 'react-router-dom'
+import FeaturedSection from '../components/products/FeaturedSection'
 
 
 const Product = () => {
@@ -28,10 +26,8 @@ const Product = () => {
     const [displayPrice, setDisplayPrice] = useState(() => null)
     const [qty, setQty] = useState(() => 1)
     const [selectedPackage, setSelectedPackage] = useState(() => null)
-    const [total, setTotal] = useState(() => null)
 
     const handleDisplayedPrice = (e) => {
-        console.log(formatPrice(product.single_price))
         if(e.target.value === 'default'){
             setDisplayPrice(product.max_price ? `$${formatPrice(product.single_price)} - ${formatPrice(product.max_price)}`
             : `$${formatPrice(product.single_price)}`)
@@ -50,25 +46,13 @@ const Product = () => {
         const {response, data} = await BasicFetch(`${productDetail.url}${product_id}/`)
         if(response.status === 200){
             setProduct(() => data)
-            setDisplayPrice(`$${formatPrice(product.single_price)} - ${formatPrice(product.max_price)}`)
+            setDisplayPrice(`$${formatPrice(data.single_price)} - ${formatPrice(data.max_price)}`)
             setLoading(() => false)
-            console.log(data)
             return
         }
     }
 
-    const handleSetQty = (action) => {
-        if(action === 'plus' && qty < product.inventory){
-            setQty(qty + 1)
-            return
-        }
-        if(action === 'minus' && qty > 1){
-            setQty(qty - 1)
-            return
-        }
-        setQty(action)
-        console.log(qty)
-    }
+
 
     const handleAddToCart = () => {
         if(!selectedPackage){
@@ -116,8 +100,8 @@ const Product = () => {
                 {product &&
                     <ImageCarousel images={product.images}/>
                 }
-                <div className='w-100'>
-                    <h2>TODO add featured ppeocuts here</h2>
+                <div className='featured-products-top'>
+                    <FeaturedSection />
                 </div>
             </div>
             <div className='margin-top-30 product-section'>
@@ -149,25 +133,20 @@ const Product = () => {
                     </div>
                 }
 
-                <div className='w-100'>
-                    <SelectDropDown options={product ? product.packages : []} onChange={handleDisplayedPrice}/>
-                </div>
-                <div className='w-75 margin-top-30 align-items-center flex-nowrap'>
-                    <div>
-                    <ButtonArrowUp action={() => handleSetQty('plus')}/>
-                        <div className='w-100'>
-                            <InputSquare 
-                            name='qty' 
-                            max={product?.inventory} 
-                            value={qty}
-                            onChange={(e) => handleSetQty(e.target.value)}/>
-                        </div>
-                    <ButtonArrowDown action={() => handleSetQty('minus')}/>
-                    </div>
+                <div className='add-to-cart-section'>
                     <div className='w-75'>
-                        <AddToCartBtn/>
+                        <SelectDropDown options={product ? product.packages : []} onChange={handleDisplayedPrice}/>
+                    </div>
+                    <div className='w-75 margin-top-30 align-items-center flex-nowrap'>
+                        <QtyBtn max={product?.inventory} name='qty'/>
+                        <div className='w-75'>
+                            <AddToCartBtn action={() => handleAddToCart}/>
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div className='featured-products-bottom'>
+                <FeaturedSection />
             </div>
         </div>
 

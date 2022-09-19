@@ -1,6 +1,5 @@
 import React from 'react'
 import {ReactComponent as ArrowLeft} from '../../assets/ArrowLeft.svg'
-import {ReactComponent as Search} from '../../assets/search-100.svg'
 import '../../css/buttons-inputs.css'
 
 const ButtonArrowLeft = ({action ={}}) => {

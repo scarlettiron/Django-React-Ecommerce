@@ -61,6 +61,20 @@
     padding:10px;
     text-decoration: none;
     border:none;
-    font-size: 30px;
+    font-size: 25px;
     color:white;
+    white-space: nowrap;
+}
+
+.btn-primary{
+    border-radius: 5px;
+    outline:none;
+    background-color: var(--theme-primary);
+    padding:5px;
+    text-decoration: none;
+    border:none;
+    font-size: 15px;
+    color:white;
+    white-space: nowrap;
+    margin:5px;
 }

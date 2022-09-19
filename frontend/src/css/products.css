@@ -23,6 +23,26 @@
 }
 
 
+.featured-products-top{
+    display:none;
+    padding:5px;
+}
+
+.featured-products-bottom{
+    padding: 5px;
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.add-to-cart-section{
+    width:100%;
+    display:flex;
+    justify-content: end;
+    flex-wrap: wrap;
+}
+
+
+
 @media (min-width:700px){
     .product-container{
         flex-wrap: nowrap;
@@ -30,5 +50,19 @@
 
     .product-section{
         width:50%;
+    }
+
+    .featured-products-top{
+        display:flex;
+        flex-wrap: wrap;
+    }
+    
+    .featured-products-bottom{
+        display:none;
+    }
+
+    .add-to-cart-section{
+        width:100%;
+        display:block;
     }
 }

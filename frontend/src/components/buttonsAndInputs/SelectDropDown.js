@@ -3,7 +3,7 @@ import {formatPrice} from '../../utils/PriceFormats'
 import '../../css/select-dropdown.css'
 
 const SelectDropDown = ({options, onChange}) => {
-    console.log(options)
+
   return (
         <select className='classic' name='packageOptions' id='packageOptions' onChange={onChange}>
             <option value='placeholder'>Choose a package</option>

@@ -24,23 +24,26 @@ export const HomeContextProvider = ({children, ...rest}) => {
         5 : {'title' : 'fifth', min_price: 500, max_price:1500, path : '/product/1', 'image': '../assets/photos/roach-food.jpg'},
     } */
 
-    const [featuredProducts, setFeaturedProducts] = useState(null)
+    const [featuredProducts, setFeaturedProducts] = useState(() => null)
+    const [featuredAds, setFeaturedAds] = useState(() => null)
 
     const fetchHomeInfo = async () => {
         const {response, data} = await BasicFetch(HomePageInfo.url)
         if(response.status === 200){
+            setFeaturedAds(() => data.featuredproducts)
             const products = {}
             for (const x in data.featuredproducts){
                 let index = String(data.featuredproducts[x].slot)
                 products[index] = data.featuredproducts[x]
             }
-            setFeaturedProducts(products)
+            setFeaturedProducts(() => products)
         }
     }
 
     const HomeContextData = {
         categories:categories,
         featuredProducts:featuredProducts,
+        featuredAds:featuredAds,
     }
 
     useEffect(() => {
