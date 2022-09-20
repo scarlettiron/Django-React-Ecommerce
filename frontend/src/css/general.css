@@ -161,3 +161,7 @@
     width:100%;
     background-color: var(--dividers);
 }
+
+.missing-input{
+    border:solid 1px red;
+}

@@ -67,6 +67,14 @@
     margin-left:5px;
 }
 
+.add-to-cart:hover{
+        background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+}
+
+.add-to-cart:focus{
+    opacity: .5;
+}
+
 .btn-primary{
     border-radius: 5px;
     outline:none;

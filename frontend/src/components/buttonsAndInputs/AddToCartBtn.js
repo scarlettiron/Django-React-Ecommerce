@@ -3,9 +3,9 @@ import {ReactComponent as Cart} from '../../assets/cart.svg'
 import '../../css/general.css'
 import '../../css/buttons-inputs.css'
 
-const AddToCartBtn = ({form}) => {
+const AddToCartBtn = ({form=null, action=null}) => {
   return (
-    <button className='add-to-cart' form={form}>
+    <button className='add-to-cart' form={form ? form : null} onClick={action ? action : null}>
         Add To Cart
     </button>
   )

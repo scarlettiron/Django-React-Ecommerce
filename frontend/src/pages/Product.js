@@ -24,6 +24,7 @@ const Product = () => {
     const [product, setProduct] = useState(() => null)
     const [loading, setLoading] = useState(() => true)
     const [error, setError] = useState(() => false)
+    const [missingInput, setMissingInput] = useState(() => null)
     const [displayPrice, setDisplayPrice] = useState(() => null)
     const [qty, setQty] = useState(() => 1)
     const [selectedPackage, setSelectedPackage] = useState(() => null)
@@ -58,31 +59,52 @@ const Product = () => {
     const handleAddToCart = () => {
         console.log('adding to cart')
         if(!selectedPackage){
-            setError('select package')
+            setMissingInput(() => 'select package')
             return
         }
-        let productData = JSON.parse(localStorage.getItem('cart'))
+        setMissingInput(() => null)
+
+        let productData = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : []
+        console.log(productData)
+
         if(productData){
+            // iterate through cart list
+            let foundProduct = false
             for(let x in productData){
-                if(productData[x].id === product.id){
+                //if current product in iteration is the same product user is adding to cart
+                console.log(productData[x].product)
+                if(productData[x].product === product.id){
+                    console.log('found product')
+                    foundProduct = true
+                    //loop through products packages in cart
+                    let foundPackage = false
                     for(let i in productData[x].packages){
-                        if(productData[x].packages[i] === selectedPackage){
-                            productData[x].packages[i].qty += qty
-                            return
+                        //if current package in iteration is the same as selected package
+                        //increases the quantity
+                        if(productData[x].packages[i].id === selectedPackage){
+                            console.log('found package')
+                            productData[x].packages[i].qty = productData[x].packages[i].qty + qty
+                            foundPackage = true
+                            break
                         }
+                    }
+                    if(!foundPackage){
+                        //if package not in iteration 
                         productData[x].packages.push({id:selectedPackage, qty:qty})
-                        return
                     }
                 }
             }
-            productData.push({product:product_id, packages:[{id:selectedPackage, qty:qty}]})
-        localStorage.removeItem('cart')
+            //if product not in cart, add  it
+            if(!foundProduct){
+                productData.push({product:product.id, packages:[{id:selectedPackage, qty:qty}]})
+            }
+            localStorage.removeItem('cart')
         }
         else{
             productData = [{product:product_id, packages:[{id:selectedPackage, qty:qty}]}]
         }
-        console.log(productData)
-        localStorage.setItem('cart', productData)
+
+        localStorage.setItem('cart', JSON.stringify(productData))
     }
 
     useEffect(() => {
@@ -137,7 +159,11 @@ const Product = () => {
 
                 <div className='padding-30 add-to-cart-section'>
                     <div className='w-75'>
-                        <SelectDropDown options={product ? product.packages : []} onChange={handleDisplayedPrice}/>
+                        <SelectDropDown 
+                        options={product ? product.packages : []} 
+                        onChange={handleDisplayedPrice}
+                        wrapperClass={missingInput ? 'missing-input' : null}
+                        />
                     </div>
                     <div className='w-75 margin-top-30 align-items-center flex-nowrap'>
                         <QtyBtn max={product?.inventory} name='qty'/>
