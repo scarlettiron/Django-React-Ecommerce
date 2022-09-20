@@ -88,3 +88,13 @@
         width:50%;
     }
 }
+
+@media (min-width:700px){
+    .slide{
+        max-width: 48vw;
+    }
+
+    .btn-wrapper{
+        width:50%;
+    }
+}

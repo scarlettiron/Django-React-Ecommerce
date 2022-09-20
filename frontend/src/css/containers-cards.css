@@ -165,7 +165,7 @@
 }
 .feature-ad img{
     height:150px;
-    width:150px;
+    width:100%;
     object-fit: cover;
 }
 

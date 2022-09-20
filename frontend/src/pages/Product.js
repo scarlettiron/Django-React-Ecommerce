@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import MainHeader from '../components/headers/MainHeader'
 import NavBar from '../components/navbars/NavBar'
 import Footer from '../components/footers/Footer'
+import Divider1 from '../components/general/Divider1'
 import ImageCarousel from '../components/products/ImageCarousel'
 import SelectDropDown from '../components/buttonsAndInputs/SelectDropDown'
 import BasicFetch from '../utils/BasicFetch'
@@ -55,11 +56,12 @@ const Product = () => {
 
 
     const handleAddToCart = () => {
+        console.log('adding to cart')
         if(!selectedPackage){
             setError('select package')
             return
         }
-        let productData = JSON.parse(localStorage.getItem('products'))
+        let productData = JSON.parse(localStorage.getItem('cart'))
         if(productData){
             for(let x in productData){
                 if(productData[x].id === product.id){
@@ -74,13 +76,13 @@ const Product = () => {
                 }
             }
             productData.push({product:product_id, packages:[{id:selectedPackage, qty:qty}]})
-        localStorage.removeItem('products')
+        localStorage.removeItem('cart')
         }
         else{
             productData = [{product:product_id, packages:[{id:selectedPackage, qty:qty}]}]
         }
         console.log(productData)
-        localStorage.setItem(productData)
+        localStorage.setItem('cart', productData)
     }
 
     useEffect(() => {
@@ -95,7 +97,7 @@ const Product = () => {
         {loading &&
             <Loading1/>
         }
-        <div className='product-container'>
+        <div className='product-container margin-top-30'>
             <div className='product-section'>
                 {product &&
                     <ImageCarousel images={product.images}/>
@@ -121,31 +123,34 @@ const Product = () => {
                         </>
                     }
                 </div>
-                <div className='w-90 padding-10'>
+                <div className='w-90 padding-30'>
                     <h4>About</h4>
                     <p>{product?.description}</p>
                 </div>
                 
                 {product && product.care &&
-                    <div className='w-90 padding-10'>
+                    <div className='w-90 padding-30'>
                         <h4>Care</h4>
                         <p>{product.care}</p>
                     </div>
                 }
 
-                <div className='add-to-cart-section'>
+                <div className='padding-30 add-to-cart-section'>
                     <div className='w-75'>
                         <SelectDropDown options={product ? product.packages : []} onChange={handleDisplayedPrice}/>
                     </div>
                     <div className='w-75 margin-top-30 align-items-center flex-nowrap'>
                         <QtyBtn max={product?.inventory} name='qty'/>
                         <div className='w-75'>
-                            <AddToCartBtn action={() => handleAddToCart}/>
+                            <AddToCartBtn action={() => handleAddToCart()}/>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className='featured-products-bottom'>
+            <div className='featured-products-bottom justify-content-center'>
+                <div className='w-75 margin-30'>
+                    <Divider1/>
+                </div>
                 <FeaturedSection />
             </div>
         </div>
