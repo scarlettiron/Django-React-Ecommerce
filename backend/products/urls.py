@@ -7,4 +7,5 @@ urlpatterns = [
     path('product-search/', v.search_products.as_view(), name="product-search"),
     path('featured-products/', v.featuredProductList.as_view(), name='featured-products'),
     path('home-info/', v.HomePage.as_view(), name='home-info'),
+    path('cart/', v.Cart.as_view(), name='cart'),
 ]

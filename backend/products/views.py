@@ -1,8 +1,9 @@
 
+from multiprocessing.sharedctypes import Value
 from rest_framework import generics, response
-from django.db.models import Prefetch, Q, OuterRef, Subquery
+from django.db.models import Prefetch, Q, OuterRef, Subquery, ExpressionWrapper, IntegerField
 from .serializers import ProductList_Serializer, FeaturedProduct_Serializer, Category_Serializer
-from .models import Product, Category, SubCategory, ThirdSubcategory, FeaturedProduct
+from .models import Product, Category, ProductPackage, SubCategory, ThirdSubcategory, FeaturedProduct
 from json import dumps
 from media.models import Media
 
@@ -73,4 +74,33 @@ class HomePage(generics.GenericAPIView):
 
         return response.Response({'categories':categories, 'featuredproducts':featured}, status = 200)
             
+
+class Cart(generics.GenericAPIView):
+    def post(self, request, *args, **kwargs):
+        data = self.request.data
+        
+        print(data)
+        
+        products = []
+        packageDict = {}
+        
+        for prod in data:
+            products.append(prod['product'])
+            for pack in prod['packages']:
+                packageDict[pack['id']] = pack['qty']
+                
+        dictKeys = list(packageDict.keys())
+        
+        print(products)
+        print(packageDict)
+                
+        cart = Product.objects.filter(pk__in = products).prefetch_related(Prefetch('productpackage_set',
+                                                        queryset=ProductPackage.objects.filter(id__in = dictKeys), to_attr = 'packages'), 
+        
+                                                    Prefetch('media_set', to_attr = 'images'))
+        
+        print(cart[1].packages)
+
+        ''' for item in cart:
+            print(item) '''
     

@@ -1,4 +1,5 @@
 
+from dataclasses import field
 from rest_framework.serializers import ModelSerializer
 
 from media.serializers import media_serializer
@@ -40,3 +41,14 @@ class Category_Serializer(ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
+        
+        
+class Cart_Serializer(ModelSerializer):
+    packages = ProductPackage_Serializer(many=True, read_only = True)
+    images = media_serializer(many=True)
+    class Meta:
+        model = Product
+        fields = ['id', 'title', 'scientific_name', 'description', 'care', 'inventory', 'min_order', 'discount',
+                  'active', 'single_price', 'max_price', 'category', 'subcategory', 'thirdsubcategory', 'packages',
+                  'images']
+        read_only = ['packages', 'images']

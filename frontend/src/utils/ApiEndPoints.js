@@ -22,4 +22,9 @@ const productUrls = {
     }
 }
 
-export {server, HomePageInfo, checkoutUrls, productUrls}
+const cartUrl = {
+    url:`${server}products/cart/`,
+    methods:['POST']
+}
+
+export {server, HomePageInfo, checkoutUrls, productUrls, cartUrl}
