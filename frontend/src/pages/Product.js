@@ -54,6 +54,9 @@ const Product = () => {
         }
     }
 
+    const handleSetQty = (newQty) => {
+        setQty(() => newQty)
+    }
 
 
     const handleAddToCart = () => {
@@ -65,8 +68,8 @@ const Product = () => {
         setMissingInput(() => null)
 
         let productData = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : []
-        console.log(productData)
-
+        
+        const orderQty = parseInt(qty)
         if(productData){
             // iterate through cart list
             let foundProduct = false
@@ -83,25 +86,25 @@ const Product = () => {
                         //increases the quantity
                         if(productData[x].packages[i].id === selectedPackage){
                             console.log('found package')
-                            productData[x].packages[i].qty = productData[x].packages[i].qty + qty
+                            productData[x].packages[i].qty = productData[x].packages[i].qty + orderQty
                             foundPackage = true
                             break
                         }
                     }
                     if(!foundPackage){
                         //if package not in iteration 
-                        productData[x].packages.push({id:selectedPackage, qty:qty})
+                        productData[x].packages.push({id:selectedPackage, qty:orderQty})
                     }
                 }
             }
             //if product not in cart, add  it
             if(!foundProduct){
-                productData.push({product:product.id, packages:[{id:selectedPackage, qty:qty}]})
+                productData.push({product:product.id, packages:[{id:selectedPackage, qty:orderQty}]})
             }
             localStorage.removeItem('cart')
         }
         else{
-            productData = [{product:product_id, packages:[{id:selectedPackage, qty:qty}]}]
+            productData = [{product:product_id, packages:[{id:selectedPackage, qty:orderQty}]}]
         }
 
         localStorage.setItem('cart', JSON.stringify(productData))
@@ -163,10 +166,16 @@ const Product = () => {
                         options={product ? product.packages : []} 
                         onChange={handleDisplayedPrice}
                         wrapperClass={missingInput ? 'missing-input' : null}
+                        id='package'
                         />
                     </div>
                     <div className='w-75 margin-top-30 align-items-center flex-nowrap'>
-                        <QtyBtn max={product?.inventory} name='qty'/>
+                        <QtyBtn 
+                        max={product?.inventory} 
+                        id='qty' 
+                        onChange={handleSetQty}
+                        currentQty = {qty}
+                        />
                         <div className='w-75'>
                             <AddToCartBtn action={() => handleAddToCart()}/>
                         </div>

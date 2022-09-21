@@ -1,23 +1,24 @@
-import React, {useState} from 'react'
+import React from 'react'
 import ButtonArrowUp from '../buttonsAndInputs/ButtonArrowUp'
 import ButtonArrowDown from '../buttonsAndInputs/ButtonArrowDown'
 import InputSquare from '../buttonsAndInputs/InputSquare'
 import '../../css/buttons-inputs.css'
 
-const QtyBtn = ({max, id, wrapperClass=null}) => {
-    const [qty, setQty] = useState(() => 1)
+const QtyBtn = ({max, id, wrapperClass=null, onChange, currentQty}) => {
 
     const handleSetQty = (action) => {
-        if(action === 'plus' && qty < max){
-            setQty(qty + 1)
+        let newQty;
+        if(action === 'plus' && currentQty < max){
+            newQty = currentQty + 1
+            onChange(newQty)
             return
         }
-        if(action === 'minus' && qty > 1){
-            setQty(qty - 1)
+        if(action === 'minus' && currentQty > 1){
+            newQty = currentQty - 1
+            onChange(newQty)
             return
         }
-        setQty(action)
-        console.log(qty)
+        onChange(action)
     }
 
   return (
@@ -28,7 +29,7 @@ const QtyBtn = ({max, id, wrapperClass=null}) => {
                 name= {id}
                 id={id}
                 max={max} 
-                value={qty}
+                value={currentQty}
                 onChange={(e) => handleSetQty(e.target.value)}/>
             </div>
         <ButtonArrowDown action={() => handleSetQty('minus')}/>
