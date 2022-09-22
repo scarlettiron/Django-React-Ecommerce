@@ -75,9 +75,7 @@ const Product = () => {
             let foundProduct = false
             for(let x in productData){
                 //if current product in iteration is the same product user is adding to cart
-                console.log(productData[x].product)
                 if(productData[x].product === product.id){
-                    console.log('found product')
                     foundProduct = true
                     //loop through products packages in cart
                     let foundPackage = false
@@ -85,26 +83,25 @@ const Product = () => {
                         //if current package in iteration is the same as selected package
                         //increases the quantity
                         if(productData[x].packages[i].id === selectedPackage){
-                            console.log('found package')
-                            productData[x].packages[i].qty = productData[x].packages[i].qty + orderQty
+                            productData[x].packages[i].qty = productData[x].packages[i].ordering + orderQty
                             foundPackage = true
                             break
                         }
                     }
                     if(!foundPackage){
                         //if package not in iteration 
-                        productData[x].packages.push({id:selectedPackage, qty:orderQty})
+                        productData[x].packages.push({id:selectedPackage, ordering:orderQty})
                     }
                 }
             }
             //if product not in cart, add  it
             if(!foundProduct){
-                productData.push({product:product.id, packages:[{id:selectedPackage, qty:orderQty}]})
+                productData.push({product:product.id, packages:[{id:selectedPackage, ordering:orderQty}]})
             }
             localStorage.removeItem('cart')
         }
         else{
-            productData = [{product:product_id, packages:[{id:selectedPackage, qty:orderQty}]}]
+            productData = [{product:product_id, packages:[{id:selectedPackage, ordering:orderQty}]}]
         }
 
         localStorage.setItem('cart', JSON.stringify(productData))

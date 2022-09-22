@@ -17,6 +17,7 @@ export const CartContextProvider = ({children, ...rest}) => {
         const body = JSON.parse(localStorage.getItem('cart'))
         const {response, data} = await BasicFetch(cartUrl.url, {method:'POST', body:JSON.stringify(body)})
         console.log(response.status)
+        console.log(data)
         
     }
  
