@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
+import CartContext from '../context/CartContext'
 import MainHeader from '../components/headers/MainHeader'
 import NavBar from '../components/navbars/NavBar'
 import Footer from '../components/footers/Footer'
@@ -28,6 +29,8 @@ const Product = () => {
     const [displayPrice, setDisplayPrice] = useState(() => null)
     const [qty, setQty] = useState(() => 1)
     const [selectedPackage, setSelectedPackage] = useState(() => null)
+
+    const {updateLocalStorageState} = useContext(CartContext)
 
     const handleDisplayedPrice = (e) => {
         if(e.target.value === 'default'){
@@ -60,7 +63,6 @@ const Product = () => {
 
 
     const handleAddToCart = () => {
-        console.log('adding to cart')
         if(!selectedPackage){
             setMissingInput(() => 'select package')
             return
@@ -105,6 +107,7 @@ const Product = () => {
         }
 
         localStorage.setItem('cart', JSON.stringify(productData))
+        updateLocalStorageState()
     }
 
     useEffect(() => {
