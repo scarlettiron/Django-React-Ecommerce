@@ -30,7 +30,8 @@ class ProductPackage(models.Model):
     qty = models.IntegerField(default=0)
     price = models.IntegerField(default=0)
     discount = models.IntegerField(blank=True, null=True)
-    
+    description = models.CharField(max_length=100, blank=True, null=True)
+     
     
 class StProduct(models.Model):
     product = models.OneToOneField(Product, blank=True, null=True, on_delete=models.CASCADE)

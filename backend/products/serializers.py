@@ -10,10 +10,14 @@ class ProductPackage_Serializer(ModelSerializer):
     ordering_quantity = SerializerMethodField()
     class Meta:
         model = ProductPackage
-        fields = ['pk', 'ordering_quantity']
+        fields = ['id', 'ordering_quantity', 'product', 'qty', 'price', 
+                  'discount', 'description']
 
     def get_ordering_quantity(self, obj):
-        cart = self.context['cart']
+        try:
+            cart = self.context['cart']
+        except:
+            return 0
         
         for item in cart:
             if item['product'] == obj.product.pk:

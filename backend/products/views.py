@@ -96,29 +96,7 @@ class Cart(generics.GenericAPIView):
         
 
         cartData = Cart_Serializer(cart, many=True, context={'cart':data}).data
-            
-        
-        ''' #loop through all products in requesting data
-        for product in data:
-            #loop through all products returned in db query
-            for cIndex, item in enumerate(cartData):
-                if item['id'] == product['product']:
-                    #loop through all packages in requesting data
-                    for pack in product['packages']:
-                        #loop through all packages returned in db query
-                        for iIndex, p in enumerate(item['packages']):
-                            print('see if matches')
-                            print(p)
-                            print(pack)
-                            if p['id'] == pack['id']:
-                                print(p)
-                                print('yep')
-                                cartData[cIndex]['packages'][iIndex] = pack['ordering']
-                                #p['ordering'] == pack['ordering']
-                                #print(p['ordering'])
-                                break
-                            else:
-                                print('nope')  '''
+
         return response.Response(cartData, status=200)
                         
             
