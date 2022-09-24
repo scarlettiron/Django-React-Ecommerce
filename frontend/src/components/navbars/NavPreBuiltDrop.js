@@ -1,6 +1,5 @@
 import React from 'react'
 import Dropdown from 'react-multilevel-dropdown';
-import { useHistory } from 'react-router-dom'
 import '../../css/general.css'
 import '../../css/navbar.css'
 

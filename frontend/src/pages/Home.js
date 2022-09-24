@@ -1,4 +1,4 @@
-import React, {useContext, useRef} from 'react'
+import React, {useContext} from 'react'
 import HomeContext from '../context/HomeContext'
 import MainHeader from '../components/headers/MainHeader'
 import NavBar from '../components/navbars/NavBar'
@@ -11,7 +11,6 @@ import '../css/containers-cards.css'
 
 const Home = () => {
   const {categories, featuredProducts} = useContext(HomeContext)
-  const product = {title:'gecko nano nano', min_price : 2000, max_price:5000, path:'/hkhjk'}
 
   return (
     <div className='w-100 padding-0'>

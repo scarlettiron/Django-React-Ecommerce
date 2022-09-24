@@ -1,5 +1,4 @@
 import React from 'react'
-import {ReactComponent as Cart} from '../../assets/cart.svg'
 import '../../css/general.css'
 import '../../css/buttons-inputs.css'
 

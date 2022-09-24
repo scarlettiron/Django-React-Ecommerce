@@ -6,15 +6,15 @@ import '../../css/cart.css'
 import '../../css/general.css'
 
 const CartPackage = ({pack, product}) => {
-    const {removeFromCart} = useContext(CartContext)
+    const {removeFromCart, updatePackageQuantity} = useContext(CartContext)
 
     const [qty, setQty] = useState(() => pack.ordering_quantity)
 
     const handleUpdateQty = (newQty) => {
         setQty(() => newQty)
+        updatePackageQuantity(product.id, pack.id, newQty)
     }
 
-    console.log(pack)
 
   return (
     <div className='cart-package-item'>

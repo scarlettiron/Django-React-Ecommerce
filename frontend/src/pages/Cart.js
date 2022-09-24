@@ -1,15 +1,19 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import CartContext from '../context/CartContext'
 import MainHeader from '../components/headers/MainHeader'
 import NavBar from '../components/navbars/NavBar'
 import Footer from '../components/footers/Footer'
 import CartItem from '../components/cart/CartItem'
+import { CountRenders } from '../utils/CountRenders'
 
 import '../css/general.css'
 import '../css/cart.css'
 
 const Cart = () => {
   const {cart} = useContext(CartContext)
+
+  CountRenders('Cart page: ')
+  console.log(cart)
 
   return (
     <div className='w-100'>
@@ -22,7 +26,7 @@ const Cart = () => {
           })
         }
       </div>
-        
+      <Footer/>
     </div>
   )
 }

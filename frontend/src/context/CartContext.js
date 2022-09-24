@@ -1,11 +1,13 @@
 import React, {useState, useEffect, createContext} from 'react'
 import BasicFetch from '../utils/BasicFetch'
 import {cartUrl} from '../utils/ApiEndPoints'
+import {CountRenders} from '../utils/CountRenders'
 
 const CartContext = createContext()
 export default CartContext
 
 export const CartContextProvider = ({children, ...rest}) => {
+    CountRenders('Cart Context: ')
 
     const [localStorageCart, setLocalStorageCart] = useState(() => localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : null)
     const [cart, setCart] = useState(() => null)
@@ -30,58 +32,82 @@ export const CartContextProvider = ({children, ...rest}) => {
 
         //remove from local storage state
         let deleteProductCompletely = false
+        for(let x in localStorageCart){
+            if(localStorageCart[x].product === product && localStorageCart[x].packages.length === 1){
+                deleteProductCompletely = true
+                break
+            }
+        }
+
+        if(deleteProductCompletely){
+            const filteredLocalStorage = localStorageCart.filter(item => {
+                return item.product !== product
+            })
+
+            //if there are no products being purchased set states to null
+            if(filteredLocalStorage.length === 0){
+                setLocalStorageCart(null)
+                setCart(null)
+                localStorage.removeItem('cart')
+                return
+            }
+
+            setLocalStorageCart(() => filteredLocalStorage)
+            localStorage.removeItem(cart)
+            localStorage.setItem('cart', JSON.stringify(filteredLocalStorage))
+
+            const filteredCart = cart.filter(item => {
+                return item.id !== product
+            })
+            setCart(filteredCart)
+            return
+        }
+
+        //if other packages being purchased for product
          setLocalStorageCart(oldState => {
             oldState.forEach(product => {
                 const newPackages = product.packages.filter(pac => {
                     return pac.id !== pack
                 })
                 product.packages = newPackages
-
-                //if no packages being purchased for this product set to true
-                if(product.packages.length === 0){deleteProductCompletely = true}
                 return product
             })
         }) 
 
-        //if no packages being purchases for this product delete from both states
-        console.log(localStorageCart)
-        //doesn't work yet
-/*         if(deleteProductCompletely){
-            setLocalStorageCart(oldState => {
-                console.log(oldState)
-                oldState.filter(prod => {
-                    return prod.id !== product
-                })
-            })
 
-            setCart(oldState => {
-                oldState.filter(prod => {
-                    return prod.id !== product
-                })
-            })
-            return
-        }
- */
         //setLocalStorageCart(localStorageCart)
-        console.log(localStorageCart)
-        //localStorage.removeItem('cart')
-        //localStorage.setItem('cart', JSON.stringify(localStorageCart))
+        localStorage.removeItem('cart')
+        localStorage.setItem('cart', JSON.stringify(localStorageCart))
 
         //handle removing full cart data
-        setCart(oldCart => {
-            oldCart.forEach(product => {
-                const newPacks = product.packages.filter(pac => {
+        for(let x in cart){
+            if(cart[x].id === product){
+                const newPackages = cart[x].packages.filter(pac => {
                     return pac.id !== pack
                 })
-                product.packages = newPacks
-                return product
-            })
-        })
-
-        console.log(cart)
-  
+                cart[x].packages = newPackages
+                return
+            }
+        }
+        setCart(cart)
     }
 
+
+    //update package quantity in cart
+    const updatePackageQuantity = (product, pack, newQty) => {
+                const prod = localStorageCart.find((p) => {return p.product === product})
+                const productPackage = prod.packages.find((p) => {return p.id === pack})
+                productPackage.ordering_quantity = newQty
+                setLocalStorageCart(localStorageCart) 
+        
+                localStorage.removeItem('cart')
+                localStorage.setItem('cart', JSON.stringify(localStorageCart))
+        
+                const cartProd = cart.find((prod) => {return prod.id === product})
+                const cartPack = cartProd.packages.find((p) => {return p.id === pack})
+                cartPack.ordering_quantity = newQty
+                setCart(cart) 
+    }
    
 
 
@@ -89,6 +115,8 @@ export const CartContextProvider = ({children, ...rest}) => {
         cart:cart,
         updateLocalStorageState: updateLocalStorageState,
         removeFromCart:removeFromCart,
+        updatePackageQuantity:updatePackageQuantity,
+
     }
 
     useEffect(() => {

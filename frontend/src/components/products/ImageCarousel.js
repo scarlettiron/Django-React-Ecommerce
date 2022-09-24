@@ -1,6 +1,4 @@
 import React, {useState} from 'react'
-import {ReactComponent as ArrowLeft} from '../../assets/ArrowLeft.svg'
-import {ReactComponent as ArrowRight} from '../../assets/ArrowRight.svg'
 import ButtonArrowLeft from '../buttonsAndInputs/ButtonArrowLeft'
 import ButtonArrowRight from '../buttonsAndInputs/ButtonArrowRight'
 import '../../css/general.css'

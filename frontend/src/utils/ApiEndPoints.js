@@ -27,4 +27,4 @@ const cartUrl = {
     methods:['POST']
 }
 
-export {server, HomePageInfo, checkoutUrls, productUrls, cartUrl}
+export {server, HomePageInfo, checkoutUrls, productUrls, cartUrl, taxApi}
