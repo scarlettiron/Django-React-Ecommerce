@@ -1,4 +1,4 @@
-import React, {useState, useEffect, createContext} from 'react'
+import React, {useState, useEffect, useRef, createContext} from 'react'
 import BasicFetch from '../utils/BasicFetch'
 import {cartUrl} from '../utils/ApiEndPoints'
 import {CountRenders} from '../utils/CountRenders'
@@ -10,22 +10,66 @@ export const CartContextProvider = ({children, ...rest}) => {
     CountRenders('Cart Context: ')
 
     const [localStorageCart, setLocalStorageCart] = useState(() => localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : null)
-    const [cart, setCart] = useState(() => null)
+    const [cart, setCart] = useState(() => localStorage.getItem('cartTotal') ? JSON.parse(localStorage.getItem('cartTotal')) : null)
+    const [cartPrice, setCartPrice] = useState(() => null)
+    const initialVisit = useRef(true)
+
+    const updateSubtotal = (data) => {
+        let orderSubtotal = 0
+        data.forEach(prod => {
+            prod.packages.forEach(p => {
+                orderSubtotal = orderSubtotal + p.price
+            })
+        })
+        setCartPrice({'subtotal':orderSubtotal})
+        localStorage.removeItem('cartTotal')
+        localStorage.setItem('cartTotal', JSON.stringify({'subtotal':orderSubtotal}))
+    }
 
     const handleGetCartData = async () => {
-        console.log('getting cart data')
-
+        if(!localStorageCart) return
         const body = JSON.parse(localStorage.getItem('cart'))
         const {response, data} = await BasicFetch(cartUrl.url, {method:'POST', body:JSON.stringify(body)})
         if(response.status === 200){
             setCart(data)
+
         }
-        
     }
  
     const updateLocalStorageState = () =>{
         setLocalStorageCart(localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : null)
     }
+
+
+
+    //under construction
+    const addToCart = (product, productPackage, qty) => {
+        let localStorageProduct = localStorageCart.find(prod => {return prod.product === product})
+        if(!localStorageProduct){
+            setLocalStorageCart(oldArray => ([
+                ...oldArray, {'product':product, 'packages':[{'id':productPackage, 'qty':qty}]}])
+                )
+        }
+        else{
+            let localProductPackage = localStorageProduct.packages.find(p => {
+                return p.id === productPackage
+            })
+
+            if(!localProductPackage){
+                localStorageProduct.packages.push({'id':productPackage, 'ordering_quantity':parseInt(qty)})
+            }
+            else{
+                localProductPackage.ordering_quantity = localProductPackage.ordering_quantity + parseInt(qty)
+            }
+            setLocalStorageCart(localStorageCart)
+        }
+
+
+        localStorage.removeItem('cart')
+        localStorage.setItem('cart', JSON.stringify(localStorageCart))
+        updateSubtotal(cart)
+    }
+
 
     //removes package from cart
     const removeFromCart = (product, pack) => {
@@ -49,6 +93,7 @@ export const CartContextProvider = ({children, ...rest}) => {
                 setLocalStorageCart(null)
                 setCart(null)
                 localStorage.removeItem('cart')
+                setCartPrice(null)
                 return
             }
 
@@ -60,6 +105,7 @@ export const CartContextProvider = ({children, ...rest}) => {
                 return item.id !== product
             })
             setCart(filteredCart)
+            updateSubtotal(cart)
             return
         }
 
@@ -90,6 +136,7 @@ export const CartContextProvider = ({children, ...rest}) => {
             }
         }
         setCart(cart)
+        updateSubtotal(cart)
     }
 
 
@@ -107,23 +154,29 @@ export const CartContextProvider = ({children, ...rest}) => {
                 const cartPack = cartProd.packages.find((p) => {return p.id === pack})
                 cartPack.ordering_quantity = newQty
                 setCart(cart) 
+
+                updateSubtotal(cart)
     }
    
 
+    useEffect(() => {
+        if(!initialVisit) return
+        const initialLoad = async () => {
+            await handleGetCartData()
+            initialVisit.current = false
+        }
+        initialLoad()
+    })
 
     const cartData = {
         cart:cart,
         updateLocalStorageState: updateLocalStorageState,
         removeFromCart:removeFromCart,
         updatePackageQuantity:updatePackageQuantity,
+        addToCart:addToCart,
+        handleGetCartData:handleGetCartData,
 
     }
-
-    useEffect(() => {
-        console.log('cart context use effect')
-        if(!localStorageCart) return
-        handleGetCartData()
-    },[])
 
     return (
         <CartContext.Provider value = {cartData}>

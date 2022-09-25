@@ -30,7 +30,7 @@ const Product = () => {
     const [qty, setQty] = useState(() => 1)
     const [selectedPackage, setSelectedPackage] = useState(() => null)
 
-    const {updateLocalStorageState} = useContext(CartContext)
+    const {addToCart} = useContext(CartContext)
 
     const handleDisplayedPrice = (e) => {
         if(e.target.value === 'default'){
@@ -69,45 +69,7 @@ const Product = () => {
         }
         setMissingInput(() => null)
 
-        let productData = JSON.parse(localStorage.getItem('cart')) ? JSON.parse(localStorage.getItem('cart')) : []
-        
-        const orderQty = parseInt(qty)
-        if(productData){
-            // iterate through cart list
-            let foundProduct = false
-            for(let x in productData){
-                //if current product in iteration is the same product user is adding to cart
-                if(productData[x].product === product.id){
-                    foundProduct = true
-                    //loop through products packages in cart
-                    let foundPackage = false
-                    for(let i in productData[x].packages){
-                        //if current package in iteration is the same as selected package
-                        //increases the quantity
-                        if(productData[x].packages[i].id === selectedPackage){
-                            productData[x].packages[i].qty = productData[x].packages[i].ordering + orderQty
-                            foundPackage = true
-                            break
-                        }
-                    }
-                    if(!foundPackage){
-                        //if package not in iteration 
-                        productData[x].packages.push({id:selectedPackage, ordering:orderQty})
-                    }
-                }
-            }
-            //if product not in cart, add  it
-            if(!foundProduct){
-                productData.push({product:product.id, packages:[{id:selectedPackage, ordering:orderQty}]})
-            }
-            localStorage.removeItem('cart')
-        }
-        else{
-            productData = [{product:product_id, packages:[{id:selectedPackage, ordering:orderQty}]}]
-        }
-
-        localStorage.setItem('cart', JSON.stringify(productData))
-        updateLocalStorageState()
+        const success = addToCart(product.id, selectedPackage, qty)
     }
 
     useEffect(() => {
