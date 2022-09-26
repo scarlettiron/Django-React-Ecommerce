@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef, createContext} from 'react'
 import BasicFetch from '../utils/BasicFetch'
 import {cartUrl} from '../utils/ApiEndPoints'
 import {CountRenders} from '../utils/CountRenders'
+import { da } from 'date-fns/locale'
 
 const CartContext = createContext()
 export default CartContext
@@ -10,18 +11,23 @@ export const CartContextProvider = ({children, ...rest}) => {
     CountRenders('Cart Context: ')
 
     const [localStorageCart, setLocalStorageCart] = useState(() => localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : null)
-    const [cart, setCart] = useState(() => localStorage.getItem('cartTotal') ? JSON.parse(localStorage.getItem('cartTotal')) : null)
-    const [cartPrice, setCartPrice] = useState(() => null)
+    const [cart, setCart] = useState(() => null)
+    const [cartPrice, setCartPrice] = useState(() => localStorage.getItem('cartTotal') ? JSON.parse(localStorage.getItem('cartTotal')) : {subtotal:0})
     const initialVisit = useRef(true)
 
-    const updateSubtotal = (data) => {
-        let orderSubtotal = 0
-        data.forEach(prod => {
-            prod.packages.forEach(p => {
-                orderSubtotal = orderSubtotal + p.price
+    const updateSubtotal = (data=null, packagePrice=null, quantity=null) => {
+        let orderSubtotal = cartPrice.subtotal
+        if(data){
+            data.forEach(prod => {
+                prod.packages.forEach(p => {
+                    orderSubtotal = orderSubtotal + p.price
+                })
             })
-        })
-        setCartPrice({'subtotal':orderSubtotal})
+        }
+        else{
+            orderSubtotal = orderSubtotal + (packagePrice * quantity)
+        }
+        setCartPrice({subtotal:orderSubtotal})
         localStorage.removeItem('cartTotal')
         localStorage.setItem('cartTotal', JSON.stringify({'subtotal':orderSubtotal}))
     }
@@ -32,6 +38,7 @@ export const CartContextProvider = ({children, ...rest}) => {
         const {response, data} = await BasicFetch(cartUrl.url, {method:'POST', body:JSON.stringify(body)})
         if(response.status === 200){
             setCart(data)
+            updateSubtotal(data)
 
         }
     }
@@ -40,34 +47,47 @@ export const CartContextProvider = ({children, ...rest}) => {
         setLocalStorageCart(localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : null)
     }
 
-
-
-    //under construction
-    const addToCart = (product, productPackage, qty) => {
-        let localStorageProduct = localStorageCart.find(prod => {return prod.product === product})
-        if(!localStorageProduct){
-            setLocalStorageCart(oldArray => ([
-                ...oldArray, {'product':product, 'packages':[{'id':productPackage, 'qty':qty}]}])
-                )
-        }
-        else{
-            let localProductPackage = localStorageProduct.packages.find(p => {
-                return p.id === productPackage
-            })
-
-            if(!localProductPackage){
-                localStorageProduct.packages.push({'id':productPackage, 'ordering_quantity':parseInt(qty)})
-            }
-            else{
-                localProductPackage.ordering_quantity = localProductPackage.ordering_quantity + parseInt(qty)
-            }
-            setLocalStorageCart(localStorageCart)
-        }
-
-
+    const addToLocalStorage = (data, price, qty) => {
+        console.log(data)
         localStorage.removeItem('cart')
-        localStorage.setItem('cart', JSON.stringify(localStorageCart))
-        updateSubtotal(cart)
+        localStorage.setItem('cart', JSON.stringify(data))
+        updateLocalStorageState()
+        updateSubtotal(null, price, qty)
+    }
+
+
+    const addToCart = (product, productPackage, qty) => {
+        qty = parseInt(qty)
+
+        const newLocalCartPackage = {'package':productPackage.id, 'ordering_quantity':qty}
+        const newLocalCartProduct = {'product':product, 'packages':[newLocalCartPackage]}
+
+        const storageCart = JSON.parse(localStorage.getItem('cart'))
+
+        if(!storageCart){
+            addToLocalStorage([newLocalCartProduct], productPackage.price, qty)
+            return
+        }
+
+        let prod = storageCart.findIndex(item => {return item.product === product})
+        if(prod === -1){
+            storageCart.push(newLocalCartProduct)
+            addToLocalStorage(storageCart, productPackage.price, qty)
+            return
+        }
+
+        let pac = storageCart[prod].packages.findIndex(p => {return p.package === productPackage.id})
+        
+        if(pac === -1){
+            storageCart[prod].packages.push(newLocalCartPackage)
+            addToLocalStorage(storageCart, productPackage.price, qty)
+            return
+        }
+
+        storageCart[prod].packages[pac].ordering_quantity = storageCart[prod].packages[pac].ordering_quantity + qty
+
+        addToLocalStorage(storageCart, productPackage.price, qty)
+        return
     }
 
 
@@ -166,15 +186,15 @@ export const CartContextProvider = ({children, ...rest}) => {
             initialVisit.current = false
         }
         initialLoad()
-    })
+    }, [])
 
     const cartData = {
         cart:cart,
         updateLocalStorageState: updateLocalStorageState,
         removeFromCart:removeFromCart,
         updatePackageQuantity:updatePackageQuantity,
-        addToCart:addToCart,
         handleGetCartData:handleGetCartData,
+        addToCart:addToCart,
 
     }
 

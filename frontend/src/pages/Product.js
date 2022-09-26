@@ -38,13 +38,9 @@ const Product = () => {
             : `$${formatPrice(product.single_price)}`)
             return
         }
-        for(let x in product.packages){
-            if(product.packages[x].id === parseInt(e.target.value)){
-                setDisplayPrice(`$${formatPrice(product.packages[x].price)}`)
-                setSelectedPackage(() => product.packages[x].id)
-                break
-            }
-        }
+        const pack = product.packages.find(p => {return p.id === parseInt(e.target.value)})
+        setDisplayPrice(`$${formatPrice(pack.price)}`)
+        setSelectedPackage(pack)
     }
 
     const getProduct = async () => {
@@ -69,7 +65,8 @@ const Product = () => {
         }
         setMissingInput(() => null)
 
-        const success = addToCart(product.id, selectedPackage, qty)
+        addToCart(product.id, selectedPackage, qty)
+        return
     }
 
     useEffect(() => {

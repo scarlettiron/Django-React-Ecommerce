@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import CartContext from '../context/CartContext'
 import MainHeader from '../components/headers/MainHeader'
 import NavBar from '../components/navbars/NavBar'
@@ -10,10 +10,14 @@ import '../css/general.css'
 import '../css/cart.css'
 
 const Cart = () => {
-  const {cart} = useContext(CartContext)
+  const {cart, handleGetCartData} = useContext(CartContext)
 
   CountRenders('Cart page: ')
   console.log(cart)
+
+  useEffect(() => {
+    handleGetCartData()
+  })
 
   return (
     <div className='w-100'>

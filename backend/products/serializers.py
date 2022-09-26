@@ -22,8 +22,8 @@ class ProductPackage_Serializer(ModelSerializer):
         for item in cart:
             if item['product'] == obj.product.pk:
                 for package in item['packages']:
-                    if package['id'] == obj.id:
-                        return package['ordering']
+                    if package['package'] == obj.id:
+                        return package['ordering_quantity']
         return 0
 
 class ProductList_Serializer(ModelSerializer):

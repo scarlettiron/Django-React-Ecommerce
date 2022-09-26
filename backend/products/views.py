@@ -85,7 +85,7 @@ class Cart(generics.GenericAPIView):
         for prod in data:
             products.append(prod['product'])
             for pack in prod['packages']:
-                packageDict[pack['id']] = pack['ordering_quantity']
+                packageDict[pack['package']] = pack['ordering_quantity']
                 
         dictKeys = list(packageDict.keys())
                 
