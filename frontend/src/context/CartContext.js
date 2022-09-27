@@ -15,7 +15,7 @@ export const CartContextProvider = ({children, ...rest}) => {
     const [cartPrice, setCartPrice] = useState(() => localStorage.getItem('cartTotal') ? JSON.parse(localStorage.getItem('cartTotal')) : {subtotal:0})
     const initialVisit = useRef(true)
 
-    const updateSubtotal = (data=null, packagePrice=null, quantity=null) => {
+    const updateSubtotal = (data=null, packagePrice=null, quantity=null, flag='add') => {
         let orderSubtotal = cartPrice.subtotal
         if(data){
             data.forEach(prod => {
@@ -25,7 +25,12 @@ export const CartContextProvider = ({children, ...rest}) => {
             })
         }
         else{
-            orderSubtotal = orderSubtotal + (packagePrice * quantity)
+            if(flag === 'add'){
+                orderSubtotal = orderSubtotal + (packagePrice * quantity)
+            }
+            else if (flag === 'subtract'){
+                orderSubtotal = orderSubtotal - (packagePrice * quantity)
+            }
         }
         setCartPrice({subtotal:orderSubtotal})
         localStorage.removeItem('cartTotal')
@@ -91,73 +96,53 @@ export const CartContextProvider = ({children, ...rest}) => {
     }
 
 
-    //removes package from cart
-    const removeFromCart = (product, pack) => {
 
-        //remove from local storage state
-        let deleteProductCompletely = false
-        for(let x in localStorageCart){
-            if(localStorageCart[x].product === product && localStorageCart[x].packages.length === 1){
-                deleteProductCompletely = true
-                break
-            }
-        }
 
-        if(deleteProductCompletely){
-            const filteredLocalStorage = localStorageCart.filter(item => {
-                return item.product !== product
-            })
+    const removeFromCart = (productId, productPackageId) => {
+        let cartData = JSON.parse(localStorage.getItem('cart'))
+        
+        //find product
+        //for localStorage
+        const product = cartData.findIndex(prod => {return prod.product === productId})
+        //for cart state
+        const cartProductIndex = cart.findIndex(prod => {return prod.id === productId})
+        const cartPackageIndex = cart[cartProductIndex].packages.findIndex( p => {return p.id === productPackageId})
+        const productPrice = cart[cartProductIndex].packages[cartPackageIndex].price
 
-            //if there are no products being purchased set states to null
-            if(filteredLocalStorage.length === 0){
-                setLocalStorageCart(null)
-                setCart(null)
+        //update cart subtotal
+        updateSubtotal(null, productPrice, cartData[product].packages[0].ordering_quantity, 'subtract')
+
+        //if product only has one package added to cart
+        if(cartData[product].packages.length === 1){
+            cartData.slice(product, 1)
+
+            //if cart has no more products in it
+            if(cartData.length === 0){
                 localStorage.removeItem('cart')
-                setCartPrice(null)
+                localStorage.removeItem('cartTotal')
+                updateLocalStorageState()
+                setCart(() => null)
                 return
             }
-
-            setLocalStorageCart(() => filteredLocalStorage)
-            localStorage.removeItem(cart)
-            localStorage.setItem('cart', JSON.stringify(filteredLocalStorage))
-
-            const filteredCart = cart.filter(item => {
-                return item.id !== product
-            })
-            setCart(filteredCart)
-            updateSubtotal(cart)
-            return
+            setCart(oldArray => oldArray.filter(item => {return item.id !== productId}))
         }
 
-        //if other packages being purchased for product
-         setLocalStorageCart(oldState => {
-            oldState.forEach(product => {
-                const newPackages = product.packages.filter(pac => {
-                    return pac.id !== pack
-                })
-                product.packages = newPackages
-                return product
-            })
-        }) 
-
-
-        //setLocalStorageCart(localStorageCart)
+        const pack = cartData[product].packages.findIndex(p => {return p.package === productPackageId})
+        cartData[product].packages = cartData[product].packages.slice(pack, 1)
         localStorage.removeItem('cart')
-        localStorage.setItem('cart', JSON.stringify(localStorageCart))
+        localStorage.setItem('cart', JSON.stringify(cartData))
+        updateLocalStorageState()
+        setCart(oldArray => {
+            oldArray.forEach(prod => {
+                let newPackageList = prod.packages.filter(pac => {
+                    return pac.id !== productPackageId})
+                prod.packages = newPackageList
+            })
+            return oldArray
+        })
 
-        //handle removing full cart data
-        for(let x in cart){
-            if(cart[x].id === product){
-                const newPackages = cart[x].packages.filter(pac => {
-                    return pac.id !== pack
-                })
-                cart[x].packages = newPackages
-                return
-            }
-        }
-        setCart(cart)
-        updateSubtotal(cart)
     }
+
 
 
     //update package quantity in cart

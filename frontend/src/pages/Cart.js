@@ -12,12 +12,9 @@ import '../css/cart.css'
 const Cart = () => {
   const {cart, handleGetCartData} = useContext(CartContext)
 
-  CountRenders('Cart page: ')
-  console.log(cart)
-
   useEffect(() => {
     handleGetCartData()
-  })
+  }, [])
 
   return (
     <div className='w-100'>
