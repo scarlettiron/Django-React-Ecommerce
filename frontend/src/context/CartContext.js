@@ -2,7 +2,6 @@ import React, {useState, useEffect, useRef, createContext} from 'react'
 import BasicFetch from '../utils/BasicFetch'
 import {cartUrl} from '../utils/ApiEndPoints'
 import {CountRenders} from '../utils/CountRenders'
-import { da } from 'date-fns/locale'
 
 const CartContext = createContext()
 export default CartContext
@@ -148,7 +147,7 @@ export const CartContextProvider = ({children, ...rest}) => {
     //update package quantity in cart
     const updatePackageQuantity = (product, pack, newQty) => {
                 const prod = localStorageCart.find((p) => {return p.product === product})
-                const productPackage = prod.packages.find((p) => {return p.id === pack})
+                const productPackage = prod.packages.find((p) => {return p.package === pack})
                 productPackage.ordering_quantity = newQty
                 setLocalStorageCart(localStorageCart) 
         
