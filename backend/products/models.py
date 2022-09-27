@@ -17,7 +17,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, blank=True, null=True)
     thirdsubcategory = models.ForeignKey(ThirdSubcategory, on_delete=models.CASCADE, blank=True, null=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True, related_name='tagslist')
     
 class FeaturedProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

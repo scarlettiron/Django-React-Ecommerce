@@ -31,9 +31,15 @@ const Footer = () => {
 
   return (
     <div className='footer'>
-        <FooterSection title={section1.title} links ={section1.links}/>
-        <FooterSection title={section2.title} links ={section2.links}/>
-        <FooterSection title={section3.title} links ={section3.links}/>
+        <div className='footer-section-wrapper'>
+            <FooterSection title={section1.title} links ={section1.links}/>
+        </div>
+        <div className='footer-section-wrapper'>
+            <FooterSection title={section2.title} links ={section2.links}/>
+        </div>
+        <div className='footer-section-wrapper'>
+            <FooterSection title={section3.title} links ={section3.links}/>
+        </div>
     </div>
   )
 }

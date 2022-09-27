@@ -146,6 +146,7 @@ export const CartContextProvider = ({children, ...rest}) => {
 
     //update package quantity in cart
     const updatePackageQuantity = (product, pack, newQty) => {
+                newQty = parseInt(newQty)
                 const prod = localStorageCart.find((p) => {return p.product === product})
                 const productPackage = prod.packages.find((p) => {return p.package === pack})
                 productPackage.ordering_quantity = newQty

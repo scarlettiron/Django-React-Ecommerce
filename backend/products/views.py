@@ -33,24 +33,6 @@ class product_detail(generics.RetrieveAPIView):
             return response.Response(serializer.data, status = 200)
         return super().retrieve(self, request, *args, **kwargs)
         
-        
-class search_products(generics.ListAPIView):
-    model = Product
-    serializer_class = ProductList_Serializer
-    
-    def get_queryset(self):
-        q = self.request.GET.get('q', None)
-        
-        try:
-            qs = Product.objects.filter(Q(title__icontains = q) | Q(description__icontains = q) |
-                                        Q(category__title__icontains = q) | Q(subcategory__title__icontains = q) | 
-                                        Q(thirdsubcategory__title__icontains = q)).select_related('category', 
-                                        'subcategory', 'thirdsubcategory').prefetch_related(Prefetch('productpackage_set', to_attr = 'packages'))
-                                        
-        except:
-            qs = Product.objects.none()
-        
-        return qs
     
 
 

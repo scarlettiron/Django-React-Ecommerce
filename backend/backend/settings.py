@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'categoriesTags.apps.CategoriestagsConfig',
     'media.apps.MediaConfig',
     'checkout.apps.CheckoutConfig',
+    'search.apps.SearchConfig',
 ]
 
 MIDDLEWARE = [

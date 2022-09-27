@@ -39,8 +39,22 @@
     align-items: center;
 }
 
+.footer-section-wrapper{
+    display:inline-flex;
+}
+
+@media (min-width:500px){
+    .footer-section-wrapper{
+        display:inline-block;
+    }
+}
 
 @media (min-width:700px){
+
+    .footer-section{
+        max-width: 33vw !important;
+    }
+
     .footer-section-large{
         display: inline-flex;
         flex-wrap: wrap;
@@ -62,5 +76,6 @@
 @media (min-width:500px){
     .footer-section{
         width:auto;
+        max-width: 33vw !important;
     }
 }
