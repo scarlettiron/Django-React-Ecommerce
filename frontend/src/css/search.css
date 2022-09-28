@@ -1,2 +1,17 @@
 @import '../App.css';
 
+.search-results-container{
+    width:100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    margin-bottom: 80px;
+}
+
+@media  (min-width:500px){
+    .search-results-container{
+        margin-top: 90px;
+        margin-bottom: 150px;
+    }
+}

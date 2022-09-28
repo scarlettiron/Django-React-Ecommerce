@@ -27,4 +27,11 @@ const cartUrl = {
     methods:['POST']
 }
 
-export {server, HomePageInfo, checkoutUrls, productUrls, cartUrl, taxApi}
+const searchUrls = {
+    complex:{
+    url: `${server}search/complex/`,
+    methods:['GET']
+    }
+}
+
+export {server, HomePageInfo, checkoutUrls, productUrls, searchUrls, cartUrl, taxApi}

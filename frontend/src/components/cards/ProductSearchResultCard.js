@@ -5,18 +5,18 @@ import PrimaryBtn from '../buttonsAndInputs/PrimaryBtn'
 import '../../css/containers-cards.css'
 import '../../css/general.css'
 
-const FeatureAdCard = ({ad}) => {
+const ProductSearchResultCard = ({product}) => {
     const history = useHistory
   return (
-    <div className='feature-ad' onClick={() => {history.push(`/product/${ad.id}`)}}>
+    <div className='feature-ad' onClick={() => {history.push(`/product/${product.id}`)}}>
         <div className='w-100 justify-content-center'>
-            <img src={ad.images[0].file} alt='feature ad'/>
+            <img src={product.images[0].file} alt='feature ad'/>
         </div>
         <div className='w-100 justify-content-center'>
-            <h3 className='text-secondary margin-0 padding-0'>{ad.title}</h3>
+            <h3 className='text-secondary margin-0 padding-0'>{product.title}</h3>
         </div>
         <div className='w-100 justify-content-center'>
-            <p className='margin-0 padding-0 text-third'>${formatPrice(ad.single_price)} {ad.max_price && - formatPrice(ad.max_price)}</p>
+            <p className='margin-0 padding-0 text-third'>${formatPrice(product.single_price)} { product.max_price && - formatPrice(product.max_price)}</p>
         </div>
         <div className='w-100 justify-content-center'>
             <PrimaryBtn text='View Product'/>
@@ -26,4 +26,4 @@ const FeatureAdCard = ({ad}) => {
   )
 }
 
-export default FeatureAdCard
+export default ProductSearchResultCard

@@ -1,6 +1,7 @@
 import React from 'react'
 import Button1 from '../buttonsAndInputs/Button1'
 import { useHistory } from 'react-router-dom'
+import { formatPrice } from '../../utils/PriceFormats'
 import '../../css/general.css'
 import '../../css/containers-cards.css'
 
@@ -15,7 +16,7 @@ const FeaturedCardMain = ({product}) => {
         <h1 className='padding-0 margin-0 text-secondary'>{product.title}</h1>
       </div>
       <div className='w-90 justify-content-space-around align-items-center padding-10'>
-        <h4 className='padding-0 margin-0'>${product.min_price / 100} - {product.max_price / 100}</h4>
+        <h4 className='padding-0 margin-0'>${formatPrice(product.single_price)} - { product.max_price && - formatPrice(product.max_price)}</h4>
         <Button1 text={'View'} />
       </div>
     </div>
