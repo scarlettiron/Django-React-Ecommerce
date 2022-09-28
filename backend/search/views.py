@@ -1,12 +1,39 @@
-from rest_framework import generics, response
-from django.db.models import Q, Prefetch, Count, Value, ValueRange
-from django.contrib.postgres.search import SearchVector
+from rest_framework import generics
+from django.db.models import Q, Prefetch
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from products.models import Product
 from products.serializers import ProductList_Serializer
-from categoriesTags.models import Tag
 
 
-class search_by_description(generics.ListAPIView):
+
+class search_complex(generics.ListAPIView):
+    serializer_class = ProductList_Serializer
+    model = Product
+    
+    def get_queryset(self):
+        qData = self.request.GET.get("q")
+
+        q_list = qData.split(" ")
+        print(q_list)
+        complex_query = SearchQuery(q_list[0])
+        
+        if len(q_list) > 1:
+            for q in q_list[1:]:
+                complex_query |= SearchQuery(q)
+
+        vector = SearchVector('tags__body', weight="A") + SearchVector('title', weight="B") + SearchVector('category', 'subcategory', 'thirdsubcategory', weight="C")+ SearchVector('description', weight="d")
+        search_rank = SearchRank(vector, complex_query)
+        
+        products = Product.objects.annotate(
+            rank = search_rank).prefetch_related(Prefetch('media_set', to_attr = 'images')).filter(rank__gte = 0.03).distinct().order_by("-rank")
+        
+        return products
+
+
+
+
+
+class search_basic(generics.ListAPIView):
     model = Product
     serializer_class = ProductList_Serializer
     
@@ -27,27 +54,3 @@ class search_by_description(generics.ListAPIView):
         return qs
     
     
-class search_by_tags(generics.ListAPIView):
-    serializer_class = ProductList_Serializer
-    model = Product
-    
-    def get_queryset(self):
-        q = self.kwargs['q']
-        print(q)
-        
-
-        ''' productsAndTags = Product.objects.all().prefetch_related(
-            Prefetch('tag_set',to_attr='tags')) '''
-        #products = Product.objects.filter(Q(tag_set_body__icontains = q))
-        
-        #products = Product.objects.filter(Q(tags__body__icontains = 'hiss'))
-        
-        #products = Product.objects.annotate(
-        #    search = SearchVector('tags__body')).filter(search = ['hiss', 'crickey'])
-        
-        #products = Product.objects.all().prefetch_related(Prefetch('tags', queryset=Count('tags_body__in' = [q])))
-        
-        
-        #products = Product.objects.filter(Q(tags__id__in = Tag.objects.filter(body__icontains = 'hiss')))
-        
-        #print(products)

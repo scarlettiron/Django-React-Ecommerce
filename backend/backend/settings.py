@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "corsheaders",
     'rest_framework',
+    "django.contrib.postgres",
     #"djstripe",
     'users.apps.UsersConfig',
     'orders.apps.OrdersConfig',
