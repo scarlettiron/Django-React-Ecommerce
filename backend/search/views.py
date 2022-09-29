@@ -14,7 +14,7 @@ class search_complex(generics.ListAPIView):
         qData = self.request.GET.get("q")
 
         q_list = qData.split(" ")
-        print(q_list)
+
         complex_query = SearchQuery(q_list[0])
         
         if len(q_list) > 1:
@@ -27,6 +27,7 @@ class search_complex(generics.ListAPIView):
         products = Product.objects.annotate(
             rank = search_rank).prefetch_related(Prefetch('media_set', to_attr = 'images')).filter(rank__gte = 0.03).distinct().order_by("-rank")
         
+        print(products.count())
         return products
 
 
