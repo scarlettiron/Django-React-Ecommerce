@@ -27,7 +27,6 @@ class search_complex(generics.ListAPIView):
         products = Product.objects.annotate(
             rank = search_rank).prefetch_related(Prefetch('media_set', to_attr = 'images')).filter(rank__gte = 0.03).distinct().order_by("-rank")
         
-        print(products.count())
         return products
 
 

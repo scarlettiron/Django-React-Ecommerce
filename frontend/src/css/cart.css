@@ -20,6 +20,8 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top:50px;
+    margin-bottom:50px;
 }
 
 .cart-product-image{
@@ -46,6 +48,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    margin:20px;
 }
 
 .cart-package-item{
@@ -58,6 +61,14 @@
     padding-right:20px;
     width:90%;
     max-height:120px;
+    margin:10px;
+}
+
+
+.checkout-btn-wrapper{
+    width:75%;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -65,6 +76,10 @@
 
         .cart-container{
             padding: 20px;
+        }
+
+        .checkout-btn-wrapper{
+            justify-content: flex-end;
         }
 }
 
