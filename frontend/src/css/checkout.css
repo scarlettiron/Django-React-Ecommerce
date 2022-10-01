@@ -1,0 +1,63 @@
+@import '../App.css';
+
+.preCheckoutForm{
+    width:100%;
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+    margin-bottom:100px;
+}
+
+.checkout-input-sm{
+    width:50%;
+}
+
+.checkout-input-md{
+    width:75%;
+}
+
+.checkout-input-lg{
+    width: 90%;
+}
+
+.card-wrapper{
+    width:95%;
+    max-width: 400px;
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top:20px;
+    margin-bottom: 50px;
+
+}
+
+.card-input{
+    font-weight:80;
+    border-radius:10px;
+    border:solid 2px var(--theme-secondary);
+    padding:30px;
+}
+
+@media (min-width:500px){
+    .card-wrapper{
+        margin-top:50px;
+        margin-bottom: 200px;
+    }
+}
+
+@media (min-width:700px){
+    .preCheckoutForm{
+        width:75%;
+    }
+    .checkout-input-sm{
+        width:25%;
+    }
+    
+    .checkout-input-md{
+        width:40%;
+    }
+    
+    .checkout-input-lg{
+        width: 75%;
+    }
+}

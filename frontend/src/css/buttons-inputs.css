@@ -100,3 +100,17 @@
     white-space: nowrap;
     margin:5px;
 }
+
+.input2{
+    outline: none;
+    border:solid 1px var(--theme-secondary);
+    border-radius: 10px;
+    width:90%;
+    height:30px;
+    padding: 7px;
+    font-weight: bold;
+}
+
+.input-error{
+    border:solid 2px red;
+}
