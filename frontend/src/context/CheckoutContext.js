@@ -9,32 +9,31 @@ const CheckoutContext = createContext()
 export default CheckoutContext;
 
 export const CheckoutContextProvider = ({children, ...rest}) => {
-    const [StCheckoutIntent, setStCheckoutIntent] = useState(() => null)
+    const StCheckoutIntent = useRef(null)
     const [shippingAddress, setShippingAddress] = useState(() => null)
     const [name, setName] = useState(() => null)
     const [contact, setContact] = useState(() => null)
 
-    const {createIntent} = checkoutUrls
+    const {CreateStripeIntent} = checkoutUrls
 
     const handleCreateIntent = async () => {
         
         const cart = JSON.parse(localStorage.getItem('cart'))
         let order = {}
 
-        cart.products.forEach(item => {
+        cart.forEach(item => {
             item.packages.forEach(pack =>{
-                let id = pack.id.toString()
-                order['products'][id] = {product:item.id, quantity:pack.ordering_quantity}
+                let id = pack.package.toString()
+                order[id] = {product:item.product, quantity:pack.ordering_quantity}
             })
         })
 
-        console.log(cart)
         
         const fetchConfig = {
             method:'POST',
             body:JSON.stringify({
             shipping:shippingAddress,
-            products:cart,
+            products:order,
             first_name:name.firstName,
             last_name:name.lastName,
             tax:0,
@@ -43,10 +42,10 @@ export const CheckoutContextProvider = ({children, ...rest}) => {
             })
         }
 
-        const {response, data} = await BasicFetch(createIntent.url, fetchConfig)
+        const {response, data} = await BasicFetch(CreateStripeIntent.url, fetchConfig)
 
         if(response.status === 201){
-            setStCheckoutIntent(data.intent)
+            StCheckoutIntent.current = data.intent
             return true
         }
 

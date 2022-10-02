@@ -17,9 +17,6 @@ const CheckoutBilling = () => {
 
   const {setShippingAddress, setName, setContact} = useContext(CheckoutContext)
 
-  const inputs = ['firstname', 'lastname', 'street', 'city', 'state', 'zipcode',
-                  'phone', 'email']
-
   const inputTypes= ['INPUT', 'SELECT']
 
   const handlePreCheckout = (e) => {
@@ -27,9 +24,8 @@ const CheckoutBilling = () => {
     const elements = e.target.elements
 
     for(let x in elements){
-      console.log(elements[x].nodeName)
       if(!elements[x].value | elements[x].value === "placeholder" && inputTypes.includes(elements[x].nodeName)){
-        console.log('returning')
+        setError(elements[x].name)
         return
       }
     }

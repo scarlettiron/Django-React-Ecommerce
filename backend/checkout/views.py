@@ -21,6 +21,7 @@ class stripe_intent(generics.GenericAPIView):
         #  etc... 
         #}
         data = self.request.data
+        print(data)
         packageKeys = [int(x) for x in data['products'].keys()]
         products = data['products']
 

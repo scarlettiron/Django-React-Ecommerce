@@ -11,9 +11,11 @@ const CheckoutSection = () => {
     const elements = useElements()
   
     const handlePayment = async () => {
+        console.log('handlign payment')
       const intent = await handleCreateIntent()
+      console.log(intent)
       if(intent){
-        await handleConfirmPayment(StCheckoutIntent)
+        await handleConfirmPayment(StCheckoutIntent.current)
       }
     }
   
@@ -37,7 +39,7 @@ const CheckoutSection = () => {
     <div className='w-100'>
         <CardElement className='card-input'/>
         <div className='w-100 justify-content-center padding-10'>
-            <CheckoutBtn onClick={handlePayment}/>
+            <CheckoutBtn action={handlePayment}/>
         </div>
     </div>
   )

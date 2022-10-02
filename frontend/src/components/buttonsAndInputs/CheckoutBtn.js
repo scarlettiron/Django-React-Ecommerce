@@ -6,7 +6,7 @@ const CheckoutBtn = ({action=null, form=null}) => {
     const history = useHistory()
   return (
     <button className='checkoutBtn' 
-    onClick={action ? () => action : () => history.push('/checkout')}
+    onClick={action ? () => action() : () => history.push('/checkout')}
     form={form}>
     
     Checkout</button>
