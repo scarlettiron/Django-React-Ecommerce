@@ -12,6 +12,7 @@ import '../css/checkout.css'
 
 const CheckoutBilling = () => {
   const [error, setError] = useState(() => null)
+  const [loading, setLoading] = useState(() => false)
 
   const history = useHistory()
 
@@ -21,11 +22,13 @@ const CheckoutBilling = () => {
 
   const handlePreCheckout = (e) => {
     e.preventDefault()
+    setLoading(true)
     const elements = e.target.elements
 
     for(let x in elements){
       if(!elements[x].value | elements[x].value === "placeholder" && inputTypes.includes(elements[x].nodeName)){
         setError(elements[x].name)
+        setLoading(false)
         return
       }
     }
@@ -48,7 +51,6 @@ const CheckoutBilling = () => {
       email:e.target.email.value
     })
 
-    console.log('about to use history push')
     history.push('/confirm-purchase')
 
   }
@@ -84,7 +86,7 @@ return (
               <Input2 placeholder={'Email'} id='email' type='email' wrapperClass={'checkout-input-md'} error={error}/>
             </div>
             <div className='w-100 justify-content-center'>
-              <CheckoutBtn form='preCheckoutForm'/>
+              <CheckoutBtn form='preCheckoutForm' loading={loading}/>
             </div>
         </form>
         </div>
