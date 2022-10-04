@@ -17,9 +17,16 @@ const Home = () => {
         <MainHeader/>
         <NavBar/>
         <div className='container'>
-          {categories.map((cat, index) => {
+          <div className='w-100 justify-content-center flex-wrap'>
+          {categories.slice(0, 3).map((cat, index) => {
             return <CategoryCard category={cat} key={index}/>
           })}
+          </div>
+          <div className='w-100 justify-content-center flex-wrap'>
+          {categories.slice(3, 6).map((cat, index) => {
+            return <CategoryCard category={cat} key={index}/>
+          })}
+          </div>
         </div>
         <div className='feature-container'>
           {featuredProducts && 

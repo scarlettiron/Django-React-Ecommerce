@@ -16,7 +16,7 @@ const FeaturedCard = ({product}) => {
         <h3 className='padding-0 margin-0 text-secondary'>{product.title}</h3>
       </div>
       <div className=' feature-info padding-0 margin-0 w-90 justify-content-space-around align-items-center'>
-        <p className='padding-0 margin-0'>${formatPrice(product.single_price)} - { product.max_price && - formatPrice(product.max_price)}</p>
+        <p className='padding-0 margin-0'>${formatPrice(product.single_price)} {product.max_price && - formatPrice(product.max_price)}</p>
         <Button1 text={'View'} />
       </div>
     </div>

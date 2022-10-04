@@ -3,7 +3,7 @@
 .preCheckoutForm{
     width:100%;
     display: flex;
-    justify-content: start;
+    justify-content: flex-start;
     flex-wrap: wrap;
     margin-bottom:100px;
 }

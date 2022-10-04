@@ -15,7 +15,10 @@
 .category-card{
     max-width:150px;
     padding:30px;
-    margin:10px;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-left:30px;
+    margin-right:30px;
     border-radius: 30px;
     background-color: var(--theme-secondary);
     display: flex;
@@ -189,6 +192,13 @@
 
 @media (min-width:500px) {
 
+    .category-card{
+        margin-top:10px;
+        margin-bottom:10px;
+        margin-left:10px;
+        margin-right:10px;
+    }
+
     .feature-slot{
         flex-wrap: nowrap;
     }
@@ -295,6 +305,15 @@
         border:solid 1px teal;
     }
 
+}
+
+@media(min-width:875px){
+    .category-card{
+        margin-top:10px;
+        margin-bottom:10px;
+        margin-left:40px;
+        margin-right:40px;
+    }
 }
 
 @media (min-width:955px){

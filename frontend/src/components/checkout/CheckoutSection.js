@@ -5,7 +5,6 @@ import CheckoutContext from '../../context/CheckoutContext'
 import CheckoutBtn from '../../components/buttonsAndInputs/CheckoutBtn'
 import '../../css/checkout.css'
 import '../../css/general.css'
-import Loading1 from '../LoadingAndErrors/Loading1'
 import Error1 from '../LoadingAndErrors/Error1'
 const CheckoutSection = () => {
     const {handleCreateIntent, StCheckoutIntent} = useContext(CheckoutContext)
