@@ -30,7 +30,7 @@ const CheckoutSection = () => {
     }
   
     const handleConfirmPayment = async (intent) => {
-      const {error, paymentIntent} = stripe.confirmCardPayment(
+      const {error, paymentIntent} = await stripe.confirmCardPayment(
           intent, {
               payment_method:{
                   type: 'card',
@@ -47,18 +47,13 @@ const CheckoutSection = () => {
   }
   return (
     <div className='w-100'>
-        {loading && <Loading1/>}
 
         {error && <Error1 message="Something went wrong, please try again later"/>}
 
-        {!loading && !error &&
-        <>
             <CardElement className='card-input'/>
             <div className='w-100 justify-content-center padding-10'>
-                <CheckoutBtn action={handlePayment}/>
+                <CheckoutBtn action={!loading && !error ? handlePayment : null} loading={loading}/>
             </div>
-        </>
-        }
     </div>
   )
 }

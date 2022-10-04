@@ -10,9 +10,17 @@ def sendRefundConfirmation(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender = Transaction)
 def updateSiteTotal(sender, instance, created, **kwargs):
-    if created:
-        bal = SiteBalance.objects.get()
+    bal = SiteBalance.objects.get()
+    if created and instance.is_payment:
         bal.balance = bal.balance + instance.price
+        bal.save()
+        return
+    if created and instance.is_payout:
+        bal.balance = bal.balance - instance.price
+        bal.save()
+        return
+    if created and instance.is_refund:
+        bal.balance = bal.balance - instance.price
         bal.save()
         return
     
