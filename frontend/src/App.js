@@ -10,6 +10,7 @@ import Cart from './pages/Cart';
 import CheckoutBilling from './pages/CheckoutBilling';
 import CheckoutCardInfo from './pages/CheckoutCardInfo'
 import CheckoutSuccess from './pages/CheckoutSuccess'
+import Categories from './pages/Categories';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
               <Route component={CheckoutCardInfo} path='/confirm-purchase'/>
             </CheckoutContextProvider>
             <Route component={CheckoutSuccess} path='/checkout-success'/>
+            <Route exact component={Categories} path='/categories/all'/>
+            <Route component={Categories} path='/categories/:category'/>
           </CartContextProvider>
         </HomeContextProvider>
       </Router>
