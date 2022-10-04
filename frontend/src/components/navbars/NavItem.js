@@ -6,7 +6,7 @@ import '../../css/navbar.css'
 const NavItem = ({item}) => {
     const history = useHistory()
   return (
-    <div className='nav-item'>
+    <div className= 'nav-item'>
         <button  className={'nav-btn'} onClick={() => history.push(item.path)}>{item.title}</button>
     </div>
   )
