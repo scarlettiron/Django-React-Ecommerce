@@ -2,7 +2,7 @@
 from multiprocessing.sharedctypes import Value
 from rest_framework import generics, response
 from django.db.models import Prefetch, Q, OuterRef, Subquery, ExpressionWrapper, IntegerField
-from .serializers import ProductList_Serializer, FeaturedProduct_Serializer, Category_Serializer, Cart_Serializer
+from .serializers import ProductList_Serializer, FeaturedProduct_Serializer, Category_Serializer, Cart_Serializer, ProductPackage_Serializer
 from .models import Product, Category, ProductPackage, SubCategory, ThirdSubcategory, FeaturedProduct
 from json import dumps
 from media.models import Media
@@ -41,21 +41,24 @@ class featuredProductList(generics.ListAPIView):
     model = FeaturedProduct
     queryset = FeaturedProduct.objects.all().select_related('product')
     
-    
-    
-#for getting all info for home page, this view saves extra request
-class HomePage(generics.GenericAPIView):
-    serializer_class = FeaturedProduct_Serializer
-    def get(self, request, *args, **kwargs):
-     
-        cats = Category.objects.all()
-        categories = Category_Serializer(cats, many = True).data
 
-        featuredProducts = FeaturedProduct.objects.all().select_related('product').prefetch_related(Prefetch('product__media_set', to_attr = 'images'))
-        featured = FeaturedProduct_Serializer(featuredProducts, many=True).data
 
-        return response.Response({'categories':categories, 'featuredproducts':featured}, status = 200)
-            
+
+class product_list_by_category(generics.ListAPIView):
+    serializer_class = ProductList_Serializer
+    model = Product
+    
+    def get_queryset(self):
+        category = self.kwargs['category']  
+        try:
+            products = Product.objects.filter(Q(category__title = category) | Q(subcategory__title = category)
+                                              | Q(thirdsubcategory__title = category)).prefetch_related(Prefetch('media_set', to_attr = 'images'))
+        except:
+            products = Product.objects.none()
+        return products
+        
+        
+                    
 
 class Cart(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):

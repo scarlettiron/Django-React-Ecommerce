@@ -16,6 +16,7 @@ dj-stripe = "*"
 django-anymail = "*"
 whitenoise = "*"
 django-storages = "*"
+pillow = "*"
 
 [dev-packages]
 

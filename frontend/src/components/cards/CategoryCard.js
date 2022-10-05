@@ -6,8 +6,8 @@ import '../../css/containers-cards.css'
 const CategoryCard = ({category}) => {
   return (
     <div className='category-card'>
-        <Link to={category.path} className='w-100 h-100 justify-content-center'>
-            <h2>{category.name}</h2>
+        <Link to={`categories/${category.title}`} className='w-100 h-100 justify-content-center'>
+            <h2>{category.title}</h2>
         </Link>
     </div>
   )

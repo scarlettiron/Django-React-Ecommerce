@@ -1,5 +1,3 @@
-from distutils.archive_util import make_zipfile
-from unicodedata import category
 from django.db import models
 from categoriesTags.models import Category, SubCategory, ThirdSubcategory, Tag
 

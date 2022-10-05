@@ -3,8 +3,8 @@ const server = 'http://127.0.0.1:8000/api/'
 
 const taxApi = "https://sales-tax-calculator.p.rapidapi.com/rates"
 
-const HomePageInfo = {
-    url:`${server}products/home-info/`
+const HomePageInfoUrls = {
+    url:`${server}categories/home-info/`
 }
 
 const checkoutUrls = {
@@ -34,4 +34,4 @@ const searchUrls = {
     }
 }
 
-export {server, HomePageInfo, checkoutUrls, productUrls, searchUrls, cartUrl, taxApi}
+export {server, HomePageInfoUrls, checkoutUrls, productUrls, searchUrls, cartUrl, taxApi}
