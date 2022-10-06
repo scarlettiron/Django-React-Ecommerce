@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import { useParams} from 'react-router-dom'
 import BasicFetch from '../utils/BasicFetch'
 import { productUrls } from '../utils/ApiEndPoints'
@@ -39,6 +39,32 @@ const Products = () => {
     useEffect(() => {
         getProducts()
     },[])
+
+
+    const handlePaginateProducts = async () => {
+        const {response, data} = await BasicFetch(products.next)
+        if(response.status === 200){
+            setProducts(oldArray => ({
+                results:[...oldArray.results, data.results], 
+                next:data.next, prev:data.previous, ...oldArray
+            }))
+        }
+    }
+
+
+    const observer = useRef()
+
+
+    const handleTrackPosition = async (element) => {
+        if(!Products.next) return
+        if(observer.current) {observer.current.disconnect()}
+        observer.current = new IntersectionObserver(async (entries) => {
+          if(entries[0].isIntersecting){
+            await handlePaginateProducts()
+          }
+        })
+        if(element) {await observer.current.observe(element)}
+      }
 
   return (
     <div className='w-100'>
