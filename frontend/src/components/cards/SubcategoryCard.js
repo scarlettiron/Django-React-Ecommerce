@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../css/containers-cards.css'
 
-const SubcategoryCard = ({category, subcategory}) => {
+const SubcategoryCard = ({subcategory}) => {
   return (
     <div className='subcategory-card'>
         {subcategory.placeholder &&

@@ -1,20 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import HomeContext from '../../context/HomeContext'
 import NavItem from './NavItem'
-import NavItemDropDown from './NavItemDropDown'
-import NavPreBuiltDrop from './NavPreBuiltDrop'
 import {ReactComponent as Burger} from '../../assets/burger.svg'
 import '../../css/general.css'
 import '../../css/navbar.css'
-import Dropdown from 'react-multilevel-dropdown'
+import NavDrop from './NavDrop'
+
 
 
 const NavBar = () => {
     const navOptions = [{title:'Home', path:'/'}]
 
     const [dropdown, setDropdown] = useState(() => false)
-    
+
+    const {categories} = useContext(HomeContext)
+    const [animals, setAnimals] = useState(() => categories.results.find((item) => {return item.title === 'Animals'}))
+  
+
     const toggle = () => {
-      console.log('toggled')
       setDropdown(!dropdown)
     }
 
@@ -25,18 +28,10 @@ const NavBar = () => {
           <NavItem item={navOptions[0]} active={dropdown}/>
         </div>
         <div className={dropdown ? `nav-item-wrapper active` : 'nav-item-wrapper'}>
-          <NavItemDropDown title='Shop' links={
-              [{name:'Animals', multi:true, links:[{name:'reptiles', path:'/reptiles'}]}, 
-              {name:'Decor', path:'/decor'}]}
-              active={dropdown}
-              />
+          <NavDrop title='Shop' links={categories.results}/>
         </div>
         <div className={dropdown ? `nav-item-wrapper active` : 'nav-item-wrapper'}>
-          <NavPreBuiltDrop links={
-              [{name:'Animals', multi:true, links:[{name:'reptiles', path:'/reptiles'}]}, 
-              {name:'Decor', path:'/decor'}]}
-              active={dropdown}
-          />
+          <NavDrop title = {'Animals'} links={animals ? animals.subcategories : []}/>
         </div>
         
     </div>

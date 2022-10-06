@@ -16,7 +16,6 @@ const Categories = () => {
   const [cat, setCat] = useState(categories.results.find((item) => {return item.title === category}))
 
   if(cat && cat.subcategories.length === 0){
-    console.log('should redirect')
     history.push(`/products/${cat.title}/`)
   }
 

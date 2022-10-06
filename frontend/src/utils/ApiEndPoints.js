@@ -19,6 +19,9 @@ const productUrls = {
     },
     productDetail:{
         url:`${server}products/product-detail/`
+    },
+    productsByCategory:{
+        url:`${server}products/by-category/`
     }
 }
 

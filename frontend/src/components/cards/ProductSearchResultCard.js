@@ -6,7 +6,7 @@ import '../../css/containers-cards.css'
 import '../../css/general.css'
 
 const ProductSearchResultCard = ({product}) => {
-    const history = useHistory
+    const history = useHistory()
   return (
     <div className='feature-ad' onClick={() => {history.push(`/product/${product.id}`)}}>
         <div className='w-100 justify-content-center'>

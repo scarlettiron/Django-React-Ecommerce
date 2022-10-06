@@ -5,14 +5,6 @@ import '../../css/navbar.css'
 
 const NavPreBuiltDrop = ({links}) => {
   return (
-/*         <Dropdown title = 'Animals' wrapperClassName='nav-item' 
-        buttonClassName='nav-btn' menuClassName='nav-item' openOnHover={true}>
-            <Dropdown.Submenu>
-                <Dropdown.Item className='nav-item'>
-                    Item1 heleogtheih
-                </Dropdown.Item>
-            </Dropdown.Submenu>
-        </Dropdown> */
         <Dropdown 
         title = 'Animals' 
         wrapperClassName='nav-item' 
