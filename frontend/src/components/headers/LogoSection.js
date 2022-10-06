@@ -4,7 +4,7 @@ import { ReactComponent as Logo} from '../../assets/skull.svg'
 
 const LogoSection = () => {
   return (
-    <div className='w-50 justify-content-start'>
+    <div className='logo-section'>
       <div className='align-items-center'>
         <Logo className={'margin-auto'}/>
       </div>

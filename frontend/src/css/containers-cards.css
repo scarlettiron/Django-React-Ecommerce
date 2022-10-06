@@ -260,13 +260,6 @@
         flex-wrap: nowrap;
     }
 
-    .header{
-        display:flex;
-        justify-content:space-between;
-        flex-wrap: nowrap;
-        min-height: 200px;
-    }
-
     .container{
         justify-content: space-around;
     }

@@ -2,7 +2,7 @@ import React from 'react'
 import LogoSection from './LogoSection'
 import SearchSection from './SearchSection'
 import '../../css/general.css'
-import '../../css/containers-cards.css'
+import '../../css/header.css'
 
 
 const MainHeader = () => {

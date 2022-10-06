@@ -1,0 +1,50 @@
+@import '../App.css';
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap: wrap;
+    min-height: 200px;
+}
+
+.logo-section{
+    width:100%;
+    display:flex;
+    justify-content: flex-start;
+    padding:10px;
+}
+
+.search-section{
+    padding:10px;
+    width:100%;
+    display:relative;
+    display:flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.search-input{
+    width:70%;
+    display:inline;
+}
+
+@media(min-width:650px){
+    .header{
+        flex-wrap: nowrap;
+    }
+
+    .search-section{
+        width:25%;
+        justify-content: flex-end;
+    }
+
+    .search-input{
+        width:75%;
+    }
+
+    .logo-section{
+        width:65%;
+    }
+}
+
