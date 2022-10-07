@@ -8,8 +8,12 @@ const NavDrop = ({links=null, title}) => {
     const history = useHistory()
 
     const categoryRedirect = (category) => {
-        if(category.subcategories.length === 0){
-            history.push(`categories/${category.title}`)
+        
+        if(!category.hasOwnProperty('subcategory')){
+            history.push(`products/${category.title}`)
+        }
+        else if(category.hasOwnProperty('subcategory') && category.subcategories.length === 0){
+            history.push(`products/${category.title}`)
         }
     }
 
