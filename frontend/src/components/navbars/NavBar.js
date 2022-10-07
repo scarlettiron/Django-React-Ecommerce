@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import HomeContext from '../../context/HomeContext'
 import NavItem from './NavItem'
 import {ReactComponent as Burger} from '../../assets/burger.svg'
@@ -20,6 +20,10 @@ const NavBar = () => {
     const toggle = () => {
       setDropdown(!dropdown)
     }
+
+    useEffect(() => {
+      setAnimals(categories.results.find((item) => {return item.title === 'Animals'}))
+    }, [categories])
 
   return (
     <div className='nav-container'>
