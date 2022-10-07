@@ -13,7 +13,8 @@
 }
 
 .category-card{
-    max-width:150px;
+    width:150px;
+    max-width:150px; 
     padding:30px;
     margin-top:10px;
     margin-bottom:10px;
@@ -264,9 +265,6 @@
         justify-content: space-around;
     }
 
-    .category-card{
-        width:300px;
-    }
 
     .feature-card-main{
         width:80%;
@@ -367,9 +365,6 @@
 }
 
 @media (min-width:955px){
-    .category-card{
-        width:300px;
-    }
 
     .feature-card-main{
         width:400px;

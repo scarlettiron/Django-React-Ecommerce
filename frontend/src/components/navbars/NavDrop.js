@@ -10,10 +10,10 @@ const NavDrop = ({links=null, title}) => {
     const categoryRedirect = (category) => {
         
         if(!category.hasOwnProperty('subcategory')){
-            history.push(`products/${category.title}`)
+            history.push(`/products/${category.title}`)
         }
         else if(category.hasOwnProperty('subcategory') && category.subcategories.length === 0){
-            history.push(`products/${category.title}`)
+            history.push(`/products/${category.title}`)
         }
     }
 

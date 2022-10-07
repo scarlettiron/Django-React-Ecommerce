@@ -13,7 +13,7 @@ const SearchSection = () => {
             <div className='search-input'>
                 <Input1 placeholder={'Search site'} onChange={(e) => {setSearch(e.target.value)}}/>
             </div>
-            <div className='display-inline padding-10' onClick={() => history.push(`search/?q=${search}`)}>
+            <div className='display-inline padding-10' onClick={() => history.push(`/search/?q=${search}`)}>
                 <Search className='svg1' viewBox="0 0 50 50"/>
             </div>
     </div>

@@ -9,7 +9,7 @@ export default HomeContext
 
 export const HomeContextProvider = ({children, ...rest}) => {
     const placeholderCategories = {results: [
-        {title:'Animals', subcategories:[{title: 'Reptiles'}, {title:'Turtles', placeholder:true}, {title:'Lizards'}]}, 
+        {title:'Animals', subcategories:[{title: 'Feeders'}, {title:'Turtles', placeholder:true}, {title:'Lizards'}]}, 
         {name:'Feeders', path:'/category/feeders'}, 
         {name:'Supplies', path:'/category/supplies'},
         {name:'Decor', path:'/category/decor'},

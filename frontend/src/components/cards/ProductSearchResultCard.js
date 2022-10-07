@@ -8,7 +8,7 @@ import '../../css/general.css'
 const ProductSearchResultCard = ({product}) => {
     const history = useHistory()
   return (
-    <div className='feature-ad' onClick={() => {history.push(`/product/${product.id}`)}}>
+    <div className='feature-ad margin-30' onClick={() => {history.push(`/product/${product.id}`)}}>
         <div className='w-100 justify-content-center'>
             <img src={product.images[0].file} alt='feature ad'/>
         </div>
