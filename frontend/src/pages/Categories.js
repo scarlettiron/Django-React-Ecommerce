@@ -38,7 +38,6 @@ const Categories = () => {
                 })
               }
             </div>
-
           }
         <Footer/>
     </div>
