@@ -12,6 +12,7 @@ import CheckoutCardInfo from './pages/CheckoutCardInfo'
 import CheckoutSuccess from './pages/CheckoutSuccess'
 import Categories from './pages/Categories';
 import Products from './pages/Products';
+import Contact from './pages/Contact';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route exact component={Categories} path='/categories/all'/>
             <Route component={Categories} path='/categories/:category'/>
             <Route component={Products} path='/products/:category'/>
+            <Route component={Contact} path='/contact'/>
           </CartContextProvider>
         </HomeContextProvider>
       </Router>

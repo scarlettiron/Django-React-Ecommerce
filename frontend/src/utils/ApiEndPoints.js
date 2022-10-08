@@ -37,4 +37,11 @@ const searchUrls = {
     }
 }
 
+const staffUrls = {
+    createContactRequest:{
+        url:`${server}staff/create-contact-request/`,
+        methods:['POST']
+    }
+}
+
 export {server, HomePageInfoUrls, checkoutUrls, productUrls, searchUrls, cartUrl, taxApi}

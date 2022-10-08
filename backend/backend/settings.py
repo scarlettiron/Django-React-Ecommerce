@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'media.apps.MediaConfig',
     'checkout.apps.CheckoutConfig',
     'search.apps.SearchConfig',
+    'staff.apps.StaffConfig',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +152,6 @@ AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+ANYMAIL_MAILGUN_API_KEY = config("MAIL_GUN_DOMAIN_API")
+DEFAULT_FROM_EMAIL=config('MAIL_GUN_EMAIL')
