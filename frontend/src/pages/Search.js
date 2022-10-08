@@ -83,6 +83,7 @@ const Search = () => {
         <div className='w-100 justify-content-center'>
             <div className='search-results-container'>
                 {searchResults && searchResults.count === 0 &&
+                    
                     <h3>Couldn't find anything</h3>
                 }
             

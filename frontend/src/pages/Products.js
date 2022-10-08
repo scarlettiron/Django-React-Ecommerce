@@ -80,8 +80,9 @@ const Products = () => {
 
             }
             {products && products.count === 0 && 
-
-                <h2>Nothing to show yet!</h2>
+                <div className='vh-100 margin-top-30'>
+                    <h2>Nothing to show yet!</h2>
+                </div>
             }
         </div>
         <Footer/>
