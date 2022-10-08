@@ -1,9 +1,9 @@
 import React from 'react'
 import '../../css/containers-cards.css'
 
-const SubcategoryCard = ({subcategory}) => {
+const SubcategoryCard = ({subcategory, onClick}) => {
   return (
-    <div className='subcategory-card'>
+    <div className='subcategory-card' onClick={onClick}>
         {subcategory.placeholder &&
             <>
             <img src={subcategory.placeholder} alt={subcategory.title} className='subcategory-card-img'/>

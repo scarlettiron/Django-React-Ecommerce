@@ -26,13 +26,14 @@ const Categories = () => {
         <MainHeader/>
         <NavBar/>
           {cat && cat.subcategories.length > 0 &&
-            <div className='w-100 justify-content-space-around padding-30 margin-top-30'>
+            <div className='w-90 justify-content-center flex-wrap padding-30 margin-top-30'>
               {
                 cat.subcategories.map((sub, index) => {
                   return <SubcategoryCard 
                           subcategory = {sub} 
                           category = {cat.title}
                           key={index}
+                          onClick={() => {history.push(`/products/${sub.title}`)}}
                           />
                 })
               }
