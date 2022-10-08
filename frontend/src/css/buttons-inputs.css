@@ -114,3 +114,21 @@
 .input-error{
     border:solid 2px red;
 }
+
+.body-input{
+    outline: none;
+    padding: 7px;
+    font-weight: bold;
+    height:75vh;
+    width:95vw;
+    border-radius:5px;
+    border:solid 1px var(--theme-secondary);
+}
+
+@media(min-width:500px){
+    .body-input{
+        height:350px;
+        width:90%;
+    }
+
+}
