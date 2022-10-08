@@ -1,0 +1,12 @@
+.error-container{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    background-color: rgb(255, 163, 163);
+    border:solid 1px red;
+}
+
+.error h3{
+    color:red;
+    font-weight: bolder;
+}
