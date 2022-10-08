@@ -3,7 +3,7 @@
 .footer{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
     background-color: var(--theme-secondary);
 }
@@ -44,16 +44,19 @@
 }
 
 @media (min-width:500px){
+    .footer{
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
     .footer-section-wrapper{
         display:inline-block;
+    }
+    .footer-section{
+        max-width: 30vw !important;
     }
 }
 
 @media (min-width:700px){
-
-    .footer-section{
-        max-width: 33vw !important;
-    }
 
     .footer-section-large{
         display: inline-flex;
