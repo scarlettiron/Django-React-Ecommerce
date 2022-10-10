@@ -9,7 +9,7 @@ import NavDrop from './NavDrop'
 
 
 const NavBar = () => {
-    const navOptions = [{title:'Home', path:'/'}]
+    const navOptions = [{title:'Home', path:'/'}, {title:'Contact', path:'/contact'}]
 
     const [dropdown, setDropdown] = useState(() => false)
 
@@ -37,7 +37,9 @@ const NavBar = () => {
         <div className={dropdown ? `nav-item-wrapper active` : 'nav-item-wrapper'}>
           <NavDrop title = {'Animals'} links={animals ? animals.subcategories : []}/>
         </div>
-        
+        <div  className={dropdown ? `nav-item-wrapper active` : 'nav-item-wrapper'}>
+          <NavItem item={navOptions[1]} active={dropdown}/>
+        </div>
     </div>
   )
 }

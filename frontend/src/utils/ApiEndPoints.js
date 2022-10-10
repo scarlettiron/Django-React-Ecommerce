@@ -44,4 +44,5 @@ const staffUrls = {
     }
 }
 
-export {server, HomePageInfoUrls, checkoutUrls, productUrls, searchUrls, cartUrl, taxApi}
+export {server, HomePageInfoUrls, checkoutUrls, productUrls, searchUrls, 
+    cartUrl, taxApi, staffUrls}

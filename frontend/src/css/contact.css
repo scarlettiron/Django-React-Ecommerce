@@ -1,0 +1,25 @@
+@import '../App.css';
+
+.contact-form{
+    width:90vw;
+    padding:5px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    border:solid 2px var(--theme-secondary);
+    border-radius: 10px;
+    margin:0px auto;
+    background-color:var(--theme-secondary);
+}
+
+.contact-form h3{
+    color:var(--text-secondary);
+}
+
+@media(min-width:500px){
+    .contact-form{
+        width:400px;
+    }
+}
