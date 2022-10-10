@@ -136,6 +136,24 @@
     border:solid 1px var(--theme-secondary);
 }
 
+.underline-input{
+    outline: none;
+    border-bottom:solid 2px var(--text-secondary);
+    border-top:transparent;
+    border-left:transparent;
+    border-right:transparent;
+    width:90%;
+    height:30px;
+    padding: 7px;
+    font-weight: bold;
+    background-color: transparent;
+    color:var(--text-secondary);
+}
+
+.underline-input::placeholder{
+    color:var(--text-secondary);
+}
+
 @media(min-width:500px){
     .body-input{
         height:100%;

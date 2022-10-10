@@ -5,6 +5,8 @@ import Loading1 from '../components/LoadingAndErrors/Loading1'
 import Button1 from '../components/buttonsAndInputs/Button1'
 import Success1 from '../components/LoadingAndErrors/Success1'
 import InputAutoResize from '../components/buttonsAndInputs/InputAutoResize'
+import UnderlineInput from '../components/buttonsAndInputs/UnderlineInput'
+import UnderlineResizeInput from '../components/buttonsAndInputs/UnderlineResizeInput'
 import Input2 from '../components/buttonsAndInputs/Input2'
 import MainHeader from '../components/headers/MainHeader'
 import NavBar from '../components/navbars/NavBar'
@@ -63,11 +65,11 @@ const Contact = () => {
                 <form onSubmit={sendContactRequest} className='contact-form' id='contact-form'>
                     <h3>Contact Us</h3>
                     <div className='w-100 padding-20'>
-                        <Input2 placeholder='email' id='email' type='email'/>
+                        <UnderlineInput placeholder='email' id='email' type='email'/>
                     </div>
                     {/* <BodyInput placeholder={'Write your message'} id='body' error={error}/> */}
                     <div className='w-100 padding-20'>
-                        <InputAutoResize placeholder={'Write your message'} id='body' error={error}/>
+                        <UnderlineResizeInput placeholder={'Write your message'} id='body' error={error}/>
                     </div>
                     <div className='margin-30'>
                         <Button1 text={'Send'} form={loading ? null : 'contact-form'} />
