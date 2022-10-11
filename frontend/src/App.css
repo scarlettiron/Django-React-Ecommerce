@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 
 
 
@@ -20,6 +20,7 @@ body{
   overflow-x: hidden;
   padding:0px;
   margin:0px;
+  font-family: 'Hind', sans-serif;
 }
 
 a{
@@ -29,9 +30,12 @@ a{
 
 p{
   word-break: break-word;
-  font-family: 'Lobster', cursive;
-  font-family: 'Montserrat', sans-serif;
 }
+
+.cursive{
+  font-family: 'Lobster', cursive;
+}
+
 
 h1{
   word-break: break-word;

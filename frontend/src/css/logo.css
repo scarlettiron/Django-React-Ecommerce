@@ -1,0 +1,11 @@
+@import '../App.css';
+
+@font-face {
+    font-family: Barrel;
+    src: url(fonts/Barrelhouse\ All\ Caps.ttf);
+}
+
+.logo-text{
+    font-family: Barrel !important;
+    color:var(--text-secondary);
+}

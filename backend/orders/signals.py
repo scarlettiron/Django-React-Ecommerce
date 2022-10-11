@@ -7,25 +7,28 @@ ServerEmail = settings.DEFAULT_FROM_EMAIL
 
 @receiver(post_save, sender=Order)
 def sendEmailUpdates(sender, instance, created,  **kwargs):
-    if instance.status == 'processing':
-        send_mail(
-            subject = 'Your Order',
-            message = 'Your order is being processed',
-            from_email = ServerEmail,
-            recipient_list = [instance.email],
-            fail_silently = False
-        )
-    if instance.status == 'shipped':
-        send_mail(
-            subject = 'Your Order',
-            message = 'Your order has shipped',
-            recipient_list = [instance.email],
-            fail_silently = False
-        )
-    if instance.status == 'delivered':
-        send_mail(
-            subject = 'Your Order',
-            message = 'Your order has been delivered',
-            recipient_list = [instance.email],
-            fail_silently = False
-        )
+    try:
+        if instance.status == 'processing':
+            send_mail(
+                subject = 'Your Order',
+                message = 'Your order is being processed',
+                from_email = ServerEmail,
+                recipient_list = [instance.email],
+                fail_silently = False
+            )
+        if instance.status == 'shipped':
+            send_mail(
+                subject = 'Your Order',
+                message = 'Your order has shipped',
+                recipient_list = [instance.email],
+                fail_silently = False
+            )
+        if instance.status == 'delivered':
+            send_mail(
+                subject = 'Your Order',
+                message = 'Your order has been delivered',
+                recipient_list = [instance.email],
+                fail_silently = False
+            )
+    except:
+        pass
