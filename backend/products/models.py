@@ -17,6 +17,10 @@ class Product(models.Model):
     thirdsubcategory = models.ForeignKey(ThirdSubcategory, on_delete=models.CASCADE, blank=True, null=True)
     tags = models.ManyToManyField(Tag, blank=True, related_name='tagslist')
     
+    def __str__(self):
+        return self.title
+    
+    
 class FeaturedProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     slot = models.IntegerField()

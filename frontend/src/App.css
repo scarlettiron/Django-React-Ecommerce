@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+
+
 :root {
  /* --background:rgb(41, 41, 41);*/
  --background:rgb(241, 241, 241);
@@ -25,6 +29,8 @@ a{
 
 p{
   word-break: break-word;
+  font-family: 'Lobster', cursive;
+  font-family: 'Montserrat', sans-serif;
 }
 
 h1{

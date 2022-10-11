@@ -1,14 +1,15 @@
 @import '../App.css';
 
 .product-container{
-    width:100%;
+    width:95%;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    margin:0 auto;
 }
 
 .product-section{
-    width:100%;
+    width:95%;
 }
 
 .product-section-item{
@@ -35,7 +36,7 @@
 }
 
 .add-to-cart-section{
-    width:100%;
+    width:90%;
     display:flex;
     justify-content: flex-end;
     flex-wrap: wrap;
@@ -62,7 +63,7 @@
     }
 
     .add-to-cart-section{
-        width:100%;
+        width:90%;
         display:block;
     }
 }

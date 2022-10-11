@@ -75,7 +75,7 @@ const Product = () => {
 
 
   return (
-    <div className='w-90 padding-0'>
+    <div className='w-100-vw padding-0'>
         <MainHeader/>
         <NavBar/>
         {loading &&
