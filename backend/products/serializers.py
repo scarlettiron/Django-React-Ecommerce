@@ -7,11 +7,12 @@ from media.serializers import media_serializer
 from .models import Product, ProductPackage, FeaturedProduct, Category
 
 class ProductPackage_Serializer(ModelSerializer):
-    ordering_quantity = SerializerMethodField()
+    ordering_quantity = SerializerMethodField(read_only=True)
+    out_of_stock = SerializerMethodField(read_only=True)
     class Meta:
         model = ProductPackage
         fields = ['id', 'ordering_quantity', 'product', 'qty', 'price', 
-                  'discount', 'description']
+                  'discount', 'description', 'out_of_stock']
 
     def get_ordering_quantity(self, obj):
         try:
@@ -25,6 +26,17 @@ class ProductPackage_Serializer(ModelSerializer):
                     if package['package'] == obj.id:
                         return package['ordering_quantity']
         return 0
+    
+    def get_out_of_stock(self, obj):
+        try:
+            inventory = obj.product.inventory
+            total_quantity = obj.qty * obj.ordering_quantity
+            if total_quantity > inventory:
+                return True
+            return False
+        except:
+            return True
+            
 
 class ProductList_Serializer(ModelSerializer):
     packages = ProductPackage_Serializer(many=True, read_only=True)

@@ -8,4 +8,5 @@
 .logo-text{
     font-family: Barrel !important;
     color:var(--text-secondary);
+    font-weight: 300;
 }
