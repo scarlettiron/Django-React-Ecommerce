@@ -37,7 +37,7 @@ const CartPackage = ({pack, product}) => {
             </div>
 
             <div className='display-inline'>
-                <button onClick={() => removeFromCart(product.id, pack.id)}>x</button>
+                <button className='remove-from-cart-btn' onClick={() => removeFromCart(product.id, pack.id)}>x</button>
             </div>
     </div>
   )
