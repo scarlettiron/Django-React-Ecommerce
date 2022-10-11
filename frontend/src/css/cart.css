@@ -72,6 +72,24 @@
 }
 
 
+.cart-svg{
+    width:35px;
+    height:35px;
+}
+
+.cart-btn-container{
+    position:relative;
+}
+
+.cart-btn-container h3{
+    position:absolute;
+    color:var(--theme-primary);
+    top:0px;
+    margin:0px;
+    padding:0px;
+}
+
+
 @media (min-width: 650px){
 
         .cart-container{

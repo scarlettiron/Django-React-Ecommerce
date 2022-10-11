@@ -5,7 +5,7 @@ import TextareaAutosize from 'react-textarea-autosize';
 const UnderlineResizeInput = ({placeholder, id, error}) => {
   return (
     <TextareaAutosize 
-    minRows={5} 
+    minRows={2} 
     className={error === id ? `input-error underline-input` : 'underline-input'} 
     id={id}
     name={id}

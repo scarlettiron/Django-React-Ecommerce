@@ -5,6 +5,7 @@ import {ReactComponent as Burger} from '../../assets/burger.svg'
 import '../../css/general.css'
 import '../../css/navbar.css'
 import NavDrop from './NavDrop'
+import CartBtn from '../buttonsAndInputs/CartBtn'
 
 
 
@@ -39,6 +40,9 @@ const NavBar = () => {
         </div>
         <div  className={dropdown ? `nav-item-wrapper active` : 'nav-item-wrapper'}>
           <NavItem item={navOptions[1]} active={dropdown}/>
+        </div>
+        <div  className={dropdown ? `nav-item-wrapper active` : 'nav-item-wrapper'}>
+            <CartBtn/>
         </div>
     </div>
   )

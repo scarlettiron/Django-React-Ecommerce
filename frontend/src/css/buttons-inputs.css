@@ -154,6 +154,19 @@
     color:var(--text-secondary);
 }
 
+.underline-input-dark{
+    outline: none;
+    border-bottom:solid 2px black;
+    border-top:transparent;
+    border-left:transparent;
+    border-right:transparent;
+    width:90%;
+    height:30px;
+    padding: 7px;
+    font-weight: bold;
+    background-color: transparent;
+}
+
 @media(min-width:500px){
     .body-input{
         height:100%;
