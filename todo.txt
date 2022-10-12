@@ -1,10 +1,3 @@
-style card so that thumbnail is abover label
-on hover have it haze over (maybe green) and have the icon fade out and label grow
-when link is clicked have custom loader of bugs or something
-
-rewrite add to cart
-
-
 home automation:
 either use rewrite so units handle facerec
 or make requests to server and download images for facerec
@@ -14,40 +7,4 @@ update yoga to use stripe webhook
 keep track of user total earnings
 
 
-
-
-    //under construction
-    const addToCart = (product, productPackage, qty) => {
-        if(!localStorageCart){
-            const newLocalCart = [{'product':product, 'packages':[{'package':productPackage.id, 'ordering_quantity':qty}]}]
-            localStorage.removeItem('cart')
-            localStorage.setItem('cart', JSON.stringify(newLocalCart))
-            updateLocalStorageState()
-            updateSubtotal(null, productPackage.price, qty)
-            return
-        }
-
-        let localStorageProduct = localStorageCart.find(prod => {return prod.product === product})
-        if(!localStorageProduct){
-            setLocalStorageCart(oldArray => ([
-                ...oldArray, {'product':product, 'packages':[{'id':productPackage.id, 'qty':qty}]}])
-                )
-        }
-        else{
-            let localProductPackage = localStorageProduct.packages.find(p => {
-                return p.id === productPackage.id
-                })
-
-            if(!localProductPackage){
-                localStorageProduct.packages.push({'id':productPackage, 'ordering_quantity':parseInt(qty)})
-            }
-            else{
-                localProductPackage.ordering_quantity = localProductPackage.ordering_quantity + parseInt(qty)
-            }
-            setLocalStorageCart(localStorageCart)
-            }
-
-        localStorage.removeItem('cart')
-        localStorage.setItem('cart', JSON.stringify(localStorageCart))
-        updateSubtotal(null, productPackage.price, qty)
-    }
+fix bug with add to cart button, on smaller screens it overflows from button
