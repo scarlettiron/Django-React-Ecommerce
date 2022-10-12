@@ -13,4 +13,4 @@ const Loading1 = ({btnAction = null}) => {
   )
 }
 
-export default Loading1
+export default React.memo(Loading1)

@@ -32,7 +32,7 @@ const Product = () => {
     const [missingInput, setMissingInput] = useState(() => null)
     const [displayPrice, setDisplayPrice] = useState(() => null)
     const [qty, setQty] = useState(() => 1)
-    const [error, setError] = (() => false)
+    const [error, setError] = useState(() => false)
     const [selectedPackage, setSelectedPackage] = useState(() => null)
 
     const {addToCart} = useContext(CartContext)

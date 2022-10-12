@@ -9,4 +9,4 @@ const Error1 = ({error=null}) => {
   )
 }
 
-export default Error1
+export default React.memo(Error1)

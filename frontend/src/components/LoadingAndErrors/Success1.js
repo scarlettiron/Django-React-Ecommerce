@@ -6,4 +6,4 @@ const Success1 = () => {
   )
 }
 
-export default Success1
+export default React.memo(Success1)

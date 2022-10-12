@@ -7,4 +7,4 @@ const Divider1 = () => {
   )
 }
 
-export default Divider1
+export default React.memo(Divider1)

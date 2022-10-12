@@ -74,4 +74,4 @@ const ImageCarousel = ({alt = "image", images}) => {
   )
 }
 
-export default ImageCarousel
+export default React.memo(ImageCarousel)

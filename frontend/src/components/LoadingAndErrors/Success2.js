@@ -11,4 +11,4 @@ const Success2 = ({message}) => {
   )
 }
 
-export default Success2
+export default React.memo(Success2)
