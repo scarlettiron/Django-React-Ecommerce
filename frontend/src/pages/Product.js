@@ -22,7 +22,7 @@ import FeaturedSection from '../components/products/FeaturedSection'
 
 import { CountRenders } from '../utils/CountRenders'
 const Product = () => {
-    CountRenders('product: ')
+
     const {productDetail} = productUrls
     const {product_id} = useParams()
     const [product, setProduct] = useState(() => null)
@@ -51,7 +51,6 @@ const Product = () => {
     const getProduct = useCallback(async () => {
         const {response, data} = await BasicFetch(`${productDetail.url}${product_id}/`)
         if(response.status === 200){
-            console.log(data)
             setProduct(() => data)
             setDisplayPrice(`$${formatPrice(data.single_price)} - ${formatPrice(data.max_price)}`)
             setLoading(() => false)
@@ -60,16 +59,22 @@ const Product = () => {
     }, [product_id, productDetail.url])
 
     const handleSetQty = useCallback((newQty) => {
+        if(!selectedPackage){
+            setError('Select a package')
+            return
+        }
         const checkQty = newQty * selectedPackage.qty
         if(checkQty > product.inventory){
             setError('Not enough stock')
             return
         }
+        setError(() => null)
         setQty(() => newQty)
-    }, [])
+    }, [selectedPackage, product])
 
 
     const handleAddToCart = useCallback(() => {
+        setError(() => null)
         setSuccess(() => false)
         setBtnLoading(() => true)
         if(!selectedPackage){
@@ -142,7 +147,7 @@ const Product = () => {
                     }
                     {error &&
                         <div className='w-75'>
-                            <Error1 message={error} />
+                            <Error1 error={error} />
                         </div>
                     }
                     <div className='w-75'>

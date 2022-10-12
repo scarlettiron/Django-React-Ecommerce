@@ -1,4 +1,5 @@
 
+from pickle import FALSE
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 
 from media.serializers import media_serializer
@@ -26,14 +27,26 @@ class ProductPackage_Serializer(ModelSerializer):
         return 0
     
     def get_out_of_stock(self, obj):
+        #if view is for viewing cart
         try:
-            inventory = obj.product.inventory
-            total_quantity = obj.qty * obj.ordering_quantity
-            if total_quantity > inventory:
-                return True
-            return False
+            cart = self.context['cart']
+            for item in cart:
+                if item['product'] == obj.product.pk:
+                    for package in item['packages']:
+                        if package['package'] == obj.id:
+                            totalQuantity = package['ordering_quantity'] + obj.qty
+                            if totalQuantity > obj.product.inventory:
+                                return True
+                            return False
+        
+        #if view is for viewing product packages
         except:
-            return True
+            try:
+                if obj.qty > obj.product.inventory:
+                    return True
+                return False
+            except:
+                return True
             
 
 class ProductList_Serializer(ModelSerializer):

@@ -5,7 +5,7 @@ import {formatPrice} from '../../utils/PriceFormats'
 import '../../css/cart.css'
 import '../../css/general.css'
 
-const CartPackage = ({pack, product}) => {
+const CartPackage = ({pack, product, itemOutOfStock}) => {
     const {removeFromCart, updatePackageQuantity} = useContext(CartContext)
 
     const [qty, setQty] = useState(() => pack.ordering_quantity)
@@ -13,6 +13,10 @@ const CartPackage = ({pack, product}) => {
     const handleUpdateQty = (newQty) => {
         setQty(() => newQty)
         updatePackageQuantity(product.id, pack.id, newQty)
+    }
+
+    if(pack.out_of_stock){
+        itemOutOfStock(true)
     }
 
 
@@ -25,10 +29,11 @@ const CartPackage = ({pack, product}) => {
             />
 
             <div className='display-inline w-50'>
-                {pack.description ? 
+                {pack.description && !pack.out_of_stock &&
                     <p>{pack.description}</p>
-                    :
-                    <p>Pack of {pack.qty}</p>
+                }
+                {pack.out_of_stock &&
+                    <p className='text-red'>{pack?.description} Out Of Stock</p>
                 }
             </div>
 

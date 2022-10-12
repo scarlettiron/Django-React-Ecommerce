@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import '../../css/cart.css'
 import '../../css/general.css'
 
-const CartItem = ({product}) => {
+const CartItem = ({product, itemOutOfStock}) => {
   const history = useHistory()
 
   return (
@@ -23,6 +23,7 @@ const CartItem = ({product}) => {
                                 pack={p} 
                                 product={product} 
                                 key={index}
+                                itemOutOfStock={itemOutOfStock}
                                 />
                     })
                 }
