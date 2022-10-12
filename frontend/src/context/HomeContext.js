@@ -47,7 +47,6 @@ export const HomeContextProvider = ({children, ...rest}) => {
     useEffect(() => {
         if(featuredAds) return
         if(!initialLoad) return
-        console.log('useEffect running')
         fetchHomeInfo()
     },[])
 

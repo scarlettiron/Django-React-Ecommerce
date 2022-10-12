@@ -14,18 +14,15 @@ const SelectDropDown = ({options, onChange, wrapperClass = null, id = null}) => 
                         key={index}
                         disabled
                         >
-                        QTY:{opt.qty} 
-                        Price: ${formatPrice(opt.price)}
-                        {opt.outofstock && 'out of stock'}
+                        {`QTY: ${opt.qty} Price: ${formatPrice(opt.price)} Out Of Stock `}
                         </option>
 
                     return <option 
                     value={opt.id} 
                     key={index}
                     >
-                    QTY:{opt.qty} 
-                    Price: ${formatPrice(opt.price)}
-                    {opt.outofstock && 'out of stock'}
+                    {`QTY:${opt.qty} Price: ${formatPrice(opt.price)}`}
+
                     </option>
                     
                 })
