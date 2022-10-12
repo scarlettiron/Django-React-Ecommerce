@@ -9,4 +9,4 @@ const PrimaryBtn = ({text, action}) => {
   )
 }
 
-export default PrimaryBtn
+export default React.memo(PrimaryBtn)

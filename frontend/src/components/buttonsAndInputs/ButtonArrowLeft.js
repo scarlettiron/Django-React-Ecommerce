@@ -10,4 +10,4 @@ const ButtonArrowLeft = ({action ={}}) => {
   )
 }
 
-export default ButtonArrowLeft
+export default React.memo(ButtonArrowLeft)

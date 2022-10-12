@@ -9,4 +9,4 @@ const UnderlineInput = ({placeholder, id, error}) => {
   )
 }
 
-export default UnderlineInput
+export default React.memo(UnderlineInput)

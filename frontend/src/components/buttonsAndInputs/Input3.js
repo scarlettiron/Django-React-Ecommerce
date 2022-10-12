@@ -7,4 +7,4 @@ min=null, error=null}) {
   )
 }
 
-export default Input3
+export default React.memo(Input3)

@@ -13,4 +13,4 @@ const SelectInput = ({choices, id, placeholder, wrapperClass=null, error=null}) 
   )
 }
 
-export default SelectInput
+export default React.memo(SelectInput)

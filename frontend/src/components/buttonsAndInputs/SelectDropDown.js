@@ -34,4 +34,4 @@ const SelectDropDown = ({options, onChange, wrapperClass = null, id = null}) => 
   )
 }
 
-export default SelectDropDown
+export default React.memo(SelectDropDown)

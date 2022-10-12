@@ -20,4 +20,4 @@ const CartBtn = () => {
   )
 }
 
-export default CartBtn
+export default React.memo(CartBtn)

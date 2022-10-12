@@ -8,4 +8,4 @@ const InputSquare = ({id, max, onChange, value}) => {
   )
 }
 
-export default InputSquare
+export default React.memo(InputSquare)

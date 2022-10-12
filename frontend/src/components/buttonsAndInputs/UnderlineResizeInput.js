@@ -14,4 +14,4 @@ const UnderlineResizeInput = ({placeholder, id, error}) => {
   )
 }
 
-export default UnderlineResizeInput
+export default React.memo(UnderlineResizeInput)

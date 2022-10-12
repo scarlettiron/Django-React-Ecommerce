@@ -10,4 +10,4 @@ min=null, error=null}) => {
       )
 }
 
-export default UnderlineInputDark
+export default React.memo(UnderlineInputDark)

@@ -16,4 +16,4 @@ const CheckoutBtn = ({action=null, form=null, loading=false}) => {
   )
 }
 
-export default CheckoutBtn
+export default React.memo(CheckoutBtn)

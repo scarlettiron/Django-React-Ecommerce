@@ -10,4 +10,4 @@ min=null, error=null}) => {
   )
 }
 
-export default Input2
+export default React.memo(Input2)

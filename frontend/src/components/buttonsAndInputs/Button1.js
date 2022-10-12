@@ -8,4 +8,4 @@ const Button1 = ({text, onClick = null, form=null}) => {
   )
 }
 
-export default Button1
+export default React.memo(Button1)

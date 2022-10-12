@@ -9,4 +9,4 @@ const Input1 = ({name = null, onChange = null, type='text', placeholder = null})
   )
 }
 
-export default Input1
+export default React.memo(Input1)

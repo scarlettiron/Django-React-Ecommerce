@@ -10,4 +10,4 @@ const AddToCartBtn = ({form=null, action=null, loading=null}) => {
   )
 }
 
-export default AddToCartBtn
+export default React.memo(AddToCartBtn)

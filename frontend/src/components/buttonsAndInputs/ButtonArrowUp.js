@@ -9,4 +9,4 @@ const ButtonArrowUp = ({action}) => {
   )
 }
 
-export default ButtonArrowUp
+export default React.memo(ButtonArrowUp)
