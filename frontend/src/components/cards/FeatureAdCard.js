@@ -26,4 +26,4 @@ const FeatureAdCard = ({ad}) => {
   )
 }
 
-export default FeatureAdCard
+export default React.memo(FeatureAdCard)

@@ -17,4 +17,4 @@ const SubcategoryCard = ({subcategory, onClick}) => {
   )
 }
 
-export default SubcategoryCard
+export default React.memo(SubcategoryCard)

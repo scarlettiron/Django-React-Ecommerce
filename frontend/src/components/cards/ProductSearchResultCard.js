@@ -26,4 +26,4 @@ const ProductSearchResultCard = ({product}) => {
   )
 }
 
-export default ProductSearchResultCard
+export default React.memo(ProductSearchResultCard)

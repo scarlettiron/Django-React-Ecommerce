@@ -13,4 +13,4 @@ const CategoryCard = ({category}) => {
   )
 }
 
-export default CategoryCard
+export default React.memo(CategoryCard)

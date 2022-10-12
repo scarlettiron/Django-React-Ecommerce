@@ -23,4 +23,4 @@ const FooterSection = ({title, links}) => {
   )
 }
 
-export default FooterSection
+export default React.memo(FooterSection)

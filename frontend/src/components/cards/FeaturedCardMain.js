@@ -23,4 +23,4 @@ const FeaturedCardMain = ({product}) => {
   )
 }
 
-export default FeaturedCardMain
+export default React.memo(FeaturedCardMain)
