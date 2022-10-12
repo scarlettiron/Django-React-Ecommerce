@@ -18,6 +18,9 @@ const QtyBtn = ({max, id, wrapperClass=null, onChange, currentQty}) => {
             onChange(newQty)
             return
         }
+
+        if(currentQty === 1 && action === 'minus') return
+        
         onChange(action)
     }
 
@@ -30,7 +33,9 @@ const QtyBtn = ({max, id, wrapperClass=null, onChange, currentQty}) => {
                 id={id}
                 max={max} 
                 value={currentQty}
-                onChange={(e) => handleSetQty(e.target.value)}/>
+                onChange={(e) => handleSetQty(e.target.value)}
+                min={1}
+                />
             </div>
         <ButtonArrowDown action={() => handleSetQty('minus')}/>
     </div>

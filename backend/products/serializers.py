@@ -30,11 +30,12 @@ class ProductPackage_Serializer(ModelSerializer):
         #if view is for viewing cart
         try:
             cart = self.context['cart']
+            print('cart')
             for item in cart:
                 if item['product'] == obj.product.pk:
                     for package in item['packages']:
                         if package['package'] == obj.id:
-                            totalQuantity = package['ordering_quantity'] + obj.qty
+                            totalQuantity = package['ordering_quantity'] * obj.qty
                             if totalQuantity > obj.product.inventory:
                                 return True
                             return False

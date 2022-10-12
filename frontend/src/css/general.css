@@ -137,6 +137,14 @@
     color:var(--text-third);
 }
 
+.text-red{
+    color:rgb(181, 0, 0);
+}
+
+.border-red{
+    border: solid 1px rgb(167, 0, 0);
+}
+
 .bg-primary{
     background-color: var(--theme-primary);
 }

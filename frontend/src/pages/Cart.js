@@ -14,8 +14,8 @@ const Cart = () => {
   const [outOfStock, setItemOutOfStock] = useState(() => false)
 
   const itemOutOfStock = (status) => {
-    if(status === true){
-      setItemOutOfStock(() => true)
+    if(status){
+      setItemOutOfStock(status)
     }
   }
 
