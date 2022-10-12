@@ -7,7 +7,7 @@ import {ReactComponent as Search} from '../../assets/search-50.svg'
 
 const SearchSection = () => {
   const history = useHistory()
-  const [search, setSearch] = useState()
+  const [search, setSearch] = useState(()=>null)
   return (
     <div className='search-section'>
             <div className='search-input'>
@@ -20,4 +20,4 @@ const SearchSection = () => {
   )
 }
 
-export default SearchSection
+export default React.memo(SearchSection)

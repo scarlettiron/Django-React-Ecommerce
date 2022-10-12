@@ -12,4 +12,4 @@ const NavItem = ({item}) => {
   )
 }
 
-export default NavItem
+export default React.memo(NavItem)

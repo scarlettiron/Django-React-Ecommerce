@@ -15,4 +15,4 @@ const LogoSection = () => {
   )
 }
 
-export default LogoSection
+export default React.memo(LogoSection)

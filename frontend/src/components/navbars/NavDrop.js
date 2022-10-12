@@ -46,4 +46,4 @@ const NavDrop = ({links=null, title}) => {
   )
 }
 
-export default NavDrop
+export default React.memo(NavDrop)

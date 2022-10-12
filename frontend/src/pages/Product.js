@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react'
+import React, {useEffect, useState, useContext, useCallback} from 'react'
 import CartContext from '../context/CartContext'
 import MainHeader from '../components/headers/MainHeader'
 import NavBar from '../components/navbars/NavBar'
@@ -11,6 +11,8 @@ import { productUrls } from '../utils/ApiEndPoints'
 import QtyBtn from '../components/buttonsAndInputs/QtyBtn'
 import AddToCartBtn from '../components/buttonsAndInputs/AddToCartBtn'
 import Loading1 from '../components/LoadingAndErrors/Loading1'
+import Error1 from '../components/LoadingAndErrors/Error1'
+import Success2 from '../components/LoadingAndErrors/Success2'
 import {formatPrice} from '../utils/PriceFormats'
 import '../css/general.css'
 import '../css/products.css'
@@ -18,13 +20,16 @@ import '../css/buttons-inputs.css'
 import { useParams } from 'react-router-dom'
 import FeaturedSection from '../components/products/FeaturedSection'
 
-
+import { CountRenders } from '../utils/CountRenders'
 const Product = () => {
+    CountRenders('product: ')
     const {productDetail} = productUrls
     const {product_id} = useParams()
     const [product, setProduct] = useState(() => null)
     const [loading, setLoading] = useState(() => true)
     const [error, setError] = useState(() => false)
+    const [success, setSuccess] = useState(() => false)
+    const [btnLoading, setBtnLoading] = useState(() => false)
     const [missingInput, setMissingInput] = useState(() => null)
     const [displayPrice, setDisplayPrice] = useState(() => null)
     const [qty, setQty] = useState(() => 1)
@@ -32,7 +37,7 @@ const Product = () => {
 
     const {addToCart} = useContext(CartContext)
 
-    const handleDisplayedPrice = (e) => {
+    const handleDisplayedPrice = useCallback((e) => {
         if(e.target.value === 'default'){
             setDisplayPrice(product.max_price ? `$${formatPrice(product.single_price)} - ${formatPrice(product.max_price)}`
             : `$${formatPrice(product.single_price)}`)
@@ -41,9 +46,9 @@ const Product = () => {
         const pack = product.packages.find(p => {return p.id === parseInt(e.target.value)})
         setDisplayPrice(`$${formatPrice(pack.price)}`)
         setSelectedPackage(pack)
-    }
+    },[product])
 
-    const getProduct = async () => {
+    const getProduct = useCallback(async () => {
         const {response, data} = await BasicFetch(`${productDetail.url}${product_id}/`)
         if(response.status === 200){
             setProduct(() => data)
@@ -51,14 +56,14 @@ const Product = () => {
             setLoading(() => false)
             return
         }
-    }
+    }, [product_id, productDetail.url])
 
-    const handleSetQty = (newQty) => {
+    const handleSetQty = useCallback((newQty) => {
         setQty(() => newQty)
-    }
+    }, [])
 
 
-    const handleAddToCart = () => {
+    const handleAddToCart = useCallback(() => {
         if(!selectedPackage){
             setMissingInput(() => 'select package')
             return
@@ -67,7 +72,7 @@ const Product = () => {
 
         addToCart(product.id, selectedPackage, qty)
         return
-    }
+    }, [selectedPackage, addToCart, product, qty])
 
     useEffect(() => {
         getProduct()
