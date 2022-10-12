@@ -42,6 +42,11 @@
     flex-wrap: wrap;
 }
 
+@media(min-width:400px){
+    .add-to-cart-section{
+        padding:30px;
+    }
+}
 
 
 @media (min-width:700px){

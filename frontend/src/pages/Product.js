@@ -119,7 +119,7 @@ const Product = () => {
                     </div>
                 }
 
-                <div className='padding-30 add-to-cart-section'>
+                <div className='add-to-cart-section'>
                     <div className='w-75'>
                         <SelectDropDown 
                         options={product ? product.packages : []} 
