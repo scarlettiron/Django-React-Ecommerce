@@ -95,22 +95,21 @@
 
 
 .logo-text{
-    font-family: Vorgane !important;
+    font-family: DarknessOfTheNight, Sans-serif!important;
     color:var(--text-secondary);
     font-weight: 300;
-    font-size:xx-large;
+    font-size:20px;
     word-wrap: none;
 }
 
 /*
+DarknessOfTheNight
 LimitBreaking
-ImagineSerif 
 templeJump 
 WoodChop
-DarknessOfTheNight
-Drift
-GhostSkeleton
 Vorgane
+GhostSkeleton
+ImagineSerif 
 */
 
 .logo-image{
@@ -121,4 +120,14 @@ Vorgane
    .logo-image{
         max-height:25vh;
    }
+
+   .logo-text{
+    font-size: 25px;
+   }
+}
+
+@media(min-width:850px){
+    .logo-text{
+        font-size: 30px;
+    }
 }

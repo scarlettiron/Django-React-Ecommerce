@@ -7,4 +7,9 @@ update yoga to use stripe webhook
 keep track of user total earnings
 
 
-fix bug with add to cart button, on smaller screens it overflows from button
+fix bug with add to cart button, 
+on smaller screens it overflows from button
+
+style success component
+
+add successfully added to cart component to product page
