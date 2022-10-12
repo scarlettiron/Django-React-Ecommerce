@@ -10,3 +10,19 @@
     color:red;
     font-weight: bolder;
 }
+
+.success-container{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    background-color: rgb(151, 254, 163);
+    border:solid 1px rgb(25, 201, 37);
+    margin:10px;
+}
+
+.success-container h3{
+    color: white;
+    font-weight: bolder;
+    margin:5px;
+    padding:0px;
+}

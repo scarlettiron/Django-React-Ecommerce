@@ -9,7 +9,25 @@ const SelectDropDown = ({options, onChange, wrapperClass = null, id = null}) => 
             <option value='placeholder'>Choose a package</option>
             {
                 options.map((opt, index) => {
-                    return <option value={opt.id} key={index}>QTY:{opt.qty} Price: ${formatPrice(opt.price)}</option>
+                    if(opt.out_of_stock) return <option 
+                        value={opt.id} 
+                        key={index}
+                        disabled
+                        >
+                        QTY:{opt.qty} 
+                        Price: ${formatPrice(opt.price)}
+                        {opt.outofstock && 'out of stock'}
+                        </option>
+
+                    return <option 
+                    value={opt.id} 
+                    key={index}
+                    >
+                    QTY:{opt.qty} 
+                    Price: ${formatPrice(opt.price)}
+                    {opt.outofstock && 'out of stock'}
+                    </option>
+                    
                 })
             }
         </select>

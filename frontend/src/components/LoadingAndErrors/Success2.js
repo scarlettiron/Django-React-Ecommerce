@@ -1,8 +1,13 @@
 import React from 'react'
+import '../../css/errors.css'
 
-const Success2 = () => {
+const Success2 = ({message}) => {
   return (
-    <div>Success2</div>
+    <div className='success-container'>
+        <h3>
+        {message ? message : 'Success!'}
+        </h3>
+    </div>
   )
 }
 

@@ -27,12 +27,12 @@ const Product = () => {
     const {product_id} = useParams()
     const [product, setProduct] = useState(() => null)
     const [loading, setLoading] = useState(() => true)
-    const [error, setError] = useState(() => false)
     const [success, setSuccess] = useState(() => false)
     const [btnLoading, setBtnLoading] = useState(() => false)
     const [missingInput, setMissingInput] = useState(() => null)
     const [displayPrice, setDisplayPrice] = useState(() => null)
     const [qty, setQty] = useState(() => 1)
+    const [error, setError] = (() => false)
     const [selectedPackage, setSelectedPackage] = useState(() => null)
 
     const {addToCart} = useContext(CartContext)
@@ -51,6 +51,7 @@ const Product = () => {
     const getProduct = useCallback(async () => {
         const {response, data} = await BasicFetch(`${productDetail.url}${product_id}/`)
         if(response.status === 200){
+            console.log(data)
             setProduct(() => data)
             setDisplayPrice(`$${formatPrice(data.single_price)} - ${formatPrice(data.max_price)}`)
             setLoading(() => false)
@@ -59,11 +60,18 @@ const Product = () => {
     }, [product_id, productDetail.url])
 
     const handleSetQty = useCallback((newQty) => {
+        const checkQty = newQty * selectedPackage.qty
+        if(checkQty > product.inventory){
+            setError('Not enough stock')
+            return
+        }
         setQty(() => newQty)
     }, [])
 
 
     const handleAddToCart = useCallback(() => {
+        setSuccess(() => false)
+        setBtnLoading(() => true)
         if(!selectedPackage){
             setMissingInput(() => 'select package')
             return
@@ -71,6 +79,8 @@ const Product = () => {
         setMissingInput(() => null)
 
         addToCart(product.id, selectedPackage, qty)
+        setSuccess(() => true)
+        setBtnLoading(() => false)
         return
     }, [selectedPackage, addToCart, product, qty])
 
@@ -125,6 +135,16 @@ const Product = () => {
                 }
 
                 <div className='add-to-cart-section'>
+                    {success &&
+                        <div className='w-75'>
+                            <Success2 message={`${product.title} has been added to cart!`}/>
+                        </div>
+                    }
+                    {error &&
+                        <div className='w-75'>
+                            <Error1 message={error} />
+                        </div>
+                    }
                     <div className='w-75'>
                         <SelectDropDown 
                         options={product ? product.packages : []} 
@@ -141,7 +161,7 @@ const Product = () => {
                         currentQty = {qty}
                         />
                         <div className='w-75'>
-                            <AddToCartBtn action={() => handleAddToCart()}/>
+                            <AddToCartBtn action={() => handleAddToCart()} loding={btnLoading}/>
                         </div>
                     </div>
                 </div>
