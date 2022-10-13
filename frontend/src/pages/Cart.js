@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useRef} from 'react'
 import CartContext from '../context/CartContext'
 import MainHeader from '../components/headers/MainHeader'
 import NavBar from '../components/navbars/NavBar'
@@ -11,14 +11,18 @@ import '../css/cart.css'
 
 const Cart = () => {
   const {cart, handleGetCartData} = useContext(CartContext)
-  const [outOfStock, setItemOutOfStock] = useState(() => false)
+  const outOfStock = useRef(false)
+
+  console.log(outOfStock.current)
 
   const itemOutOfStock = (status) => {
     if(status){
-      setItemOutOfStock(status)
+      outOfStock.current = status
     }
   }
-  console.log(cart)
+  if(outOfStock.current){
+    console.log('out')
+  }
 
   useEffect(() => {
     handleGetCartData()
@@ -37,7 +41,7 @@ const Cart = () => {
       </div>
       <div className='w-100 justify-content-center'>
           <div className='checkout-btn-wrapper'>
-            {outOfStock ? 
+            {outOfStock.current === true ? 
             <h3 className='text-red'>Some items are out of stock, remove them to continue</h3>
             :  
             <CheckoutBtn/>

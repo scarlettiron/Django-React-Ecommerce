@@ -4,29 +4,24 @@ import ButtonArrowDown from '../buttonsAndInputs/ButtonArrowDown'
 import InputSquare from '../buttonsAndInputs/InputSquare'
 import '../../css/buttons-inputs.css'
 
-const QtyBtn = ({max, id, wrapperClass=null, onChange, currentQty}) => {
+const QtyBtn = ({id, wrapperClass=null, onChange, currentQty}) => {
 
     const handleSetQty = (action) => {
         let newQty;
-        if(currentQty === 1 && action === 'minus'){ 
-            console.log('equals 1 minus')
-            return
-        }
 
-        if(!currentQty || currentQty === 0) {
-            console.log('no current quantity')
+        if(currentQty === 1 && action === 'minus') return
+
+        if(!currentQty && action === 'plus'){
             onChange(1)
             return
         }
 
-        if(action === 'plus' && currentQty < max){
+        if(action === 'plus'){
             newQty = currentQty + 1
             onChange(newQty)
-            console.log('plus')
             return
         }
         if(action === 'minus' && currentQty > 1){
-            console.log('minus')
             newQty = currentQty - 1
             onChange(newQty)
             return
@@ -41,7 +36,6 @@ const QtyBtn = ({max, id, wrapperClass=null, onChange, currentQty}) => {
                 <InputSquare 
                 name= {id}
                 id={id}
-                max={max} 
                 value={currentQty}
                 onChange={(e) => handleSetQty(e.target.value)}
                 min={1}

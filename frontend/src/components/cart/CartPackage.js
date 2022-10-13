@@ -1,29 +1,30 @@
-import React, {useState, useContext, useCallback} from 'react'
+import React, {useState, useContext, useCallback, useRef} from 'react'
 import CartContext from '../../context/CartContext'
 import QtyBtn from '../buttonsAndInputs/QtyBtn'
 import {formatPrice} from '../../utils/PriceFormats'
 import '../../css/cart.css'
 import '../../css/general.css'
 
-const CartPackage = ({pack, product}) => {
+const CartPackage = ({pack, product, itemOutOfStock}) => {
     const {removeFromCart, updatePackageQuantity} = useContext(CartContext)
 
     const [qty, setQty] = useState(() => pack.ordering_quantity)
-    const [notEnoughStock, setNotEnoughStock] = useState(() => pack.out_of_stock)
+    const notEnoughStock = useRef(pack.out_of_stock)
 
-    const handleUpdateQty = useCallback((newQty) => {
+    itemOutOfStock(notEnoughStock)
+    const handleUpdateQty = (newQty) => {
         const totalQty = newQty * pack.qty
         if(totalQty <= product.inventory && pack.out_of_stock){
-            setNotEnoughStock(() => false)
+            notEnoughStock.current = false
         }
 
         if(totalQty > product.inventory){
-            setNotEnoughStock(() => true)
+            notEnoughStock.current = true
         }
 
         setQty(() => newQty)
         updatePackageQuantity(product.id, pack.id, newQty)
-    }, [setNotEnoughStock, pack, product, updatePackageQuantity])
+    }
 
     const removePackage = useCallback(() => {
         removeFromCart(product.id, pack.id)
@@ -31,18 +32,17 @@ const CartPackage = ({pack, product}) => {
 
 
   return (
-    <div className={notEnoughStock ? `border-red cart-package-item` : 'cart-package-item'}>
+    <div className={notEnoughStock.current ? `border-red cart-package-item` : 'cart-package-item'}>
             <QtyBtn 
-            max={product.inventory}
             currentQty={qty}
             onChange={handleUpdateQty}
             />
 
             <div className='display-inline w-50'>
-                {pack.description && !notEnoughStock &&
+                {pack.description && !notEnoughStock.current &&
                     <p>{pack.description}  QTY: {pack?.qty}</p>
                 }
-                {notEnoughStock &&
+                {notEnoughStock.current &&
                     <p className='text-red'>{pack?.description} QTY: {pack?.qty}  (Out Of Stock)</p>
                 }
             </div>
