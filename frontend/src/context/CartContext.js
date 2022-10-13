@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, createContext} from 'react'
+import React, {useState, useEffect, useRef, createContext, useCallback} from 'react'
 import BasicFetch from '../utils/BasicFetch'
 import {cartUrl} from '../utils/ApiEndPoints'
 import {CountRenders} from '../utils/CountRenders'
@@ -50,6 +50,7 @@ export const CartContextProvider = ({children, ...rest}) => {
 
         }
     }
+    
  
     const updateLocalStorageState = () =>{
         setLocalStorageCart(localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : null)
@@ -165,7 +166,7 @@ export const CartContextProvider = ({children, ...rest}) => {
                 setCart(cart) 
 
                 updateSubtotal(cart)
-    }
+        }
    
 
     useEffect(() => {

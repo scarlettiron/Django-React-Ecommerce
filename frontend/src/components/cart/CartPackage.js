@@ -5,7 +5,7 @@ import {formatPrice} from '../../utils/PriceFormats'
 import '../../css/cart.css'
 import '../../css/general.css'
 
-const CartPackage = ({pack, product, itemOutOfStock}) => {
+const CartPackage = ({pack, product}) => {
     const {removeFromCart, updatePackageQuantity} = useContext(CartContext)
 
     const [qty, setQty] = useState(() => pack.ordering_quantity)
@@ -14,29 +14,20 @@ const CartPackage = ({pack, product, itemOutOfStock}) => {
     const handleUpdateQty = useCallback((newQty) => {
         const totalQty = newQty * pack.qty
         if(totalQty <= product.inventory && pack.out_of_stock){
-            itemOutOfStock(false)
             setNotEnoughStock(() => false)
         }
 
         if(totalQty > product.inventory){
             setNotEnoughStock(() => true)
-            itemOutOfStock(true)
         }
 
         setQty(() => newQty)
         updatePackageQuantity(product.id, pack.id, newQty)
-    }, [setNotEnoughStock, pack, product, updatePackageQuantity, itemOutOfStock])
-
-    if(pack.out_of_stock){
-        itemOutOfStock(true)
-    }
+    }, [setNotEnoughStock, pack, product, updatePackageQuantity])
 
     const removePackage = useCallback(() => {
-        if(pack.out_of_stock){
-            itemOutOfStock(false)
-        }
         removeFromCart(product.id, pack.id)
-    }, [product, pack, itemOutOfStock, removeFromCart])
+    }, [product, pack, removeFromCart])
 
 
   return (

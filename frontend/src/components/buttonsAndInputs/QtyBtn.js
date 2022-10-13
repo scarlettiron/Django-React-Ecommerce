@@ -8,19 +8,29 @@ const QtyBtn = ({max, id, wrapperClass=null, onChange, currentQty}) => {
 
     const handleSetQty = (action) => {
         let newQty;
+        if(currentQty === 1 && action === 'minus'){ 
+            console.log('equals 1 minus')
+            return
+        }
+
+        if(!currentQty || currentQty === 0) {
+            console.log('no current quantity')
+            onChange(1)
+            return
+        }
+
         if(action === 'plus' && currentQty < max){
             newQty = currentQty + 1
             onChange(newQty)
+            console.log('plus')
             return
         }
         if(action === 'minus' && currentQty > 1){
+            console.log('minus')
             newQty = currentQty - 1
             onChange(newQty)
             return
         }
-
-        if(currentQty === 1 && action === 'minus') return
-        
         onChange(action)
     }
 

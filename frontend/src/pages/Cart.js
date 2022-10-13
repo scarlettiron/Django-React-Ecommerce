@@ -18,6 +18,7 @@ const Cart = () => {
       setItemOutOfStock(status)
     }
   }
+  console.log(cart)
 
   useEffect(() => {
     handleGetCartData()
@@ -48,4 +49,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default React.memo(Cart)
