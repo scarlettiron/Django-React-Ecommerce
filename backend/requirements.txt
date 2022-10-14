@@ -1,8 +1,9 @@
 asgiref==3.5.2
-boto3==1.24.86
-botocore==1.27.86
+boto3==1.24.90
+botocore==1.27.90
 certifi==2022.9.24
 charset-normalizer==2.1.1
+dj-database-url==1.0.0
 dj-stripe==2.6.2
 Django==4.1.2
 django-anymail==8.6
@@ -10,11 +11,12 @@ django-cors-headers==3.13.0
 django-storages==1.13.1
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.1
+gunicorn==20.1.0
 idna==3.4
 jmespath==1.0.1
 jsonfield==3.1.0
 Pillow==9.2.0
-psycopg2==2.9.3
+psycopg2==2.9.4
 PyJWT==2.5.0
 python-dateutil==2.8.2
 python-decouple==3.6
@@ -24,6 +26,6 @@ s3transfer==0.6.0
 six==1.16.0
 sqlparse==0.4.3
 stripe==4.2.0
-tzdata==2022.4
+tzdata==2022.5
 urllib3==1.26.12
 whitenoise==6.2.0

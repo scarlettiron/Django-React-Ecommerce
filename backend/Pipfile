@@ -15,8 +15,10 @@ stripe = "*"
 dj-stripe = "*"
 django-anymail = "*"
 whitenoise = "*"
-django-storages = "*"
 pillow = "*"
+gunicorn = "*"
+dj-database-url = "*"
+django-storages = "*"
 
 [dev-packages]
 

@@ -1,6 +1,7 @@
 from pathlib import Path
-import os
 from decouple import config
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'storages',
     'django.contrib.staticfiles',
     "corsheaders",
     'rest_framework',
@@ -53,6 +55,10 @@ MIDDLEWARE = [
 
 #CORS_ALLOWED_ORIGINS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = "*"
+CORS_ALLOW_CREDENTIALS=True
+
+CSRF_TRUSTED_ORIGINS = [config('API_URL'),]
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -94,7 +100,8 @@ EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 ANYMAIL_MAILGUN_API_KEY = config("MAIL_GUN_DOMAIN_API")
 DEFAULT_FROM_EMAIL=config('MAIL_GUN_EMAIL')
 
-DATABASES = {
+#for local development
+''' DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': config('DB_NAME'),
@@ -103,6 +110,12 @@ DATABASES = {
         'USER':'postgres',
         'HOST':'localhost',
     }
+}  '''
+
+#for production
+DATABASE_URL = config('DATABASE_URL')
+DATABASES = {
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=100),
 }
 
 
@@ -139,16 +152,18 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static and media files (CSS, JavaScript, Images)
-
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-
 AWS_S3_ACCESS_KEY_ID = config('AWS_ACCESS_KEY')
 AWS_S3_SECRET_ACCESS_KEY = config('AWS_SECRET_KEY')
 AWS_S3_FILE_OVERWRITE = False
 AWS_S3_REGION_NAME = 'us-east-2'
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMIAN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+
+# Static and media files (CSS, JavaScript, Images)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMIAN}/static/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3StaticStorage'
+MEDIA_URL = '/media/'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 

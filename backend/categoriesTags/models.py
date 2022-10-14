@@ -1,4 +1,3 @@
-from turtle import title
 from django.db.models import Model, CharField, ForeignKey, BooleanField, CASCADE, ImageField
 
 class Category(Model):
