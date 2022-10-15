@@ -1,5 +1,5 @@
 
-const server = 'http://127.0.0.1:8000/api/'
+const server = process.env.REACT_APP_SERVER_NAME
 
 const taxApi = "https://sales-tax-calculator.p.rapidapi.com/rates"
 

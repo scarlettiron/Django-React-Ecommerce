@@ -12,7 +12,7 @@ import '../css/general.css'
 
 const CheckoutCardInfo = () => {
   const {shippingAddress} = useContext(CheckoutContext)
-  const stripePromise = loadStripe('pk_test_51J8QwpEpzqddY1hCOO1KJoSkTglaDVhebOVuNIoQgtKjSiEs4sYsfYJuTsNOKqhhFNZmtQq41o9WbIZA5TOkFc7k00gGwOU31h')
+  const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 
   if(!shippingAddress){
     Redirect('/cart')

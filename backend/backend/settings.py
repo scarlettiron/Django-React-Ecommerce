@@ -101,7 +101,7 @@ ANYMAIL_MAILGUN_API_KEY = config("MAIL_GUN_DOMAIN_API")
 DEFAULT_FROM_EMAIL=config('MAIL_GUN_EMAIL')
 
 #for local development
-''' DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': config('DB_NAME'),
@@ -110,13 +110,13 @@ DEFAULT_FROM_EMAIL=config('MAIL_GUN_EMAIL')
         'USER':'postgres',
         'HOST':'localhost',
     }
-}  '''
+}  
 
 #for production
-DATABASE_URL = config('DATABASE_URL')
+''' DATABASE_URL = config('DATABASE_URL')
 DATABASES = {
     "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=100),
-}
+} '''
 
 
 # Password validation
