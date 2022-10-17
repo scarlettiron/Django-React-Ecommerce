@@ -29,7 +29,7 @@ export const HomeContextProvider = ({children, ...rest}) => {
     const fetchHomeInfo = useCallback(async () => {
         const {response, data} = await BasicFetch(HomePageInfoUrls.url)
         if(response.status === 200){
-            if(featuredProducts.length > 0){
+            if(data.featuredProducts.length > 0){
                 const products = {}
                 for (const x in data.featuredproducts){
                     let index = String(data.featuredproducts[x].slot)
