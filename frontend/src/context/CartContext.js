@@ -14,6 +14,8 @@ export const CartContextProvider = ({children, ...rest}) => {
     const [cartPrice, setCartPrice] = useState(() => localStorage.getItem('cartTotal') ? JSON.parse(localStorage.getItem('cartTotal')) : {subtotal:0, totalquantity:0})
     const initialVisit = useRef(true)
 
+    console.log(cartPrice)
+
     const updateSubtotal = (data=null, packagePrice=null, quantity=null, flag='add') => {
         let orderSubtotal = cartPrice.subtotal
         let totalquantity = cartPrice.totalquantity
@@ -180,6 +182,7 @@ export const CartContextProvider = ({children, ...rest}) => {
 
     const cartData = {
         cart:cart,
+        cartPrice:cartPrice,
         updateLocalStorageState: updateLocalStorageState,
         removeFromCart:removeFromCart,
         updatePackageQuantity:updatePackageQuantity,

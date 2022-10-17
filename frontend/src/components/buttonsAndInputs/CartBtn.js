@@ -6,13 +6,16 @@ import '../../css/cart.css'
 
 const CartBtn = () => {
 
-    const {cartTotal} = useContext(CartContext)
+    const {cartPrice} = useContext(CartContext)
     const history = useHistory()
 
   return (
     <div className='cart-btn-container' onClick={() => history.push('/cart')}>
-            {cartTotal && cartTotal.totalquantity > 0 &&
-                <h3 className='text-absolute'>{cartTotal.totalquantity}</h3>
+            {cartPrice && cartPrice.totalquantity > 0 && cartPrice.totalquantity  <= 10 &&
+                <h3 className='text-absolute'>{cartPrice.totalquantity}</h3>
+            }
+            {cartPrice && cartPrice.totalquantity > 10 &&
+                <h3 className='text-absolute'>10+</h3>
             }
             <Cart viewBox="0 0 60.000000 60.000000" className='cart-svg'/>
        
