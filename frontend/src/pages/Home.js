@@ -28,6 +28,7 @@ const Home = () => {
           })}
           </div>
         </div>
+        <div className='feature-container-wrapper'>
         <div className='feature-container'>
           {featuredProducts && 
           <>
@@ -52,6 +53,7 @@ const Home = () => {
           </div>     
           </>
           } 
+        </div>
         </div>
         <Footer/>
     </div>
