@@ -8,13 +8,20 @@ import {ReactComponent as Search} from '../../assets/search-50.svg'
 const SearchSection = () => {
   const history = useHistory()
   const [search, setSearch] = useState(()=>null)
+  
+  const handleSearch = (e) => {
+    if(e.keyCode === 13){
+      history.push(`/search/?q=${search}`)
+    }
+    setSearch(e.target.value)
+  }
+
   return (
     <div className='search-section'>
             <div className='search-input'>
-                <Input1 placeholder={'Search site'} onChange={(e) => {setSearch(e.target.value)}}/>
+                <Input1 placeholder={'Search site'} onChange={(e) => {handleSearch(e)}} name='searchbox'/>
             </div>
-            <div className='display-inline padding-10' onClick={() => history.push(`/search/?q=${search}`)}
-            onKeyUp={() => history.push(`/search/?q=${search}`)}>
+            <div className='display-inline padding-10' onClick={() => history.push(`/search/?q=${search}`)}>
                 <Search className='svg1' viewBox="0 0 50 50"/>
             </div>
     </div>

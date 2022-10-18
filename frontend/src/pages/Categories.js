@@ -15,7 +15,7 @@ const Categories = () => {
 
   const [cat, setCat] = useState(categories.results.find((item) => {return item.title === category}))
 
-  if(cat && cat.subcategories.length === 0){
+  if(cat && cat.subcategories.length === 0 && category !== 'auction'){
     history.push(`/products/${cat.title}/`)
   }
 
@@ -39,6 +39,13 @@ const Categories = () => {
               }
             </div>
           }
+
+          {category === 'auction' && 
+            <div className='w-100 h-100-vh margin-top-30 justify-content-center'>
+              <h1 className='margin-top-30'>Coming Soon!</h1>
+            </div>
+          }
+
         <Footer/>
     </div>
   )
