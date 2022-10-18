@@ -75,6 +75,13 @@ const Products = () => {
         <div className='w-90 justify-content-center flex-wrap margin-top-30 padding-30'>
             {products && products.count > 0 &&
                 products.results.map((product, index) => {
+                    if(index + 1 === products.results.length){
+                        <React.Fragment key={index}>
+                            <div ref={handleTrackPosition}>
+                                <ProductSearchResultCard product={product}/>
+                            </div>
+                        </React.Fragment>
+                    }
                     return <ProductSearchResultCard product={product} key={index}/>
                 })
 

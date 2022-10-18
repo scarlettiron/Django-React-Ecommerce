@@ -24,7 +24,7 @@ export const HomeContextProvider = ({children, ...rest}) => {
     const [categories, setCategories] = useState(placeholderCategories)
 
 
-    const [featuredProducts, setFeaturedProducts] = useState(() => null)
+    const [featuredProducts, setFeaturedProducts] = useState(() => [])
 
     const fetchHomeInfo = useCallback(async () => {
         const {response, data} = await BasicFetch(HomePageInfoUrls.url)

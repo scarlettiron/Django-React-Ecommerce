@@ -19,6 +19,7 @@ export const CartContextProvider = ({children, ...rest}) => {
     const updateSubtotal = (data=null, packagePrice=null, quantity=null, flag='add') => {
         let orderSubtotal = cartPrice.subtotal
         let totalquantity = cartPrice.totalquantity
+        console.log(totalquantity)
         if(data){
             data.forEach(prod => {
                 prod.packages.forEach(p => {
@@ -26,15 +27,18 @@ export const CartContextProvider = ({children, ...rest}) => {
                     totalquantity = totalquantity + p.ordering_quantity
                 })
             })
+            console.log(totalquantity)
         }
         else{
             if(flag === 'add'){
                 orderSubtotal = orderSubtotal + (packagePrice * quantity)
                 totalquantity = totalquantity + quantity
+                console.log(totalquantity)
             }
             else if (flag === 'subtract'){
                 orderSubtotal = orderSubtotal - (packagePrice * quantity)
                 totalquantity = totalquantity - quantity
+                console.log(totalquantity)
             }
         }
         setCartPrice({subtotal:orderSubtotal, totalquantity:totalquantity})
