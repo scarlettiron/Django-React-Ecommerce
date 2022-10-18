@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'storages',
+    'ckeditor',
     'django.contrib.staticfiles',
     "corsheaders",
     'rest_framework',
@@ -158,6 +159,9 @@ AWS_S3_FILE_OVERWRITE = False
 AWS_S3_REGION_NAME = 'us-east-2'
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMIAN = f"{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com"
+
+#for using ckeditor with s3 buckets
+AWS_QUERYSTRING_AUTH = False
 
 # Static and media files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')

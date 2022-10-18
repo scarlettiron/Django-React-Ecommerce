@@ -14,6 +14,7 @@ import Loading1 from '../components/LoadingAndErrors/Loading1'
 import Error1 from '../components/LoadingAndErrors/Error1'
 import Success2 from '../components/LoadingAndErrors/Success2'
 import {formatPrice} from '../utils/PriceFormats'
+import ReactHtmlParser from 'react-html-parser'
 import '../css/general.css'
 import '../css/products.css'
 import '../css/buttons-inputs.css'
@@ -128,13 +129,13 @@ const Product = () => {
                 </div>
                 <div className='w-90 padding-30'>
                     <h4>About</h4>
-                    <p>{product?.description}</p>
+                    {ReactHtmlParser(product?.description)}
                 </div>
                 
                 {product && product.care &&
                     <div className='w-90 padding-30'>
                         <h4>Care</h4>
-                        <p>{product.care}</p>
+                        {ReactHtmlParser(product.care)}
                     </div>
                 }
 

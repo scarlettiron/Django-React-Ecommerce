@@ -19,6 +19,7 @@ pillow = "*"
 gunicorn = "*"
 dj-database-url = "*"
 django-storages = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 

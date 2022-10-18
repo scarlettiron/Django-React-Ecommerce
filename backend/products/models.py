@@ -1,11 +1,12 @@
 from django.db import models
 from categoriesTags.models import Category, SubCategory, ThirdSubcategory, Tag
+from ckeditor.fields import RichTextField
 
 class Product(models.Model):
     title = models.CharField(max_length=250)
     scientific_name = models.CharField(max_length=250)
-    description = models.CharField(max_length=1000)
-    care = models.CharField(max_length=1000)
+    description = RichTextField(max_length=1000)
+    care = RichTextField(max_length=1000)
     inventory = models.IntegerField(default=0)
     min_order = models.IntegerField(default = 1)
     discount = models.IntegerField(blank=True, null=True) 
