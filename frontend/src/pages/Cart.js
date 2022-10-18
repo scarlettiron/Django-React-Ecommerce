@@ -5,15 +5,14 @@ import NavBar from '../components/navbars/NavBar'
 import Footer from '../components/footers/Footer'
 import CartItem from '../components/cart/CartItem'
 import CheckoutBtn from '../components/buttonsAndInputs/CheckoutBtn'
+import {formatPrice} from '../utils/PriceFormats'
 
 import '../css/general.css'
 import '../css/cart.css'
 
 const Cart = () => {
-  const {cart, handleGetCartData} = useContext(CartContext)
+  const {cart,  cartPrice,  handleGetCartData} = useContext(CartContext)
   const outOfStock = useRef(false)
-
-  console.log(outOfStock.current)
 
   const itemOutOfStock = (status) => {
     if(status){
@@ -38,6 +37,14 @@ const Cart = () => {
             return <CartItem product={item} key={index} itemOutOfStock={itemOutOfStock}/>
           })
         }
+        {cartPrice.totalquantity === 0 &&
+          <h2>You have nothing in your cart</h2>
+        }
+      </div>
+      <div className='w-100 justify-content-center'>
+        <div className='checkout-btn-wrapper'>
+          <h3>Subtotal: ${formatPrice(cartPrice.subtotal)}</h3>
+        </div>
       </div>
       <div className='w-100 justify-content-center'>
           <div className='checkout-btn-wrapper'>

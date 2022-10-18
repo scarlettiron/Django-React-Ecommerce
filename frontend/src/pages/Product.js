@@ -20,7 +20,6 @@ import '../css/buttons-inputs.css'
 import { useParams } from 'react-router-dom'
 import FeaturedSection from '../components/products/FeaturedSection'
 
-import { CountRenders } from '../utils/CountRenders'
 const Product = () => {
 
     const {productDetail} = productUrls

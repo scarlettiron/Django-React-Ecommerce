@@ -24,7 +24,8 @@ export const HomeContextProvider = ({children, ...rest}) => {
     const [categories, setCategories] = useState(placeholderCategories)
 
 
-    const [featuredProducts, setFeaturedProducts] = useState(() => [])
+    const [featuredProducts, setFeaturedProducts] = useState(() => null)
+    const [featuredAds, setFeaturedAds] = useState(() => null)
 
     const fetchHomeInfo = useCallback(async () => {
         const {response, data} = await BasicFetch(HomePageInfoUrls.url)
@@ -36,6 +37,7 @@ export const HomeContextProvider = ({children, ...rest}) => {
                     products[index] = data.featuredproducts[x]
                 }
                 setFeaturedProducts(() => products)
+                setFeaturedAds(() => data.featuredAds)
             }
             if(data.results.length > 0){
                 setCategories(data)
@@ -46,7 +48,7 @@ export const HomeContextProvider = ({children, ...rest}) => {
     const HomeContextData = {
         categories:categories,
         featuredProducts:featuredProducts,
-        featuredAds:featuredProducts,
+        featuredAds:featuredAds,
     }
 
     useEffect(() => {

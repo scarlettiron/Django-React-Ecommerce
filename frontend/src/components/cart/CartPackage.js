@@ -12,6 +12,7 @@ const CartPackage = ({pack, product, itemOutOfStock}) => {
     const notEnoughStock = useRef(pack.out_of_stock)
 
     itemOutOfStock(notEnoughStock)
+
     const handleUpdateQty = (newQty) => {
         const totalQty = newQty * pack.qty
         if(totalQty <= product.inventory && pack.out_of_stock){
