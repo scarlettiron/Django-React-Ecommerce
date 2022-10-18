@@ -130,6 +130,7 @@
     border:solid 2px red;
 }
 
+
 .body-input{
     outline: none;
     padding: 7px;
@@ -164,6 +165,14 @@
     color:var(--text-secondary);
 }
 
+.underline-input.underline-input-error{
+    border-bottom:solid 2px red;
+    border-top:solid 2px red;
+    border-left:solid 2px red;
+    border-right:solid 2px red;
+    border-radius: 5px;
+}
+
 .underline-input::placeholder{
     color:var(--text-secondary);
 }
@@ -184,6 +193,13 @@
 
 .underline-inputdark::placeholder{
     color:var(--text-secondary);
+}
+.underline-input-dark.underline-input-error{
+    border-bottom:solid 2px red;
+    border-top:solid 2px red;
+    border-left:solid 2px red;
+    border-right:solid 2px red;
+    border-radius: 5px;
 }
 
 @media(min-width:500px){

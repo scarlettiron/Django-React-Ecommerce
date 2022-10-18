@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import CheckoutContext from '../context/CheckoutContext'
+import CartContext from '../context/CartContext'
 import MainHeader from '../components/headers/MainHeader'
 import Navbar from '../components/navbars/NavBar'
 import Footer from '../components/footers/Footer'
@@ -17,6 +18,11 @@ const CheckoutBilling = () => {
   const history = useHistory()
 
   const {setShippingAddress, setName, setContact} = useContext(CheckoutContext)
+  const {cartPrice} = useContext(CartContext)
+
+  if(cartPrice.subtotal === 0){
+    history.push('/cart')
+  }
 
   const inputTypes= ['INPUT', 'SELECT']
 

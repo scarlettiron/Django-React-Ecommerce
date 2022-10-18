@@ -2,13 +2,15 @@ import React, {useContext, useState} from 'react'
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js'
 import { useHistory } from 'react-router-dom'
 import CheckoutContext from '../../context/CheckoutContext'
+import CartContext from '../../context/CartContext'
 import CheckoutBtn from '../../components/buttonsAndInputs/CheckoutBtn'
 import '../../css/checkout.css'
 import '../../css/general.css'
 import Error1 from '../LoadingAndErrors/Error1'
 const CheckoutSection = () => {
-    const {handleCreateIntent, StCheckoutIntent} = useContext(CheckoutContext)
-  
+    const {handleCreateIntent, StCheckoutIntent, shippingAddress} = useContext(CheckoutContext)
+    const {cartPrice} = useContext(CartContext)
+
     const stripe = useStripe()
     const elements = useElements()
 
@@ -17,6 +19,10 @@ const CheckoutSection = () => {
     const [error, setError] = useState(() => false)
   
     const handlePayment = async () => {
+      if(!shippingAddress || cartPrice.subtotal === 0){
+        history.push('/cart')
+      }
+      
       setLoading(true)
       const intent = await handleCreateIntent()
 
