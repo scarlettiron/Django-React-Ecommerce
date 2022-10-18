@@ -33,7 +33,7 @@
     justify-content: center;
 }
 
-@media(min-width:500px){
+@media(min-width:650px){
     .nav-item-wrapper{
         background-color: transparent;
         display: flex;
@@ -158,7 +158,7 @@
 }
 
 
-@media(min-width:550px){
+@media(min-width:650px){
     .nav-container{
         justify-content: center;
 
