@@ -38,7 +38,7 @@ export const HomeContextProvider = ({children, ...rest}) => {
                     products[index] = data.featuredproducts[x]
                 }
                 setFeaturedProducts(() => products)
-                setFeaturedAds(() => data.featuredAds)
+                setFeaturedAds(() => data.featuredproducts)
             }
             if(data.results.length > 0){
                 setCategories(data)

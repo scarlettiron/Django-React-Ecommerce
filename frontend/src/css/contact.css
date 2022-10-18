@@ -8,10 +8,10 @@
     align-items: center;
     text-align: center;
     flex-wrap: wrap;
-    border:solid 2px var(--theme-secondary);
     border-radius: 10px;
     margin:0px auto;
-    background-color:var(--theme-secondary);
+   /*  background-image: radial-gradient(var(--theme-primary), rgb(46, 188, 3),yellow); */
+    background-color: var(--theme-secondary);
 }
 
 .contact-form h3{

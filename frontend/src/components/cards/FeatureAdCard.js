@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { formatPrice } from '../../utils/PriceFormats'
-import PrimaryBtn from '../buttonsAndInputs/PrimaryBtn'
+import GradientBtn from '../buttonsAndInputs/GradientBtn'
 import '../../css/containers-cards.css'
 import '../../css/general.css'
 
@@ -18,8 +18,8 @@ const FeatureAdCard = ({ad}) => {
         <div className='w-100 justify-content-center'>
             <p className='margin-0 padding-0 text-third'>${formatPrice(ad.single_price)} {ad.max_price && - formatPrice(ad.max_price)}</p>
         </div>
-        <div className='w-100 justify-content-center'>
-            <PrimaryBtn text='View Product'/>
+        <div className='w-100 justify-content-center padding-10'>
+            <GradientBtn text='View Product'/>
         </div>
 
     </div>

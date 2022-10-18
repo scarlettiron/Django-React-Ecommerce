@@ -46,7 +46,8 @@
 .button-controls{
     border-radius: 5px;
     outline:none;
-    background-color: transparent;
+    background-color: white;
+    opacity: .5;
     padding:10px;
     text-decoration: none;
     border:none;
@@ -200,6 +201,17 @@
     border-left:solid 2px red;
     border-right:solid 2px red;
     border-radius: 5px;
+}
+
+.gradient-btn{
+    background-image: linear-gradient(var(--theme-primary), yellow);
+    border-radius: 5px;
+    outline:none;
+    padding:10px;
+    text-decoration: none;
+    border:none;
+    font-weight: bold;
+    color:white;
 }
 
 @media(min-width:500px){
