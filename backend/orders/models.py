@@ -10,6 +10,9 @@ class Address(models.Model):
     city = models.CharField(max_length=200)
     state = models.CharField(max_length=200)
     zip = models.IntegerField()
+    
+    def __str__(self):
+        return f"{self.street} | {self.city} | {self.state} | {self.zip}"
 
 orderStatuses = [
     ('processing', 'Processing'),
@@ -36,9 +39,15 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     orderId = models.CharField(max_length=500, blank=True)
     
+    def __str__(self):
+        return f"user:{self.user} | orderId: {self.orderId}"
+    
 class OrderItem(models.Model):
     package = models.ForeignKey(ProductPackage, on_delete=models.SET_NULL, null=True)
     qty = models.IntegerField()
     price = models.IntegerField()
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.pk} | order {self.oder} | package {self.package}"
     

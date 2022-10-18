@@ -2,7 +2,7 @@ from django.db.models import Model, CharField, ForeignKey, BooleanField, CASCADE
 
 class Category(Model):
     title = CharField(max_length=250)
-    hasSubcategory = BooleanField(default=False)
+    placeholder = ImageField(upload_to='placeholders/', blank=True, null=True)
     
     def __str__(self):
         return f"{self.title}"
@@ -19,6 +19,9 @@ class SubCategory(Model):
 
 class ThirdSubcategory(Model):
     title = CharField(max_length=250)  
+    
+    def __str__(self):
+        return self.title
 
 
 class Tag(Model):

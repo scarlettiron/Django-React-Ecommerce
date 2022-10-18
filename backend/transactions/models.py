@@ -16,6 +16,11 @@ class Transaction(models.Model):
     paymentId = models.CharField(max_length = 1000)
     order = models.ForeignKey(Order, on_delete = models.SET_NULL, null = True)
     
+    def __str__(self):
+        return f"pk: {self.pk} | amount: {self.amount} | order: {self.order}"
     
 class SiteBalance(models.Model):
     balance = models.IntegerField()
+    
+    def __str__(self):
+        return self.balance

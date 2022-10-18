@@ -1,6 +1,7 @@
 import React, {createContext, useState, useEffect, useCallback, useRef} from 'react'
 import BasicFetch from '../utils/BasicFetch'
 import { HomePageInfoUrls } from '../utils/ApiEndPoints'
+import DecorIcon from '../assets/photos/aquarium-decor.jpg'
 
 
 const HomeContext = createContext()
@@ -15,7 +16,7 @@ export const HomeContextProvider = ({children, ...rest}) => {
             {title:'Arachnids'}, {title:'Specimens'}
         ]},
         {title:'Feeders'},
-        {title:'Decor'}, 
+        {title:'Decor', placeholder:DecorIcon}, 
         {title:'Specimens'}, 
         {title:'Supplies'},
         {title:'Auction'}]}

@@ -7,7 +7,14 @@ const CategoryCard = ({category}) => {
   return (
     <div className='category-card'>
         <Link to={`categories/${category.title}`} className='w-100 h-100 justify-content-center'>
-            <h2>{category.title}</h2>
+        {category.placeholder ?
+            <>
+              <img src={category.placeholder} alt={category.title} className='subcategory-card-img'/>
+              <h2 className='subcategory-card-title-absolute'>{category.title}</h2>
+            </>
+            :
+            <h2 className='subcategory-card-text'>{category.title}</h2>
+        }
         </Link>
     </div>
   )

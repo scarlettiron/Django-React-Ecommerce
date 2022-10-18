@@ -18,12 +18,15 @@ class Product(models.Model):
     tags = models.ManyToManyField(Tag, blank=True, related_name='tagslist')
     
     def __str__(self):
-        return self.title
+        return f"{self.pk} | {self.title}" 
     
     
 class FeaturedProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     slot = models.IntegerField()
+    
+    def __str__(self):
+        return f"product: {self.product} | slot: {self.slot}"
     
     
     
@@ -33,6 +36,9 @@ class ProductPackage(models.Model):
     price = models.IntegerField(default=0)
     discount = models.IntegerField(blank=True, null=True)
     description = models.CharField(max_length=100, blank=True, null=True)
+    
+    def __str__(self):
+        return f"pk: {self.pk} | product: {self.product} | price: {self.price}"
      
     
 class StProduct(models.Model):

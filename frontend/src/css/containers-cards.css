@@ -106,7 +106,7 @@
 }
 
 .feature-container{
-    background-color: var(--theme-primary);
+    background-image: radial-gradient(var(--theme-primary) 40%, yellow);
     width:100vw;
     display: flex;
     justify-content: center;
