@@ -7,6 +7,8 @@ import CheckoutBtn from '../../components/buttonsAndInputs/CheckoutBtn'
 import '../../css/checkout.css'
 import '../../css/general.css'
 import Error1 from '../LoadingAndErrors/Error1'
+import {formatPrice} from '../../utils/PriceFormats'
+
 const CheckoutSection = () => {
     const {handleCreateIntent, StCheckoutIntent, shippingAddress} = useContext(CheckoutContext)
     const {cartPrice} = useContext(CartContext)
@@ -56,6 +58,9 @@ const CheckoutSection = () => {
         {error && <Error1 message="Something went wrong, please try again later"/>}
 
             <CardElement className='card-input'/>
+            <div className='w-100 justify-content-center padding-10'>
+              <h3>Total: ${formatPrice(cartPrice.subtotal)}</h3>
+            </div>
             <div className='w-100 justify-content-center padding-10'>
                 <CheckoutBtn action={!loading && !error ? handlePayment : null} loading={loading}/>
             </div>
