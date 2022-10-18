@@ -7,7 +7,6 @@ import '../../css/containers-cards.css'
 
 const FeaturedSection = () => {
     const {featuredAds} = useContext(HomeContext)
-    console.log(featuredAds)
   return (
     <div className='w-100'>
         <div className='w-100 justify-content-center'>
@@ -24,4 +23,4 @@ const FeaturedSection = () => {
   )
 }
 
-export default FeaturedSection
+export default React.memo(FeaturedSection)

@@ -46,7 +46,7 @@
 .button-controls{
     border-radius: 5px;
     outline:none;
-    background-color: white;
+    background-color: var(--background);
     opacity: .5;
     padding:10px;
     text-decoration: none;

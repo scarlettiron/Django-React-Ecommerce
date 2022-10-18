@@ -48,7 +48,9 @@ const Product = () => {
         setSelectedPackage(pack)
     },[product])
 
-    const getProduct = useCallback(async () => {
+    const getProduct = async () => {
+        if(!loading){setLoading(true)}
+        
         const {response, data} = await BasicFetch(`${productDetail.url}${product_id}/`)
         if(response.status === 200){
             setProduct(() => data)
@@ -56,7 +58,7 @@ const Product = () => {
             setLoading(() => false)
             return
         }
-    }, [product_id, productDetail.url])
+    }
 
     const handleSetQty = useCallback((newQty) => {
         if(!selectedPackage){
@@ -91,7 +93,7 @@ const Product = () => {
 
     useEffect(() => {
         getProduct()
-    }, [])
+    }, [product_id])
 
 
   return (
