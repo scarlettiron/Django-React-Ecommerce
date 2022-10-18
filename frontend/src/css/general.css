@@ -164,6 +164,9 @@
 .bg-black{
     background-color: black;
 }
+.bg-transparent{
+    background-color: transparent;
+}
 
 .align-items-center{
     display: flex;

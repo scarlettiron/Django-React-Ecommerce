@@ -179,6 +179,11 @@
     padding: 7px;
     font-weight: bold;
     background-color: transparent;
+    margin:10px;
+}
+
+.underline-inputdark::placeholder{
+    color:var(--text-secondary);
 }
 
 @media(min-width:500px){
