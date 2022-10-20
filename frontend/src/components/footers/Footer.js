@@ -6,7 +6,7 @@ import '../../css/general.css'
 const Footer = () => {
     const section1 = {title: 'Customer Service', links:[
         {name:'Order Status',
-        link:'/tracking/?'},
+        link:'/findorder'},
         {name:'Shipping / Return Policy',
         link:'/termsandconditions'},
         {name:'Contact',
