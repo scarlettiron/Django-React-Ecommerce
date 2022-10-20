@@ -13,7 +13,7 @@ const FooterSection = ({title, links}) => {
         {
             links.map((link, index) => {
                 return <React.Fragment key={index}>
-                <div className='footer-link' onClick={() => history.push(`/${link.path}`)}>
+                <div className='footer-link' onClick={() => history.push(`${link.link}`)}>
                     <p className='padding-0 margin-0 text-secondary'>{link.name}</p>                   
                 </div>
                 </React.Fragment>

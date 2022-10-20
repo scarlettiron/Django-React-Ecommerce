@@ -1,0 +1,26 @@
+@import '../App.css';
+
+.find-order-container{
+    width: 100%;
+    max-width: 400px;
+    padding:30px;
+    border-radius: 10px;
+    background-color: var(--theme-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top:30px;
+    margin-bottom:50vh;
+    min-height:70vh;
+}
+
+.find-order-container h1{
+    color:var(--background);
+}
+
+@media (min-width:400px){
+    .find-order-container{
+        min-height:auto;
+    }
+}

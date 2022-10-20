@@ -13,6 +13,9 @@ import CheckoutSuccess from './pages/CheckoutSuccess'
 import Categories from './pages/Categories';
 import Products from './pages/Products';
 import Contact from './pages/Contact';
+import Privacy from './pages/basic/Privacy';
+import TermsAndConditions from './pages/basic/TermsAndConditions';
+import FindOrder from './pages/FindOrder';
 
 function App() {
   return (
@@ -33,6 +36,10 @@ function App() {
             <Route component={Categories} path='/categories/:category'/>
             <Route component={Products} path='/products/:category'/>
             <Route component={Contact} path='/contact'/>
+
+            <Route component={Privacy} path='/privacy'/>
+            <Route component={TermsAndConditions} path='/termsandconditions'/>
+            <Route component={FindOrder} path='/findorder'/>
           </CartContextProvider>
         </HomeContextProvider>
       </Router>

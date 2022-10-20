@@ -44,5 +44,13 @@ const staffUrls = {
     }
 }
 
+const orderUrls = {
+    findOrder:{
+        url:`${server}orders/order-info/`,
+        methods:['GET'],
+        url_params:`url/{order_id}/{customers last name}/{shipping zip code/}`
+    }
+}
+
 export {server, HomePageInfoUrls, checkoutUrls, productUrls, searchUrls, 
-    cartUrl, taxApi, staffUrls}
+    cartUrl, taxApi, staffUrls, orderUrls}
