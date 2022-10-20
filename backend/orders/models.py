@@ -25,13 +25,22 @@ checkoutTypes = [
     ('stripe', 'Stripe')
 ]
 
+shippingMethods = [
+    ('usps', 'USPS'),
+    ('ups', 'UPS'),
+    ('fedex', 'FEDEX')
+]
+
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    first_name = models.CharField(max_length = 100, blank=True, null=True)
+    last_name = models.CharField(max_length = 100, blank=True, null=True)
     email = models.EmailField()
     address = models.ForeignKey(Address, on_delete=models.SET_NULL, null = True)
-    trackingNumber = models.CharField(max_length = 500, blank=True, null=True)
+    tracking_number = models.CharField(max_length = 500, blank=True, null=True)
+    shipping_method = models.CharField(choices=shippingMethods, blank=True, null=True, max_length=20)
     status = models.CharField(choices=orderStatuses, max_length = 50, default='processing')
-    paymentType = models.CharField(choices=checkoutTypes, max_length=50)
+    payment_type = models.CharField(choices=checkoutTypes, max_length=50)
     refunded = models.BooleanField(default = False)
     subTotal = models.IntegerField()
     tax = models.IntegerField()
