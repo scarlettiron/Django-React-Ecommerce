@@ -48,7 +48,7 @@ const FindOrderForm = ({setOrder}) => {
         </div>
         <div className='w-90'>
             <UnderlineInput
-            placeholder={'Order Id (Found in email confirmation)'} 
+            placeholder={'Order Id (Found in Confirmation Email)'} 
             id='orderid' 
             wrapperClass={'w-75'}
             error={error}

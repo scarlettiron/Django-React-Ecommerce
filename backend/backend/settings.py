@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'products.apps.ProductsConfig',
     'transactions.apps.TransactionsConfig',
-    'vendors.apps.VendorsConfig',
     'categoriesTags.apps.CategoriestagsConfig',
     'media.apps.MediaConfig',
     'checkout.apps.CheckoutConfig',
